@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="author" content="CookiePawn">
+        <meta name="description" content="Enter Info Page">
+        <title>CNFT WITH</title>
+        <link href="../css/Tool.css" rel="stylesheet">
+        <link href="../css/enterInfoPage.css" rel="stylesheet">
+        <script src="../js/SameSite.js" charset="utf-8"></script>
+        <script src="../js/scrollPercent.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <header class="mainHeader">
+            <nav>
+                <div class="mainLogoDiv">
+                    <a href="/main">
+                        <img src="https://drive.google.com/uc?id=1OjseRRmJX1efiUSZQlkEqol2Zoq5km1T" alt="MainLogo" height="22px">
+                    </a>
+                </div>
+                <div class="mainCategoryDiv">
+                    <div>
+                        <ul class="mainUl">
+                            <li class="li c1"><span class="mainCategory">기업정보</span></li>
+                            <li class="li c2"><span class="mainCategory">CFNT 정보 제공</span></li>
+                            <li class="li c3"><span class="mainCategory">에이다 뉴스</span></li>
+                            <li class="li c4"><span class="mainCategory">브로커리지</span></li>
+                            <li class="li c5"><span class="mainCategory">문의사항</span></li>
+                            <li class="li c6"><span class="mainCategory">프리미엄 서비스</span></li>
+                        </ul>
+                    </div>
+                    <div class="subUl">
+                        <div class="c1Sub">
+                            <div>
+                                <a href="/enterInfo_Login#enterInfo1">- 기업이 하는 일</a><br>
+                                <a href="/enterInfo_Login#enterInfo2">- 경영 이념</a><br>
+                                <a href="/investmentPost_Login">- 투자정보</a><br>
+                                <a href="/recruitmentPost_Login">- 채용정보</a>
+                            </div>
+                            <div>
+                                <a href="/enterInfo_Login#enterInfo4">- 운영진 소개</a><br>
+                                <a href="/enterInfo_Login#enterInfo3">- CEO 메세지</a><br>
+                                <a href="/currentSituationPost_Login">- 투자현황</a>
+                            </div>
+                        </div>
+                        <div class="c2Sub">
+                            <div>
+                                - CNFT 용어<br>
+                                - CNFT 캘린더<br>
+                                <a href="/cnftNewsPost_Login">- CNFT 뉴스</a><br>
+                                <a href="/cnftPost_Login">- CNFT 소개</a>
+                            </div>
+                            <div>
+                                <a href="/mintingPost_Login">- CNFT 민팅</a><br>
+                                <a href="/exchangePost_Login">- CNFT 거래소</a>
+                            </div>
+                            <div>
+                                <a href="/dealPost_Login">- CNFT 거래 방법</a><br>
+                                <a href="/walletPost_Login">- CNFT 지갑</a>
+                            </div>
+                            <div>
+                               <a href="/servicePost_Login">- CNFT 서비스</a>
+                            </div>
+                        </div>
+                        <div class="c3Sub">
+                            <div>
+                                <a href="/adaInfo_Login">- 에이다 생태계</a><br>
+                                <a href="/adaNewsPost_Login">- 에이다 뉴스</a><br>
+                                <a href="/main#ADASection">- 에이다 시세</a>
+                            </div>
+                        </div>
+                        <div class="c4Sub">
+                            <div>
+                                <a href="/brokerage_Login#infoID">- 브로커리지란?</a><br>
+                                <a href="/brokerage_Login#linkID">- 기업 브로커리지 소개</a><br>
+                                <a href="/brokerage_Login#linkID">- 브로커리지 거래 문의</a>
+                            </div>
+                        </div>
+                        <div class="c5Sub">
+                            <div>
+                                <a href="/questionsPage">- FAQ</a><br>
+                                <span id="c5Sub1">- 고객문의</span><br>
+                                <span id="c5Sub2">- 부서문의</span>
+                            </div>
+                            <div id="c5SubSub1">
+                                - 인사팀<br>
+                                - 개발팀<br>
+                                - 운영진
+                            </div>
+                            <div id="c5SubSub2">
+                                - 전화로 문의하기<br>
+                                - 카카오톡으로 문의하기
+                            </div>
+                        </div>
+                        <div class="c6Sub">
+                            <div>
+                                <a href="/subscribe_Login">- CNFT WITH 구독</a><br>
+                                - CNFT WITH 펀드<br>
+                                - CNFT WITH 브로커리지 연결<br>
+                                - 추가예정
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainLoginDiv">
+                    <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
+                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px"></button>
+                </div>
+            </nav>
+        </header>
+        <div style="height: 100px;"></div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="contHome">
+            <section>
+                    <div id="topPage" class="headerBar"></div>
+                <nav class="adaCategoryNav">
+                    <ul>
+                        <li><a href="#enterInfo1">- 기업이 하는 일</a></li>
+                        <li><a href="#enterInfo2">- 경영 이념</a></li>
+                        <li><a href="#enterInfo3">- CEO 메세지</a></li>
+                        <li><a href="#enterInfo4">- 운영진 소개</a></li>
+                    </ul>
+                </nav>
+                <div class="mainImgDiv">
+                    <div class="mainTitleDiv">
+                    </div>
+                </div>
+                <div class="mainBox">
+                    <div class="contentsBox">
+                        <div id="enterInfo1" style="height:100px"></div>
+                        <div class="enterInfo1">
+                            <br>
+                            <hr align="left" style="border: solid 2px black; width:80px;">
+                            <h1>기업이 하는 일</h1><br>
+                            <div class="container1">
+                                <img src="https://drive.google.com/uc?id=1Bl1ibKFUffcMZJn3cwwL_ZInTaAS_DP1">
+                            </div>
+                                <ul style="list-style-type: circle;">
+                                    <li>
+                                        브로커리지
+                                    </li>
+                                    <span>CNFT 거래에 어려움을 겪는 고객에게<br>도움을 줌으로써 CNFT시장을 활성화시킵니다</span>
+                                    <li>
+                                        펀드
+                                    </li>
+                                    <span>직접 투자에 어려움을 겪는 고객을<br>위한 펀드 서비스를 제공합니다</span>
+                                    <li>
+                                        투자
+                                    </li>
+                                    <span>기업 자체의 CNFT 투자활동을 통하여<br>CNFT의 미래가치를 증명합니다</span>
+                                    <li>
+                                        구독시스템
+                                    </li>
+                                    <span>매일 새롭게 업데이트되는 CNFT와 관련된 방대한 정보를<br>가공하여 낮은 가격으로 고객에게 제공합니다</span>
+                                    <li>
+                                        유튜브
+                                    </li>
+                                    <span>투자와 관련된 대중적인 미디어 콘텐츠를<br>제공하여 투자에 대한 긍정적인 인식을 심어줍니다</span>
+                                </ul>
+                        </div>
+                        <br>
+                        <br>
+                        <div id="enterInfo2" style="height:100px"></div>
+                        <div class="enterInfo2">
+                            <br>
+                            <hr align="right" style="border: solid 2px black; width:80px;">
+                            <h1>경영이념</h1><br>
+                            <div class="container2">
+                                <img src="https://drive.google.com/uc?id=1cnBKln7Wkj3AJ4En9r4z-GRV1oGFnCGd">
+                            </div>
+                                <span>CNFT with는 CNFT시장에 처음 발을 딛는<br>투자자를 위한 기본적인 거래 가이드를 제공합니다<br><br>
+                                    또한 직접 투자를 하기에 부담이 있는<br>투자자를 위한 인터넷 중개 사업(브로커리지)과 펀딩 서비스를<br>
+                                    제공함으로써 CNFT 시장의 활성화를 돕는 것에 의의를 둡니다
+                                </span>
+                        </div>
+                        <div id="enterInfo3" style="height:100px"></div>
+                        <div class="enterInfo3">
+                            <br>
+                            <hr align="left" style="border: solid 2px black; width:80px;">
+                            <h1>CEO 메세지</h1><br>
+                            <div class="container3">
+                                <img src="https://drive.google.com/uc?id=1Vm8ogoDNvHL-LXemNL_tCvegiKkUkpoR">
+                            </div>
+                                <span>CNFT with는 미래적 투자 가치가 있는<br>CNFT시장의 성장을 위하여 기획한 기업입니다<br>
+                                    이를 토대로 기업을 찾아주는 고객에게<br>CNFT에 관한 가치 있는 정보를 제공해 주겠습니다<br>
+                                </span>
+                                <ul style="list-style-type: circle;">
+                                    <li>
+                                        실질적인 데이터를 기반으로<br>투자활동을 할 수 있게 돕겠습니다
+                                    </li>
+                                    <li>
+                                        CNFT에 대한 명확한 이해와 프로젝트의<br>방향을 알 수 있도록 정보를 제공하겠습니다
+                                    </li>
+                                    <br>
+                                </ul>
+                                <span>CNFT with는 CNFT시장 속에서 다양한 서비스를<br>제공하며 고객, 시장과 함께 성장하도록 하겠습니다<br>
+                                    감사합니다<br>
+                                </span>
+                        </div>
+
+
+                        <div id="enterInfo4" style="height:100px"></div>
+                        <div class="enterInfo4">
+                            <br>
+                            <hr align="center" style="border: solid 2px black; width:1100px;">
+                            <h1>운영진 소개</h1><br>
+                            <div class="container4">
+                                <img src="https://drive.google.com/uc?id=1Vm8ogoDNvHL-LXemNL_tCvegiKkUkpoR">
+                            </div>
+                                <span>CNFT with는 CNFT시장에 처음 발을 딛는<br>투자자를 위한 기본적인 거래 가이드를 제공합니다<br><br>
+                                    또한 직접 투자를 하기에 부담이 있는<br>투자자를 위한 인터넷 중개 사업(브로커리지)과 펀딩 서비스를<br>
+                                    제공함으로써 CNFT 시장의 활성화를 돕는 것에 의의를 둡니다
+                                </span>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </section>
+            
+            <div id="dimmedID" class="dimmed"></div>
+        </div>
+        <footer>
+            <div class="footerCategoryDiv">
+                <ul class="footerUl">
+                    <li><span>기업정보</span>
+                        <ul>
+                            <li><a href="/enterInfo_Login#enterInfo1">기업이 하는 일</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo2">경영 이념</a></li>
+                            <li><a href="/investmentPost_Login">투자정보</a></li>
+                            <li><a href="/recruitmentPost_Login">채용정보</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo4">운영진 소개</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo3">CEO 메세지</a></li>
+                            <li><a href="/currentSituationPost_Login">투자현황</a></li>
+                        </ul> 
+                    </li>
+                    <li><span>CFNT 정보 제공</span>
+                        <ul>
+                            <li>CNFT 용어</li>
+                            <li>CNFT 캘린더</li>
+                            <li><a href="/cnftNewsPost_Login">CNFT 뉴스</a></li>
+                            <li><a href="/cnftPost_Login">CNFT 소개</a></li>
+                            <li><a href="/mintingPost_Login">CNFT 민팅</a></li>
+                            <li><a href="/exchangePost_Login">CNFT 거래소</a></li>
+                            <li><a href="/dealPost_Login">CNFT 거래 방법</a></li>
+                            <li><a href="/walletPost_Login">CNFT 지갑</a></li>
+                            <li><a href="/servicePost_Login">CNFT 서비스</a></li>
+                        </ul>
+                    </li>
+                    <li><span>에이다 뉴스</span>
+                        <ul>
+                            <li><a href="/adaInfo_Login">에이다 생태계</a></li>
+                            <li><a href="/adaNewsPost_Login">에이다 뉴스</li>
+                            <li><a href="/main#ADASection">에이다 시세</a></li>
+                        </ul>
+                    </li>
+                    <li><span>브로커리지</span>
+                        <ul>
+                            <li><a href="/brokerage_Login#infoID">브로커리지란?</a></li>
+                            <li><a href="/brokerage_Login#linkID">기업 브로커리지 소개</a></li>
+                            <li><a href="/brokerage_Login#linkID">브로커리지 거래 문의</a></li>
+                        </ul>
+                    </li>
+                    <li><span>문의사항</span>
+                        <ul>
+                            <li><a href="/questionsPage">FAQ</a></li>
+                            <li><a href="">고객문의</a></li>
+                            <li><a href="">부서문의</a></li>
+                            <li>인사팀</li>
+                            <li>개발팀</li>
+                            <li>운영진</li>
+                        </ul>
+                    </li>
+                    <li><span>프리미엄 서비스</span>
+                        <ul>
+                            <li><a href="/subscribe_Login">CNFT WITH 구독</a></li>
+                            <li>CNFT WITH 펀드</li>
+                            <li>CNFT WITH 브로커리지 연결</li>
+                            <li>추가예정</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div name="footerImgLink">
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1INFHEFN1beKtjBDF5z1CxzxyQpd0w3QS" width="30px">
+                    </a>
+                    <a href="https://github.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1S6cm4e_AWUCwH_NR6TWdmcB2lMmcdWAh" width="30px">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1sEPivNFiLUFVPnTBE09A7hPLT6CGmosz" width="30px">
+                    </a>
+                </div>
+            </div>
+            <div class="footerInfoDiv">
+                <div name="footerInfoText">
+                    <strong>CNFTwith (주)</strong>
+                    <p>대표이사 :  강원석&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업자등록번호 : ------------&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업장소재지 : 어딘가&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;호스팅서비스 : ----------</p>
+                    <p>문의사항 : 010-2680-9361&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;이메일 : lsy000428@naver.com</p>
+                </div>
+                <div name="footerInquiryText">
+                    <strong>고객문의</strong>
+                    <p><a>전화연결 문의</a>&nbsp;&nbsp;&nbsp;<a>오픈채팅 문의</a></p>
+                </div>
+                <h4>Copyright 2020. cocodoer. All Rights Reserved</h4>
+            </div>
+        </footer>
+        <input type="hidden" id="emailID" name="email">
+        <div class="loading">
+            <div class="waveform">
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+            </div>
+        </div>
+        <script src="../js/loading.js" charset="utf-8"></script>
+        <script src="../js/dropdown.js" charset="utf-8"></script>
+        <script src="../js/loginPopup.js" charset="utf-8"></script>
+        <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
+        <script src="../js/logout.js" charset="utf-8"></script>
+        <script>
+            if(sessionStorage.getItem('email') == null) {
+                alert('로그인을 해주세요!');
+                location.href='/';
+            }
+            document.querySelector('.loginBtn > img').setAttribute('src', sessionStorage.getItem('icon'));
+            document.querySelector('.loginBtn > img').setAttribute('title', sessionStorage.getItem('nickname'));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="author" content="CookiePawn">
+        <meta name="description" content="Post List Page">
+        <title>CNFT WITH</title>
+        <link href="../css/Tool.css" rel="stylesheet">
+        <link href="../css/postPage.css" rel="stylesheet">
+        <script src="../js/SameSite.js" charset="utf-8"></script>
+        <script src="../js/scrollPercent.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <header class="mainHeader">
+            <nav>
+                <div class="mainLogoDiv">
+                    <a href="/">
+                        <img src="https://drive.google.com/uc?id=1OjseRRmJX1efiUSZQlkEqol2Zoq5km1T" alt="MainLogo" height="22px">
+                    </a>
+                </div>
+                <div class="mainCategoryDiv">
+                    <div>
+                        <ul class="mainUl">
+                            <li class="li c1"><span class="mainCategory">기업정보</span></li>
+                            <li class="li c2"><span class="mainCategory">CFNT 정보 제공</span></li>
+                            <li class="li c3"><span class="mainCategory">에이다 뉴스</span></li>
+                            <li class="li c4"><span class="mainCategory">브로커리지</span></li>
+                            <li class="li c5"><span class="mainCategory">문의사항</span></li>
+                            <li class="li c6"><span class="mainCategory">프리미엄 서비스</span></li>
+                        </ul>
+                    </div>
+                    <div class="subUl">
+                        <div class="c1Sub">
+                            <div>
+                                <a href="/enterInfo#enterInfo1">- 기업이 하는 일</a><br>
+                                <a href="/enterInfo#enterInfo2">- 경영 이념</a><br>
+                                <a href="/investmentPost">- 투자정보</a><br>
+                                <a href="/recruitmentPost">- 채용정보</a>
+                            </div>
+                            <div>
+                                <a href="/enterInfo#enterInfo4">- 운영진 소개</a><br>
+                                <a href="/enterInfo#enterInfo3">- CEO 메세지</a><br>
+                                <a href="/currentSituationPost">- 투자현황</a>
+                            </div>
+                        </div>
+                        <div class="c2Sub">
+                            <div>
+                                - CNFT 용어<br>
+                                - CNFT 캘린더<br>
+                                <a href="/cnftNewsPost">- CNFT 뉴스</a><br>
+                                <a href="/cnftPost">- CNFT 소개</a>
+                            </div>
+                            <div>
+                                <a href="/mintingPost">- CNFT 민팅</a><br>
+                                <a href="/exchangePost">- CNFT 거래소</a>
+                            </div>
+                            <div>
+                                <a href="/dealPost">- CNFT 거래 방법</a><br>
+                                <a href="/walletPost">- CNFT 지갑</a>
+                            </div>
+                            <div>
+                               <a href="/servicePost">- CNFT 서비스</a>
+                            </div>
+                        </div>
+                        <div class="c3Sub">
+                            <div>
+                                <a href="/adaInfo">- 에이다 생태계</a><br>
+                                <a href="/adaNewsPost">- 에이다 뉴스</a><br>
+                                <a href="/#ADASection">- 에이다 시세</a>
+                            </div>
+                        </div>
+                        <div class="c4Sub">
+                            <div>
+                                <a href="/brokerage#infoID">- 브로커리지란?</a><br>
+                                <a href="/brokerage#linkID">- 기업 브로커리지 소개</a><br>
+                                <a href="/brokerage#linkID">- 브로커리지 거래 문의</a>
+                            </div>
+                        </div>
+                        <div class="c5Sub">
+                            <div>
+                                <a href="/questionsPage">- FAQ</a><br>
+                                <span id="c5Sub1">- 고객문의</span><br>
+                                <span id="c5Sub2">- 부서문의</span>
+                            </div>
+                            <div id="c5SubSub1">
+                                - 인사팀<br>
+                                - 개발팀<br>
+                                - 운영진
+                            </div>
+                            <div id="c5SubSub2">
+                                - 전화로 문의하기<br>
+                                - 카카오톡으로 문의하기
+                            </div>
+                        </div>
+                        <div class="c6Sub">
+                            <div>
+                                <a href="/subscribe">- CNFT WITH 구독</a><br>
+                                - CNFT WITH 펀드<br>
+                                - CNFT WITH 브로커리지 연결<br>
+                                - 추가예정
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainLoginDiv">
+                    <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
+                    <button class="loginBtn" onclick="openLoginPopup()"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px" title="로그인"></button>
+                </div>
+            </nav>
+        </header>
+        <div style="height: 100px;"></div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loginPopupDiv">
+            <h3>소셜 로그인</h3>
+            <input type="button" value="x" onclick="closeLoginPopup()"></input>
+            <button id="naverIdLogin_loginButton" href="javascript:void(0)">
+                <img src="https://drive.google.com/uc?id=1YAKetuHF2DliC5TpQb0OWz1XLIxTp2ru" width="37px">
+                <span>NAVER 로그인</span>
+            </button>
+            <button id="googleLoginBtn">
+
+            </button>
+        </div>
+        <div class="contHome">
+            <div style="height: 100px;"></div>
+            <section name="postListSection">
+                <div class="postToolDiv">
+                    <strong>CNFT 소개 게시판</strong>
+                    <form method="get">
+                        <div>
+                            <input type="submit" value="🔍︎">
+                            <input type="text" placeholder="검색하고 싶은 게시글을 검색하세요" name="postSearch">
+                        </div>
+                    </form>
+                    <span>총 <%=list.length%>개</span>
+                    <div class="postToolBorder"></div>
+                    <input type="button" onclick="plzLogin()" value="글 쓰기"></input>
+                </div>
+                <div class="postListDiv">
+                    <div class="postListBorder"></div>
+                    <div class="postListTitle">
+                        <span class="pt1">&nbsp;글 번호</span><span class="ptBorder">|</span>
+                        <span class="pt2">&nbsp;제목</span><span class="ptBorder">|</span>
+                        <span class="pt3">&nbsp;작성자</span><span class="ptBorder">|</span>
+                        <span class="pt4">&nbsp;조회수</span><span class="ptBorder">|</span>
+                        <span class="pt5">&nbsp;작성일</span>
+                    </div>
+                    <ul>
+                        <% for (var i = (list.length-1); i >= 0; i--)  { %>
+                            <% var comCnt=0;
+                            for(var j = 0; j < clist.length; j++) {
+                                if(list[i].postNum == clist[j].postNum) {
+                                    comCnt++;
+                                } 
+                            }%>
+                            <form method="get" id="postForm postFormID<%= i%>" action="/cnftPostInfo_Login">
+                                <a type="submit" onclick="document.getElementById('postForm postFormID<%= i%>').submit();">
+                                    <div class="postListInfoDiv">
+                                        <span class="plt1">&nbsp;<%= list[i].postNum %></span>
+                                        <%if(list[i].img == "" && comCnt != 0) {%>
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;<span>[<%=comCnt%>]</span></span>
+                                        <%} else if(list[i].img == "" && comCnt == 0) {%>
+                                                <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %></span>
+                                        <%} else if(list[i].img != "" && comCnt != 0) {%>
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;<span>[<%=comCnt%>]</span>&nbsp;&nbsp;📷</span>
+                                        <%} else if(list[i].img != "" && comCnt == 0) {%>             
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;&nbsp;📷</span>                                   
+                                        <%}%>
+                                        <span class="plt3">&nbsp;
+                                            <img src="<%=list[i].authorIcon%>" width="30px">
+                                            &nbsp;<%= list[i].author %>
+                                        </span>
+                                        <span class="plt4">&nbsp;<%= list[i].hit %></span>
+                                        <%list[i].DATE = list[i].DATE.substr(0, 10)%>
+                                        <span class="plt5">&nbsp;<%= list[i].DATE %></span>
+                                        <input name="postID" type="hidden" value="<%= list[i].postNum%>">
+                                    </div>
+                                </a>
+                            </form>
+                        <%}%>
+                    </ul>
+                </div>
+            </section>
+            <div id="dimmedID" class="dimmed"></div>
+        </div>
+        <footer>
+            <div class="footerCategoryDiv">
+                <ul class="footerUl">
+                    <li><span>기업정보</span>
+                        <ul>
+                            <li><a href="/enterInfo#enterInfo1">기업이 하는 일</a></li>
+                            <li><a href="/enterInfo#enterInfo2">경영 이념</a></li>
+                            <li><a href="/investmentPost">투자정보</a></li>
+                            <li><a href="/recruitmentPost">채용정보</a></li>
+                            <li><a href="/enterInfo#enterInfo4">운영진 소개</a></li>
+                            <li><a href="/enterInfo#enterInfo3">CEO 메세지</a></li>
+                            <li><a href="/currentSituationPost">투자현황</a></li>
+                        </ul> 
+                    </li>
+                    <li><span>CFNT 정보 제공</span>
+                        <ul>
+                            <li>CNFT 용어</li>
+                            <li>CNFT 캘린더</li>
+                            <li><a href="/cnftNewsPost">CNFT 뉴스</a></li>
+                            <li><a href="/cnftPost">CNFT 소개</a></li>
+                            <li><a href="/mintingPost">CNFT 민팅</a></li>
+                            <li><a href="/exchangePost">CNFT 거래소</a></li>
+                            <li><a href="/dealPost">CNFT 거래 방법</a></li>
+                            <li><a href="/walletPost">CNFT 지갑</a></li>
+                            <li><a href="/servicePost">CNFT 서비스</a></li>
+                        </ul>
+                    </li>
+                    <li><span>에이다 뉴스</span>
+                        <ul>
+                            <li><a href="/adaInfo">에이다 생태계</a></li>
+                            <li><a href="/adaNewsPost">에이다 뉴스</li>
+                            <li><a href="/#ADASection">에이다 시세</a></li>
+                        </ul>
+                    </li>
+                    <li><span>브로커리지</span>
+                        <ul>
+                            <li><a href="/brokerage#infoID">브로커리지란?</a></li>
+                            <li><a href="/brokerage#linkID">기업 브로커리지 소개</a></li>
+                            <li><a href="/brokerage#linkID">브로커리지 거래 문의</a></li>
+                        </ul>
+                    </li>
+                    <li><span>문의사항</span>
+                        <ul>
+                            <li><a href="/questionsPage">FAQ</a></li>
+                            <li><a href="">고객문의</a></li>
+                            <li><a href="">부서문의</a></li>
+                            <li>인사팀</li>
+                            <li>개발팀</li>
+                            <li>운영진</li>
+                        </ul>
+                    </li>
+                    <li><span>프리미엄 서비스</span>
+                        <ul>
+                            <li><a href="/subscribe">CNFT WITH 구독</a></li>
+                            <li>CNFT WITH 펀드</li>
+                            <li>CNFT WITH 브로커리지 연결</li>
+                            <li>추가예정</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div name="footerImgLink">
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1INFHEFN1beKtjBDF5z1CxzxyQpd0w3QS" width="30px">
+                    </a>
+                    <a href="https://github.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1S6cm4e_AWUCwH_NR6TWdmcB2lMmcdWAh" width="30px">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1sEPivNFiLUFVPnTBE09A7hPLT6CGmosz" width="30px">
+                    </a>
+                </div>
+            </div>
+            <div class="footerInfoDiv">
+                <div name="footerInfoText">
+                    <strong>CNFTwith (주)</strong>
+                    <p>대표이사 :  강원석&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업자등록번호 : ------------&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업장소재지 : 어딘가&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;호스팅서비스 : ----------</p>
+                    <p>문의사항 : 010-2680-9361&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;이메일 : lsy000428@naver.com</p>
+                </div>
+                <div name="footerInquiryText">
+                    <strong>고객문의</strong>
+                    <p><a>전화연결 문의</a>&nbsp;&nbsp;&nbsp;<a>오픈채팅 문의</a></p>
+                </div>
+                <h4>Copyright 2020. cocodoer. All Rights Reserved</h4>
+            </div>
+        </footer>
+        <div class="loading">
+            <div class="waveform">
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+            </div>
+        </div>
+        <script src="../js/loading.js" charset="utf-8"></script>
+        <script src="../js/dropdown.js" charset="utf-8"></script>
+        <script src="../js/loginPopup.js" charset="utf-8"></script>
+        <script src="../js/plzLoginAlert.js" charset="utf-8"></script>
+        <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
+        <script src="../js/naverLogin.js" charset="utf-8"></script>
+        <script src="../js/googleLogin.js" charset="utf-8"></script>
+        <script src="../js/logout.js" charset="utf-8"></script>
+    </body>
+</html>

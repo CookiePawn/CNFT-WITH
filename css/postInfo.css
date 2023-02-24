@@ -1,0 +1,269 @@
+/* 컨텐츠 */
+
+section[name='postToolSection'] {
+    width: 100%;
+    min-width: 1200px;
+}
+
+.postToolDiv{
+    width: 1100px;
+    height: 120px;
+    margin-bottom: 20px;
+    margin: auto;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postToolDiv > strong {
+    margin-left: 50px;
+    font-family: 'GmarketSans-Medium';
+    font-size: 2em;
+    font-weight: 600;
+    float: left;
+}
+
+.postToolDiv > span {
+    margin-top: 15px;
+    margin-right: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: gray;
+    float: right;
+}
+
+.postToolBorder {
+    border-bottom: 3px solid gray;
+    width: 100%;
+    min-width: 1100px;
+    height: 30px;
+    margin: auto;
+    float: left;
+}
+
+section[name='postSection'] {
+    margin: auto;
+    width: 100%;
+    min-width: 1200px;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postTitleDiv {
+    margin: auto;
+    width: 1000px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+div[name='postTitle'] {
+    margin: auto;
+    width: 920px;
+}
+
+div[name='postTitle'] > span {
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+}
+
+div[name='postAuthor'] {
+    width: 50%;
+    height: 50px;
+    float: left;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+div[name='postAuthor'] > span > img {
+    position: relative;
+    top: 7px;
+    margin-left: 40px;
+    border-radius: 500px
+}
+
+div[name='postDate'] {
+    width: 50%;
+    height: 50px;
+    float: right;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+div[name='postDate'] > span {
+    position: relative;
+    top: 18px;
+    right: 40px;
+}
+
+.postContentDiv {
+    margin: auto;
+    width: 1000px;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+div[name='postContent'] {
+    width: 920px;
+    margin: auto;
+}
+
+div[name='postContent'] > span {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+div[name='postTool'] {
+    width: 1000px;
+    height: 70px;
+    text-align: right;
+    line-height: 70px;
+    background-color: rgba(0, 0, 0, 0.035);
+}
+
+div[name='postTool'] > span {
+    margin-right: 40px;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+input[id='deleteBtnID'] {
+    background-color: #00ff0000;
+    border: 0;
+    float: left;
+    color: rgba(0, 0, 0, 0.3);
+    font-family: 'GmarketSans-Medium';
+    font-size: 16px;
+    line-height: 70px;
+    cursor: pointer;
+}
+
+input[id='editBtnID'] {
+    margin-left: 40px;
+    background-color: #00ff0000;
+    border: 0;
+    float: left;
+    color: rgba(0, 0, 0, 0.3);
+    font-family: 'GmarketSans-Medium';
+    font-size: 16px;
+    line-height: 70px;
+    cursor: pointer;
+}
+
+section[name='postCommentsSection'] {
+    margin-top: 30px;
+    width: 100%;
+    min-width: 1200px;
+}
+
+section[name='postCommentsSection'] > div {
+    margin: auto;
+    width: 1000px;
+    background-color: rgba(0, 0, 0, 0.03);
+    font-family: 'GmarketSans-Medium';
+}
+
+div[name='comTitle'] {
+    width: 920px;
+    height: 200px;
+    margin: auto;
+    color: rgba(0, 0, 0, 0.3);
+    line-height: 70px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+}
+
+div[name='comTitle'] > span{
+    font-size: 2em;
+    color: black;
+}
+
+div[name="comPosting"] {
+    width: 100%;
+    height: 100px;
+    border: 2px solid #1111;
+}
+
+textarea[name="comContent"] {
+    width: 79.5%;
+    height: 95%;
+    resize: none;
+    float: left;
+    border: 0;
+}
+
+textarea[name="comContent"]::placeholder {
+    font-family: 'GmarketSans-Medium';
+    font-size: 1.3em;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+input[name="comPostBtn"] {
+    width: 19.95%;
+    height: 99.5%;
+    float: right;
+    background-color: #1111;
+    border: 0;
+    font-size: 1.5em;
+    color: white;
+    font-family: 'GmarketSans-Medium';
+    cursor: pointer;
+}
+
+div[name="comContent"] {
+    margin: auto;
+    width: 920px;
+    border-bottom: 2px solid #1111;
+}
+
+div[name="comContent"] > p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.15);
+}
+
+div[name="comContent"] > p > img{
+    position: relative;
+    top: 8px;
+    border-radius: 500px;
+}
+
+.comContentTextDiv{
+    width: 100%;
+}
+
+.comContentTextDiv > p{
+    text-align: left;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.comContentTextDiv > textarea{
+    margin: 0;
+    width: 600px;
+    height: 100px;
+    display: none;
+}
+
+.comBtnDiv {
+    width: 100%;
+    height: 30px;
+}
+
+input[name="comDelete"] {
+    display: none;
+    background-color: #00ff0000;
+    border: 0;
+    font-size: 16px;
+    font-family: 'GmarketSans-Medium';
+    color: rgba(0, 0, 0, 0.3);
+    float: right;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+

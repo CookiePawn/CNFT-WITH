@@ -1,0 +1,142 @@
+/* 상단 네비바 */
+.adaCategoryNav {
+    width: 100%;
+    height: 40px;
+}
+
+.adaCategoryNav > ul {
+    list-style-type: none;
+}
+
+.adaCategoryNav > ul >li {
+    margin-left: 100px;
+    float: left;
+}
+
+.adaCategoryNav > ul >li > a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.adaCategoryNav > ul >li > a:hover{
+    color: gainsboro;
+}
+
+
+
+
+
+
+
+/* 컨텐츠 */
+
+section[name='mainImgSection'] {
+    width: 100%;
+    height: 550px;
+    min-width: 1200px;
+    background-image: url(https://drive.google.com/uc?id=1fvyL-05ao3TqUujFGjooM6H1Y6lTwBsu);
+    background-size: 100%;
+}
+
+section[name='brokerageInfo'] {
+    width: 100%;
+    height: 1000px;
+    min-width: 1200px;
+    font-family: 'GmarketSans-Medium';
+    text-align: center;
+}
+
+section[name='brokerageInfo'] > h1 {
+    display: inline-block;
+    margin-top: 130px;
+    margin-bottom: 50px;
+    font-size: 2em;
+}   
+
+section[name='brokerageInfo'] > img {
+    display: block;
+    margin: auto;
+}
+
+section[name='brokerageInfo'] > p {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    color: gray;
+}
+
+section[name='brokerageInfo'] > p > a {
+    font-size: 0.7em;
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;;
+}
+
+section[name='brokerageLink'] {
+    width: 100%;
+    height: 700px;
+    min-width: 1200px;
+    font-family: 'GmarketSans-Medium';
+}
+
+.linkDiv {
+    margin: auto;
+    width: 1100px;
+    height: 650px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid gainsboro;
+    border-radius: 40px;
+}
+
+.linkDiv > h1 {
+    margin-top: 44px;
+    margin-left: 70px;
+    font-size: 1.7em;
+}
+
+.linkDiv > div{
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.linkTextDiv {
+    width: 60%;
+    height: 110px;
+    float: left;
+    font-family: 'GmarketSans-Light';
+}
+
+.linkTextDiv > h3 {
+    margin-left: 70px;
+}
+
+.linkTextDiv > p {
+    margin-left: 70px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: gray;
+    line-height: 25px;
+}
+
+.linkButtonDiv {
+    width: 40%;
+    height: 110px;
+    float: left;
+}
+
+.linkButtonDiv > button {
+    height: 30px;
+    font-family: 'GmarketSans-Medium';
+    background-color: white;
+    border-radius: 40px;
+    border: 1px solid gray;
+    margin-top: 75px;
+    cursor: pointer;
+}
+
+.linkButtonDiv > button:hover {
+    background-color: #1111;
+}

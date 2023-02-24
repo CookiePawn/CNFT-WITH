@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth;">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="author" content="CookiePawn">
+        <meta name="description" content="Question Page">
+        <title>CNFT WITH</title>
+        <link href="css/questionsPage.css" rel="stylesheet">
+        <script src="js/scrollPercent.js" charset="utf-8"></script>
+        <script src="js/SameSite.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <center>
+            <header class="header mainHeader">
+                <nav class="nav mainNav">
+                    <div style="width: 20%; height: 100%; float: left;">
+                        <a class="a mainLogoLink" href="/main">
+                            <img class="img mainLogo" src="img/mainLogo.svg" alt="메인로고">
+                        </a>
+                    </div>
+                    <div style="width: 60%; height: 100%; float: left;">
+                        <header id="dropdownHeader" class="dropdown">
+                            <ul class="clearfix">
+                                <li class="li c1"><span class="mainCategory">기업정보</span>
+                                    <ul>
+                                        <li><a href="/enterInfo#enterInfo1">- 기업이 하는 일</a></li>
+                                        <li><a href="/enterInfo#enterInfo2">- 경영 이념</a></li>
+                                        <li><a href="/enterInfo">- 투자정보</a></li>
+                                        <li><a href="/enterInfo">- 채용정보</a></li>
+                                    </ul>
+                                    <ul class="li sub1" style="left: 200px;">
+                                        <li><a href="/enterInfo">- 운영진 소개</a></li>
+                                        <li><a href="/enterInfo">- CEO 메세지</a></li>
+                                        <li><a href="/enterInfo">- 투자현황</a></li>
+                                    </ul> 
+                                </li>
+                                <li class="li c2"><span class="mainCategory">CFNT 정보 제공</span>
+                                    <ul style="right: 100px; position: relative;">
+                                        <li>- CNFT 용어</li>
+                                        <li>- CNFT 캘린더</li>
+                                        <li><a href="/cnftPost_Login">- CNFT 뉴스</a></li>
+                                        <li><a href="/main#cnftNoticeID">- CNFT 소개</a></li>
+                                    </ul>
+                                    <ul class="li sub1" style="left: 100px; bottom: 230px; position: relative;">
+                                        <li>- CNFT 민팅</li>
+                                        <li>- CNFT 거래소</li>
+                                    </ul>
+                                    <ul class="li sub2"style="left: 300px; bottom:360px; position: relative;">
+                                        <li>- CNFT 거래 방법</li>
+                                        <li>- CNFT 지갑</li>
+                                    </ul>
+                                    <ul class="li sub3" style="left: 500px; bottom: 440px; position: relative;">
+                                        <li></li>
+                                        <li>- CNFT 서비스</li>
+                                    </ul>
+                                </li>
+                                <li class="li c3"><span class="mainCategory">에이다 뉴스</span>
+                                    <ul>
+                                        <li>- 에이다 생태계</li>
+                                        <li><a href="/adaNewsPost">- 에이다 뉴스</li>
+                                        <li><a href="/main#cnftNewsAdaID">- 에이다 시세</a></li>
+                                    </ul>
+                                </li>
+                                <li class="li c4"><span class="mainCategory">브로커리지</span>
+                                    <ul>
+                                        <li>- 브로커리지란?</li>
+                                        <li>- 기업 브로커리지 소개</li>
+                                        <li>- 브로커리지 거래 문의</li>
+                                    </ul>
+                                </li>
+                                <li class="li c5"><span class="mainCategory">문의사항</span>
+                                    <ul>
+                                        <li>- 고객 문의</li>
+                                        <li>- FAQ</li>
+                                        <li id="departmentFAQ">- 부서 문의</li>
+                                    </ul>
+                                    <ul class="li sub1" style="left: 100px; top: 100px; position: relative;">
+                                        <li>- 인사팀</li>
+                                        <li>- 개발팀</li>
+                                        <li>- 운영진</li>
+                                    </ul>
+                                </li>
+                                <li class="li c6"><span class="mainCategory">프리미엄 서비스</span>
+                                    <ul>
+                                        <li><a href="/main#subscriptionID">- CNFT WITH 구독</a></li>
+                                        <li>- CNFT WITH 펀드</li>
+                                        <li>- CNFT WITH 브로커리지 연결</li>
+                                        <li>- 추가예정</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </header>
+                    </div>
+                    <div style="width: 20%; height: 100%; float: right;">
+                        <button class="btn mainLogout" onclick="location.href='/'">
+                            <img class="img mainLoginImg" src="img/logout.png" alt="로그아웃" title="로그아웃" width="30px">
+                        </button>
+                        <button class="btn mainLogin" id="login_userInfoBtn" onclick="location.href='/login'">
+                            <img class="img mainLoginImg" id="login_userInfoImg" src="img/login.png" alt="로그인" title="로그인" width="30px">
+                        </button>
+                        <span id="userNickName" style="float: right; margin-right: 10px;">Please Login!</span>    
+                    </div>
+                </nav>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </header>
+            <div class="div contHome">
+                <div id="topPage" style="height: 106px;"></div>
+                <nav class="adaCategoryNav">
+                    <ul>
+                        <li><a href="#questionPage1">- 자주하는 질문</a></li>
+                        <li><a href="#questionPage2">- 1:1 문의하기</a></li>
+                        <li><a href="#questionPage3">- 부서문의</a></li>
+                    </ul>
+                </nav>
+                <div class="mainImgDiv">
+                    <div class="mainTitleDiv">
+                        <h1>문의사항</h1>
+                        <span>궁금한 것이 있으십니까?</span>
+                    </div>
+                    <div class="questionsBox"></div>
+                </div>
+                <div id="questionPage1" style="height:100px"></div>
+                <div  class="questionPage1">
+                    <br><br>
+                    <h1>자주 하는 질문</h1><br>
+                    <span>자주하는 질문을 확인해보세요.</span><br><br>
+                    <input type="button" class="btn1" value="기업" id="btn1" onclick="toggleBtn1()"/>
+                    <input type="button" class="btn1" value="CNFT투자" id="btn2" onclick="toggleBtn2()"/>
+                    <input type="button" class="btn1" value="에이다" id="btn3" onclick="toggleBtn3()"/>
+                    <input type="button" class="btn1" value="브로커리지" id="btn4" onclick="toggleBtn4()"/>
+                    <input type="button" class="btn1" value="구독" id="btn5" onclick="toggleBtn5()"/>
+                </div>
+                <div id="accordion1" class="accordion">
+                    <div id="chart1" class="faqOption">
+                        <input type="checkbox" id="answer01">
+                        <label for="answer01">기업에 관한 질문<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer02">
+                        <label for="answer02">NFT 지갑 만드는법이 궁금합니다.<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer03">
+                        <label for="answer03">구독서비스는 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer04">
+                        <label for="answer04">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer05">
+                        <label for="answer05">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer06">
+                        <label for="answer06">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer07">
+                        <label for="answer07">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer08">
+                        <label for="answer08">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer09">
+                        <label for="answer09">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer10">
+                        <label for="answer10">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                    </div>
+                    <hr class="hr-1">
+                </div>
+                <div id="accordion2" class="accordion2">
+                    <div id="chart1" class="faqOption">
+                        <input type="checkbox" id="answer01">
+                        <label for="answer01">CNFT란 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer02">
+                        <label for="answer02">NFT 지갑 만드는법이 궁금합니다.<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer03">
+                        <label for="answer03">구독서비스는 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer04">
+                        <label for="answer04">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer05">
+                        <label for="answer05">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer06">
+                        <label for="answer06">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer07">
+                        <label for="answer07">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer08">
+                        <label for="answer08">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer09">
+                        <label for="answer09">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer10">
+                        <label for="answer10">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                    </div>
+                    <hr class="hr-1">
+                </div>
+                <div id="accordion3" class="accordion2">
+                    <div id="chart1" class="faqOption">
+                        <input type="checkbox" id="answer01">
+                        <label for="answer01">에이다란 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer02">
+                        <label for="answer02">NFT 지갑 만드는법이 궁금합니다.<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer03">
+                        <label for="answer03">구독서비스는 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer04">
+                        <label for="answer04">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer05">
+                        <label for="answer05">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer06">
+                        <label for="answer06">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer07">
+                        <label for="answer07">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer08">
+                        <label for="answer08">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer09">
+                        <label for="answer09">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer10">
+                        <label for="answer10">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                    </div>
+                    <hr class="hr-1">
+                </div>
+                <div id="accordion4" class="accordion2">
+                    <div id="chart1" class="faqOption">
+                        <input type="checkbox" id="answer01">
+                        <label for="answer01">브로커리지란 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer02">
+                        <label for="answer02">NFT 지갑 만드는법이 궁금합니다.<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer03">
+                        <label for="answer03">구독서비스는 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer04">
+                        <label for="answer04">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer05">
+                        <label for="answer05">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer06">
+                        <label for="answer06">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer07">
+                        <label for="answer07">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer08">
+                        <label for="answer08">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer09">
+                        <label for="answer09">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer10">
+                        <label for="answer10">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                    </div>
+                    <hr class="hr-1">
+                </div>
+                <div id="accordion5" class="accordion2">
+                    <div id="chart1" class="faqOption">
+                        <input type="checkbox" id="answer01">
+                        <label for="answer01">구독서비스란 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer02">
+                        <label for="answer02">NFT 지갑 만드는법이 궁금합니다.<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer03">
+                        <label for="answer03">구독서비스는 무엇인가요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer04">
+                        <label for="answer04">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer05">
+                        <label for="answer05">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer06">
+                        <label for="answer06">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer07">
+                        <label for="answer07">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer08">
+                        <label for="answer08">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer09">
+                        <label for="answer09">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                        <input type="checkbox" id="answer10">
+                        <label for="answer10">카카오 채널은 어디서 볼 수 있나요?<em></em></label>
+                        <div><p>여기에 추가되는 부분이 자주 묻는 질무의 영역입니다</p></div>
+                    </div>
+                    <hr class="hr-1">
+                </div>
+                <div id="questionPage2" style="height:100px"></div>
+                <div class="questionPage2">
+                    <br><br>
+                    <h1>1:1 문의하기</h1><br>
+                    <span>찾으시는 답변이 없다면 1:1문의를 이용해 보세요.</span>
+                </div>
+                <div id="questionPage3" style="height:100px"></div>
+                <div class="questionPage3">
+                    <br><br>
+                    <h1>부서 문의하기</h1><br>
+                    <span>부서별로 문의가 필요하시면 이용해주세요.</span>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="headerBtn">
+                    <a href="#topPage"><img src="../img/login.png" style="width:30px; height:30px;"></a>
+                </div>
+                <div class="footerBtn">
+                    <a href="#wrap"><img src="../img/login.png" style="width:30px; height:30px;"></a>
+                </div>
+
+                
+
+                <div id="dimmedID" class="dimmed"></div>
+            </div>
+        </center>
+        <div id="wrap">
+            <footer>
+                <div class="footerEnterInfo">
+                    <a href="/enterInfo">기업이 하는 일</a>
+                    <a href="/enterInfo">경영 이념</a>
+                    <a href="/enterInfo">투자정보</a>
+                    <a href="/enterInfo">채용정보</a>
+                    <a href="/enterInfo">운영진 소개</a>
+                    <a href="/enterInfo">CEO 메세지</a>
+                    <a href="/enterInfo">투자현황</a>
+                </div>
+                <div class="footerCNFTInfo">
+                    <a href="/#cnftNoticeIDo">CNFT 용어</a>
+                    <a href="/#cnftNoticeID">CNFT 캘린더</a>
+                    <a href="/cnftPost">CNFT 뉴스</a>
+                    <a href="/#cnftNoticeID">CNFT 소개</a>
+                    <a href="/#cnftNoticeID">CNFT 민팅</a>
+                    <a href="/#cnftNoticeID">CNFT 거래소</a>
+                    <a href="/#cnftNoticeID">CNFT 거래 방법</a>
+                    <a href="/#cnftNoticeID">CNFT 지갑</a>
+                    <a href="/#cnftNoticeID">CNFT 서비스</a>
+                </div>
+                <div class="footerADANews">
+                    <a href="/adaNewsPost">에이다 생태계</a>
+                    <a href="/adaNewsPost">에이다 뉴스</a>
+                    <a href="/#cnftNewsAdaID">에이다 시세</a>
+                </div>
+                <div class="footerBro">
+                    <a href="/adaNewsPost">브로커리지란?</a>
+                    <a href="/adaNewsPost">기업 브로커리지 소개</a>
+                    <a href="/adaNewsPost">브로커리지 거래 문의</a>
+                </div>
+                <div class="footerQuestions">
+                    <a href="/adaNewsPost">고객 문의</a>
+                    <a href="/adaNewsPost">FAQ</a>
+                    <a href="/adaNewsPost">인사팀</a>
+                    <a href="/adaNewsPost">개발팀</a>
+                    <a href="/adaNewsPost">운영진</a>
+                </div>
+                <div class="footerService">
+                    <a href="/#subscriptionID">CNFT WITH 구독</a>
+                    <a href="/#subscriptionID">CNFT WITH 펀드</a>
+                    <a href="/#subscriptionID">CNFT WITH 브로커리지연결</a>
+                    <a href="/#subscriptionID">추가예정</a>
+                    <hr class="hr-1">
+                </div>
+                <div style="width:100%"></div>
+                <nav>
+                    <a href="https://www.instagram.com/syong._.00/" target="_blank">
+                        <img src="../img/instagramIcon.png" width="30px">
+                    </a>
+                    <a href="https://github.com/lsy000428" target="_blank">
+                        <img src="../img/githubIcon.png" width="30px">
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=8YfSUfW3bF4" target="_blank">
+                        <img src="../img/youtubeIcon.png" width="30px">
+                    </a>
+                </nav>
+                <div class="footerlast">
+                    <span>CNFTWith · 대표 강원석</span>
+                    <span>사업자등록번호 : --------- </span>
+                    <span>사업장소재지 : 어딘가</span>
+                    <span>호스팅 서비스 : --------</span>
+                    <span>문의사항 : 010-2680-9361</span>
+                    <span>이메일 : lsy000428@naver.com</span>
+                    <span>Copyright 2020. cocoder. All Rights Reserved</span>
+                </div>
+            </footer>
+        </div>
+        <div class="loading">
+            <div class="waveform">
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+            </div>
+        </div>
+        <script src="../js/loading.js" charset="utf-8"></script>
+        <script src="js/dropdown.js" charset="utf-8"></script>
+        <script src="js/faqChoice.js" charset="utf-8"></script>
+        <script>
+            if(sessionStorage.getItem('email') == null) {
+                alert('로그인을 해주세요!');
+                location.href='/';
+            }
+            document.querySelector('.loginBtn > img').setAttribute('src', sessionStorage.getItem('icon'));
+            document.querySelector('.loginBtn > img').setAttribute('title', sessionStorage.getItem('nickname'));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="author" content="CookiePawn">
+        <meta name="description" content="Main Page">
+        <title>CNFT WITH</title>
+        <link href="../css/Tool.css" rel="stylesheet">
+        <link href="../css/adaInfoPage.css" rel="stylesheet">
+        <script src="../js/SameSite.js" charset="utf-8"></script>
+        <script src="../js/scrollPercent.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <header class="mainHeader">
+            <nav>
+                <div class="mainLogoDiv">
+                    <a href="/main">
+                        <img src="https://drive.google.com/uc?id=1OjseRRmJX1efiUSZQlkEqol2Zoq5km1T" alt="MainLogo" height="22px">
+                    </a>
+                </div>
+                <div class="mainCategoryDiv">
+                    <div>
+                        <ul class="mainUl">
+                            <li class="li c1"><span class="mainCategory">기업정보</span></li>
+                            <li class="li c2"><span class="mainCategory">CFNT 정보 제공</span></li>
+                            <li class="li c3"><span class="mainCategory">에이다 뉴스</span></li>
+                            <li class="li c4"><span class="mainCategory">브로커리지</span></li>
+                            <li class="li c5"><span class="mainCategory">문의사항</span></li>
+                            <li class="li c6"><span class="mainCategory">프리미엄 서비스</span></li>
+                        </ul>
+                    </div>
+                    <div class="subUl">
+                        <div class="c1Sub">
+                            <div>
+                                <a href="/enterInfo_Login#enterInfo1">- 기업이 하는 일</a><br>
+                                <a href="/enterInfo_Login#enterInfo2">- 경영 이념</a><br>
+                                <a href="/investmentPost_Login">- 투자정보</a><br>
+                                <a href="/recruitmentPost_Login">- 채용정보</a>
+                            </div>
+                            <div>
+                                <a href="/enterInfo_Login#enterInfo4">- 운영진 소개</a><br>
+                                <a href="/enterInfo_Login#enterInfo3">- CEO 메세지</a><br>
+                                <a href="/currentSituationPost_Login">- 투자현황</a>
+                            </div>
+                        </div>
+                        <div class="c2Sub">
+                            <div>
+                                - CNFT 용어<br>
+                                - CNFT 캘린더<br>
+                                <a href="/cnftNewsPost_Login">- CNFT 뉴스</a><br>
+                                <a href="/cnftPost_Login">- CNFT 소개</a>
+                            </div>
+                            <div>
+                                <a href="/mintingPost_Login">- CNFT 민팅</a><br>
+                                <a href="/exchangePost_Login">- CNFT 거래소</a>
+                            </div>
+                            <div>
+                                <a href="/dealPost_Login">- CNFT 거래 방법</a><br>
+                                <a href="/walletPost_Login">- CNFT 지갑</a>
+                            </div>
+                            <div>
+                               <a href="/servicePost_Login">- CNFT 서비스</a>
+                            </div>
+                        </div>
+                        <div class="c3Sub">
+                            <div>
+                                <a href="/adaInfo_Login">- 에이다 생태계</a><br>
+                                <a href="/adaNewsPost_Login">- 에이다 뉴스</a><br>
+                                <a href="/main#ADASection">- 에이다 시세</a>
+                            </div>
+                        </div>
+                        <div class="c4Sub">
+                            <div>
+                                <a href="/brokerage_Login#infoID">- 브로커리지란?</a><br>
+                                <a href="/brokerage_Login#linkID">- 기업 브로커리지 소개</a><br>
+                                <a href="/brokerage_Login#linkID">- 브로커리지 거래 문의</a>
+                            </div>
+                        </div>
+                        <div class="c5Sub">
+                            <div>
+                                <a href="/questionsPage">- FAQ</a><br>
+                                <span id="c5Sub1">- 고객문의</span><br>
+                                <span id="c5Sub2">- 부서문의</span>
+                            </div>
+                            <div id="c5SubSub1">
+                                - 인사팀<br>
+                                - 개발팀<br>
+                                - 운영진
+                            </div>
+                            <div id="c5SubSub2">
+                                - 전화로 문의하기<br>
+                                - 카카오톡으로 문의하기
+                            </div>
+                        </div>
+                        <div class="c6Sub">
+                            <div>
+                                <a href="/subscribe_Login">- CNFT WITH 구독</a><br>
+                                - CNFT WITH 펀드<br>
+                                - CNFT WITH 브로커리지 연결<br>
+                                - 추가예정
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainLoginDiv">
+                    <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
+                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px"></button>
+                </div>
+            </nav>
+        </header>
+        <div style="height: 100px;"></div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="contHome">
+            <section name="mainImgSection">
+                <div class="mainImgDiv">
+                    <div class="mainTitleDiv">
+                        <h1>에이다 생태계</h1>
+                        <span>에이다 생태계 설명 칸 입니다</span>
+                    </div>
+                </div>
+            </section>
+            <section name="ADADiscoverySection">
+                <div class="adaContentDiv1">
+                    <br><br>
+                    <h1>ADA Discover</h1><br>
+                    <span>카르다노는 사람, 목적, 기술, 연구 및 기회<br>
+                        이 다섯 가지 원칙의 결합체입니다.<br><br>
+                        이 새로운 지식의 별자리를 탐험하고 배우시길 바랍니다.</span>
+                    <div class="content1Img1"><img src="https://drive.google.com/uc?id=12P9mYjq8kwvWDM6XpWRc-63S1-Y-I5XZ" width="600px"></div>
+                </div>
+            </section>
+            <section name="ADAPeopleSection">
+                <div class="adaContentDiv2">
+                    <br><br>
+                    <h1>People</h1><br>
+                    <span>
+                        함께 일하면서, 우리는 많은 사람들을 위해 더 많은 것을 성취합니다.<br><br>
+                        카르다노는 세계가 필요로 하는 긍정적인 변화에 불을 붙일 기술 플랫폼을 만들기 위해<br>
+                        공동의 목적으로 뭉친 과학자, 엔지니어 및 사상 지도자로 구성된분산형 커뮤니티에 의해 건설됩니다.<br><br>
+                        우리는 미래가 과거에 의해 정의되어서는 안 되며, 더 많은 것이 가능하다고 믿습니다.<br>
+                        그리고 기술을 통해, 모두를 위해 만들어질 수 있습니다.<br>
+                        우리는 도전이 아니라 결과에 따라 일의 가치를 측정합니다.
+                    </span>
+                    <div class="content1Img1"><img src="https://drive.google.com/uc?id=1-r2jpmnmAPy-4bYQKN3LyTZ1-0Cbouo4" width="600px"></div>
+                    <span>
+                        모든 Cardano(ADA) 홀더들은 카르다노 네트워크의 지분을 가지고 있습니다.<br>
+                        지갑에 저장된 데이터를 지분 풀에 위임하여 보상을 얻거나,<br>
+                        네트워크의 성공적인 운영에 참여하거나 지분 풀에 위임하여 보상을 받을 가능성을 높일 수 있습니다.<br><br>
+                        시간이 지나면, 에이다는 카르다노 플랫폼의 다양한 애플리케이션과 서비스에 사용할 수 있게 될 것 입니다.
+                    </span>
+                </div>
+            </section>
+            <section name="ADALinkSection">
+                <div class="adaContentDiv3">
+                    <br><br>
+                    <h1>See us, Know us, Join us</h1><br>
+                    <span>
+                        카르다노는 긍정적인 글로벌 변화를 전달하기 위해 노력하고, 우리의 파트너들과 함께 새로운 가능성의 시대를 추진합니다.<br><br>
+                        미래는 다수와 마찬가지로 소수에게 제공되고 개인, 사회 그리고 기업이 거래, 상호작용, 창작물 그리고 지배구조의 새로운 방식을 상상하고 만들어 낼 수 있는 권한을 줍니다.<br>
+                    </span>  
+                    <br><br><br><br><br>
+                    <span>
+                        <span style="color: lightskyblue;">카르다노 파운데이션(Cardano Foundation)</span><br><br><br>
+                        카르다노와 그 생태계의 개발을 감독하고 감독할 핵심 책임이 있는 스위스에 기반을 둔 독립 표준 기구.<br><br>
+                        카르다노 재단은 채택을 추진하고, 블록체인 거버넌스를 형성하며, 상업적 표준을 설정하고,<br>
+                        카르다노 사용자 커뮤니티를 지원하기 위해 일한다.<br><br>
+                    </span>
+                    <a class="content3Link" href="https://cardano.org/partners/?tab=cardano-foundation#partners-section" target="_blank">
+                        <div>
+                            <span>카르다도 파운데이션 사이트로 이동 →</span>
+                        </div>
+                    </a>
+                    <hr>
+                    <span>
+                        <span style="color: lightskyblue;">인풋 아웃풋(Input Output)</span><br><br><br>
+                        Input Output은 카르다노 플랫폼을 설계, 구축 및 유지하기 위해 계약한 기술 및 엔지니어링 회사입니다.<br><br>
+                        찰슨 호킨스(Charles Hoskinson)와 제러미 우드(Jeremy Wood)에 의해 설립된 IOHK는<br>
+                        엄격한 P2P 과학 검토와 소프트웨어 개발의 최고 보증 표준을 통해 혁신에 전념하고 있습니다.<br><br>
+                    </span>
+                    <a class="content3Link" href="https://cardano.org/partners/?tab=iohk#partners-section" target="_blank">
+                        <div>
+                            <span>인풋 아웃풋 사이트로 이동 →</span>
+                        </div>
+                    </a>
+                    <hr>
+                    <span>
+                        <span style="color: lightskyblue;">EMURGO</span><br><br><br>
+                        EMURGO는 카르다노의 기업 부문으로, 상업적 벤처 사업을 통해 플랫폼을 활성화하기 위해 운영하고 있습니다.<br><br>
+                        EMURGO는 상업적 기회를 개발, 지원 및 육성하고 비즈니스를 분산형 블록체인 시스템에 통합할 수 있도록 지원합니다.<br><br>
+                    </span>
+                    <a class="content3Link" href="https://cardano.org/partners/?tab=emurgo#partners-section" target="_blank">
+                        <div>
+                            <span>EMURGO 사이트로 이동 →</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            <div id="dimmedID" class="dimmed"></div>
+        </div>
+        <footer>
+            <div class="footerCategoryDiv">
+                <ul class="footerUl">
+                    <li><span>기업정보</span>
+                        <ul>
+                            <li><a href="/enterInfo_Login#enterInfo1">기업이 하는 일</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo2">경영 이념</a></li>
+                            <li><a href="/investmentPost_Login">투자정보</a></li>
+                            <li><a href="/recruitmentPost_Login">채용정보</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo4">운영진 소개</a></li>
+                            <li><a href="/enterInfo_Login#enterInfo3">CEO 메세지</a></li>
+                            <li><a href="/currentSituationPost_Login">투자현황</a></li>
+                        </ul> 
+                    </li>
+                    <li><span>CFNT 정보 제공</span>
+                        <ul>
+                            <li>CNFT 용어</li>
+                            <li>CNFT 캘린더</li>
+                            <li><a href="/cnftNewsPost_Login">CNFT 뉴스</a></li>
+                            <li><a href="/cnftPost_Login">CNFT 소개</a></li>
+                            <li><a href="/mintingPost_Login">CNFT 민팅</a></li>
+                            <li><a href="/exchangePost_Login">CNFT 거래소</a></li>
+                            <li><a href="/dealPost_Login">CNFT 거래 방법</a></li>
+                            <li><a href="/walletPost_Login">CNFT 지갑</a></li>
+                            <li><a href="/servicePost_Login">CNFT 서비스</a></li>
+                        </ul>
+                    </li>
+                    <li><span>에이다 뉴스</span>
+                        <ul>
+                            <li><a href="/adaInfo_Login">에이다 생태계</a></li>
+                            <li><a href="/adaNewsPost_Login">에이다 뉴스</li>
+                            <li><a href="/main#ADASection">에이다 시세</a></li>
+                        </ul>
+                    </li>
+                    <li><span>브로커리지</span>
+                        <ul>
+                            <li><a href="/brokerage_Login#infoID">브로커리지란?</a></li>
+                            <li><a href="/brokerage_Login#linkID">기업 브로커리지 소개</a></li>
+                            <li><a href="/brokerage_Login#linkID">브로커리지 거래 문의</a></li>
+                        </ul>
+                    </li>
+                    <li><span>문의사항</span>
+                        <ul>
+                            <li><a href="/questionsPage">FAQ</a></li>
+                            <li><a href="">고객문의</a></li>
+                            <li><a href="">부서문의</a></li>
+                            <li>인사팀</li>
+                            <li>개발팀</li>
+                            <li>운영진</li>
+                        </ul>
+                    </li>
+                    <li><span>프리미엄 서비스</span>
+                        <ul>
+                            <li><a href="/subscribe_Login">CNFT WITH 구독</a></li>
+                            <li>CNFT WITH 펀드</li>
+                            <li>CNFT WITH 브로커리지 연결</li>
+                            <li>추가예정</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div name="footerImgLink">
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1INFHEFN1beKtjBDF5z1CxzxyQpd0w3QS" width="30px">
+                    </a>
+                    <a href="https://github.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1S6cm4e_AWUCwH_NR6TWdmcB2lMmcdWAh" width="30px">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1sEPivNFiLUFVPnTBE09A7hPLT6CGmosz" width="30px">
+                    </a>
+                </div>
+            </div>
+            <div class="footerInfoDiv">
+                <div name="footerInfoText">
+                    <strong>CNFTwith (주)</strong>
+                    <p>대표이사 :  강원석&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업자등록번호 : ------------&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업장소재지 : 어딘가&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;호스팅서비스 : ----------</p>
+                    <p>문의사항 : 010-2680-9361&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;이메일 : lsy000428@naver.com</p>
+                </div>
+                <div name="footerInquiryText">
+                    <strong>고객문의</strong>
+                    <p><a>전화연결 문의</a>&nbsp;&nbsp;&nbsp;<a>오픈채팅 문의</a></p>
+                </div>
+                <h4>Copyright 2020. cocodoer. All Rights Reserved</h4>
+            </div>
+        </footer>
+        <div class="loading">
+            <div class="waveform">
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+            </div>
+        </div>
+        <input type="hidden" id="emailID" name="email">
+        <script src="../js/loading.js" charset="utf-8"></script>
+        <script src="../js/dropdown.js" charset="utf-8"></script>
+        <script src="../js/loginPopup.js" charset="utf-8"></script>
+        <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
+        <script src="../js/logout.js" charset="utf-8"></script>
+        <script>
+            if(sessionStorage.getItem('email') == null) {
+                alert('로그인을 해주세요!');
+                location.href='/';
+            }
+            document.querySelector('.loginBtn > img').setAttribute('src', sessionStorage.getItem('icon'));
+            document.querySelector('.loginBtn > img').setAttribute('title', sessionStorage.getItem('nickname'));
+        </script>
+    </body>
+</html>

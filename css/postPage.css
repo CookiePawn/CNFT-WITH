@@ -1,0 +1,238 @@
+/* 컨텐츠 */
+
+section[name='postListSection'] {
+    margin-bottom: 200px;
+    width: 100%;
+    min-width: 1200px;
+}
+
+.postListDiv{
+    width: 1100px;
+    min-width: 1100px;
+    margin: auto;
+}
+
+.postToolDiv{
+    width: 1100px;
+    height: 220px;
+    margin-bottom: 20px;
+    margin: auto;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postToolDiv > strong {
+    margin-left: 50px;
+    font-family: 'GmarketSans-Medium';
+    font-size: 2em;
+    font-weight: 600;
+    float: left;
+}
+
+.postToolDiv > span {
+    margin-top: 15px;
+    margin-right: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: gray;
+    float: right;
+}
+
+.postToolDiv > form > div {
+    margin-right: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
+    overflow: hidden;
+    float: right;
+}
+
+.postToolDiv > form > div > input[type="text"] {
+    width: 350px;
+    height: 40px;
+    background-color: white;
+    border: 0;
+    border-radius: 40px 0 0 40px;
+    float: left;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postToolDiv > form > div > input[type="text"]::placeholder {
+    position: relative;
+    left: 50px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.postToolDiv > form > div > input[value="🔍︎"] {
+    background-color: white;
+    font-size: 1.5em;
+    font-family: 'GmarketSans-Medium';
+    width: 40px;
+    height: 42px;
+    border: 0;
+    float: right;
+    cursor: pointer;
+}
+
+.postToolBorder {
+    border-bottom: 3px solid gray;
+    width: 100%;
+    min-width: 1100px;
+    height: 30px;
+    margin: auto;
+    float: left;
+}
+
+input[value='글 쓰기']{
+    margin-top: 30px;
+    margin-right: 50px;
+    width: 110px;
+    height: 40px;
+    background-color: gray;
+    border: 0;
+    border-radius: 40px;
+    color: white;
+    font-size: 1.2em;
+    font-family: 'GmarketSans-Medium';
+    float: right;
+    cursor: pointer;
+}
+
+input[value='글 쓰기']:hover{
+    background-color: gainsboro;
+}
+
+.postListTitle {
+    width: 100%;
+    height: 50px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 3px solid gray;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postListTitle > span {
+    color: gray;
+    float: left;
+}
+
+.ptBorder {
+    width: 20px;
+}
+
+.pt1 {
+    width: 7%;
+}
+
+.pt2 {
+    width: 40%;
+}
+
+.pt3 {
+    width: 20%;
+}
+
+.pt4 {
+    width: 9%;
+}
+
+.pt5 {
+    width: 16.6%;
+}
+
+.postListDiv > ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.postListDiv > ul > form > a{
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.postListDiv > ul > form > a:hover{
+    transform: scale(1.05);
+}
+
+.postListInfoDiv {
+    width: 100%;
+    height: 60px;
+    max-height: 60px;
+    line-height: 57px;
+    text-align: center;
+    font-family: 'GmarketSans-Light';
+    border-bottom: 1px solid gainsboro;
+    overflow: hidden;
+}
+
+.postListInfoDiv:hover {
+    background-color: #1111;
+}
+
+.postListInfoDiv > span {
+    float: left;
+}
+
+.plt1 {
+    margin-right: 20px;
+    width: 7%;
+}
+
+.plt2 {
+    margin-right: 20px;
+    width: 40%;
+}
+
+.plt2 > span {
+    color: lightskyblue;
+}
+
+.plt3 {
+    margin-right: 20px;
+    width: 20%;
+}
+
+.plt3 > img {
+    vertical-align: middle;
+    border-radius: 50px;
+    border: 1px solid #1111;
+}
+
+.plt4 {
+    margin-right: 20px;
+    width: 9%;
+}
+
+.plt5 {
+    width: 16.6%;
+}
+
+.list.postList{
+    text-decoration: none;
+    text-align: left;
+    color: black;
+}
+
+.list.postList > h2 {
+    margin: 0;
+}
+
+.list.postList > p {
+    color: gainsboro;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.list.postList > span {
+    float: right;
+    margin-right: 10px;
+}
+
+.list.postList > p {
+    margin: 0;
+}
+
+.div.postListDateDiv > span {
+    float: right;
+    margin-right: 10px;
+}

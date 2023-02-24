@@ -1,0 +1,169 @@
+/* 컨텐츠 */
+
+section[name='mainImgSection'] {
+    width: 100%;
+    height: 700px;
+    min-width: 1200px;
+    
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mainImgDiv {
+    margin: auto;
+    width: 100%;
+    max-width: 2000px;
+    height: 700px;
+    background-color: #1111;
+    border: 2px solid gainsboro;
+    background-image: url(https://drive.google.com/uc?id=19LMMlyv1b0ISQ6wYqPxkvgfVcvZSnTGf);
+    background-size: cover;
+    font-family: 'GmarketSans-Medium';
+}
+
+.mainTitleDiv {
+    margin-left: 130px;
+    margin-top: 50px;
+    width: 80%;
+    text-align: left;
+    float: left;
+}
+
+.mainTitleDiv > h1 {
+    font-size: 3em;
+    color: white;
+}
+
+.mainTitleDiv > span {
+    color: white;
+    font-size: 1.3em;
+    font-family: 'GmarketSans-Light';
+}
+
+section[name='ADADiscoverySection'] {
+    width: 100%;
+    height: 800px;
+    min-width: 1200px;
+    
+}
+
+.adaContentDiv1 {
+    margin: auto;
+    width: 1100px;
+    height: 800px;
+    text-align: center;
+    font-family: 'GmarketSans-Medium';
+}
+
+.adaContentDiv1 > h1 {
+    font-size: 2.5em;
+}
+
+.adaContentDiv1 > span {
+    color: gray;
+    font-family: 'GmarketSans-Light';
+}
+
+.content1Img1 {
+    width: 800px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+section[name='ADAPeopleSection'] {
+    width: 100%;
+    height: 1050px;
+    min-width: 1200px;
+    
+    background-color: #1111;
+}
+
+.adaContentDiv2 {
+    margin: auto;
+    width: 1100px;
+    height: 1050px;
+    text-align: center;
+    font-family: 'GmarketSans-Medium';
+}
+
+.adaContentDiv2 > h1 {
+    font-size: 2.5em;
+}
+
+.adaContentDiv2 >span {
+    color: gray;
+    font-family: 'GmarketSans-Light';
+}
+
+section[name='ADALinkSection'] {
+    width: 100%;
+    height: 1550px;
+    min-width: 1200px;
+    
+}
+
+.adaContentDiv3 {
+    margin: auto;
+    width: 1100px;
+    height: 1550px;
+    text-align: center;
+    font-family: 'GmarketSans-Medium';
+}
+
+.adaContentDiv3 > h1 {
+    font-size: 2.5em;
+}
+
+.adaContentDiv3 >span {
+    color: gray;
+    font-family: 'GmarketSans-Light';
+}
+
+.adaContentDiv3 > hr{
+    width: 40%;
+    height: 0;
+    border: 1px solid #1111;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.adaContentDiv3 > span > span {
+    font-size: 1.3em;
+    font-family: 'GmarketSans-Medium';
+}
+
+.content3Link {
+    text-decoration: none;
+}
+
+.content3Link > div {
+    margin: auto;
+    border: 1px solid gray;
+    width: 80%;
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
+}
+
+.content3Link > div:hover {
+    background-color: #1111;
+}
+
+.content3Link > div > span {
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

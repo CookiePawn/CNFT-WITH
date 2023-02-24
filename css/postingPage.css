@@ -1,0 +1,134 @@
+/* 컨텐츠 */
+
+section[name='postToolSection'] {
+    width: 100%;
+    min-width: 1200px;
+}
+
+.postToolDiv{
+    width: 1100px;
+    height: 120px;
+    margin-bottom: 20px;
+    margin: auto;
+    font-family: 'GmarketSans-Medium';
+}
+
+.postToolDiv > strong {
+    margin-left: 50px;
+    font-family: 'GmarketSans-Medium';
+    font-size: 2em;
+    font-weight: 600;
+    float: left;
+}
+
+.postToolDiv > span {
+    margin-top: 15px;
+    margin-right: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: gray;
+    float: right;
+}
+
+.postToolBorder {
+    border-bottom: 3px solid gray;
+    width: 100%;
+    min-width: 1100px;
+    height: 30px;
+    margin: auto;
+    float: left;
+}
+
+section[name='postingSection'] {
+    width: 100%;
+    min-width: 1200px;
+    margin-bottom: 200px;
+}
+
+.postDiv{
+    width: 1000px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.div.postTitleDiv{
+    margin: auto;
+    width: 920px;
+    height: 130px;
+}
+
+.div.postContentDiv{
+    margin: auto;
+    width: 920px;
+    height: 590px;
+    background-color: #1111;
+    word-wrap: break-word;
+}
+
+.div.imgDiv{
+    width: 50%;
+    height: 50px;
+    float: left;
+}
+
+.div.imgDiv > label{
+    margin-top: 15px;
+    margin-left: 30px;
+    float: left;
+}
+
+.div.imgDiv > input{
+    margin-top: 13px;
+    margin-left: 10px;
+    float: left;
+}
+
+.div.buttonDiv{
+    margin: auto;
+    width: 1000px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.div.buttonDiv > input {
+    width: 100px;
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 10px;
+    background-color: white;
+    border-radius: 40px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    float: right;
+    cursor: pointer;
+}
+
+.div.buttonDiv > input:hover{
+    background-color: #1111;
+}
+
+.div.postTitleDiv > input{
+    margin-top: 40px;
+    width: 920px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    resize: none;
+    font-family: 'GmarketSans-medium';
+}
+
+.div.postTitleDiv > input::placeholder {
+    position: relative;
+    left: 10px;
+}
+
+.div.postContentDiv > textarea{
+    margin-top: 10px;
+    width: 920px;
+    height: 95%;
+    background-color: #00ff0000;
+    border: #00ff0000;
+    resize: none;
+    font-size: 2em;
+    white-space: pre-line;
+}
