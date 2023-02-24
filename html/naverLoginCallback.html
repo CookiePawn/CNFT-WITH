@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name="author" content="CookiePawn">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <script>
+            var naverLogin = new naver.LoginWithNaverId(
+            {
+                clientId: "fF_n9MMtYWJjeyNVzYDQ",
+                callbackUrl: "http://localhost:3000/main", // http://cookiepawn.shop/main
+                isPopup: false,
+                callbackHandle: true
+            }
+            );  
+
+
+            naverLogin.init();
+
+
+            window.addEventListener('load', function () {
+                naverLogin.getLoginStatus(function (status) {
+                    if (status) {
+                        var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+                                
+                        const id = naverLogin.user.getId();
+                        const nickname = naverLogin.user.getNickName();
+                        const profile_img = naverLogin.user.getProfileImage();
+                        
+                        
+                        sessionStorage.setItem('id', id);
+                        sessionStorage.setItem('nickname', nickname);
+                        sessionStorage.setItem('icon', profile_img);
+                        sessionStorage.setItem('email', email);
+                        sessionStorage.setItem('social', 'naver');
+
+                        location.href='/main';
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

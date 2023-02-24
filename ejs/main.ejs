@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta name ="google-signin-client_id" content="941458816459-s7hnjsgbkqd5d92tfa41arvhafkjj9dq.apps.googleusercontent.com">
+        <meta name="author" content="CookiePawn">
+        <meta name="description" content="Main Page">
+        <title>CNFT WITH</title>
+        <link href="../css/Tool.css" rel="stylesheet">
+        <link href="../css/mainPage.css" rel="stylesheet">
+        <script src="../js/SameSite.js" charset="utf-8"></script>
+        <script src="../js/scrollPercent.js" charset="utf-8"></script>
+        <script src="../js/mobileCheck.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <header class="mainHeader">
+            <nav>
+                <div class="mainLogoDiv">
+                    <a onclick="location.href='/'">
+                        <img src="https://drive.google.com/uc?id=1OjseRRmJX1efiUSZQlkEqol2Zoq5km1T" alt="MainLogo" height="22px">
+                    </a>
+                </div>
+                <div class="mainCategoryDiv">
+                    <div>
+                        <ul class="mainUl">
+                            <li class="li c1"><span class="mainCategory">기업정보</span></li>
+                            <li class="li c2"><span class="mainCategory">CFNT 정보 제공</span></li>
+                            <li class="li c3"><span class="mainCategory">에이다 뉴스</span></li>
+                            <li class="li c4"><span class="mainCategory">브로커리지</span></li>
+                            <li class="li c5"><span class="mainCategory">문의사항</span></li>
+                            <li class="li c6"><span class="mainCategory">프리미엄 서비스</span></li>
+                        </ul>
+                    </div>
+                    <div class="subUl">
+                        <div class="c1Sub">
+                            <div>
+                                <a href="/enterInfo#enterInfo1">- 기업이 하는 일</a><br>
+                                <a href="/enterInfo#enterInfo2">- 경영 이념</a><br>
+                                <a href="/investmentPost">- 투자정보</a><br>
+                                <a href="/recruitmentPost">- 채용정보</a>
+                            </div>
+                            <div>
+                                <a href="/enterInfo#enterInfo4">- 운영진 소개</a><br>
+                                <a href="/enterInfo#enterInfo3">- CEO 메세지</a><br>
+                                <a href="/currentSituationPost">- 투자현황</a>
+                            </div>
+                        </div>
+                        <div class="c2Sub">
+                            <div>
+                                - CNFT 용어<br>
+                                - CNFT 캘린더<br>
+                                <a href="/cnftNewsPost">- CNFT 뉴스</a><br>
+                                <a href="/cnftPost">- CNFT 소개</a>
+                            </div>
+                            <div>
+                                <a href="/mintingPost">- CNFT 민팅</a><br>
+                                <a href="/exchangePost">- CNFT 거래소</a>
+                            </div>
+                            <div>
+                                <a href="/dealPost">- CNFT 거래 방법</a><br>
+                                <a href="/walletPost">- CNFT 지갑</a>
+                            </div>
+                            <div>
+                               <a href="/servicePost">- CNFT 서비스</a>
+                            </div>
+                        </div>
+                        <div class="c3Sub">
+                            <div>
+                                <a href="/adaInfo">- 에이다 생태계</a><br>
+                                <a href="/adaNewsPost">- 에이다 뉴스</a><br>
+                                <a href="/#ADASection">- 에이다 시세</a>
+                            </div>
+                        </div>
+                        <div class="c4Sub">
+                            <div>
+                                <a href="/brokerage#infoID">- 브로커리지란?</a><br>
+                                <a href="/brokerage#linkID">- 기업 브로커리지 소개</a><br>
+                                <a href="/brokerage#linkID">- 브로커리지 거래 문의</a>
+                            </div>
+                        </div>
+                        <div class="c5Sub">
+                            <div>
+                                <a href="/questionsPage">- FAQ</a><br>
+                                <span id="c5Sub1">- 고객문의</span><br>
+                                <span id="c5Sub2">- 부서문의</span>
+                            </div>
+                            <div id="c5SubSub1">
+                                - 인사팀<br>
+                                - 개발팀<br>
+                                - 운영진
+                            </div>
+                            <div id="c5SubSub2">
+                                - 전화로 문의하기<br>
+                                - 카카오톡으로 문의하기
+                            </div>
+                        </div>
+                        <div class="c6Sub">
+                            <div>
+                                <a href="/subscribe">- CNFT WITH 구독</a><br>
+                                - CNFT WITH 펀드<br>
+                                - CNFT WITH 브로커리지 연결<br>
+                                - 추가예정
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainLoginDiv">
+                    <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
+                    <button class="loginBtn" onclick="openLoginPopup()"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px" title="로그인"></button>
+                </div>
+            </nav>
+        </header>
+        <div style="height: 100px;"></div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loginPopupDiv">
+            <h3>소셜 로그인</h3>
+            <input type="button" value="x" onclick="closeLoginPopup()"></input>
+            <button id="naverIdLogin_loginButton" href="javascript:void(0)">
+                <img src="https://drive.google.com/uc?id=1YAKetuHF2DliC5TpQb0OWz1XLIxTp2ru" width="37px">
+                <span>NAVER 로그인</span>
+            </button>
+            <button id="googleLoginBtn">
+
+            </button>
+        </div>
+        <div class="contHome">
+            <section name="mainImgSection">
+                <div>
+                    <span>CNFT WITH</span>
+                    <p>Welcome to CNFT WITH page!</p>
+                </div>
+            </section>
+            <section name="subsSection" id="subsSection">
+                <div name="subsContentDiv">
+                    <div class="subsTextDiv">
+                        <div name="subsTextBorder"></div>
+                        <h1>구독 서비스</h1>
+                        <span>구독하여 더 많은 서비스를 이용하세요</span>
+                        <p>
+                            구독시스템을 이용하실 매일 새롭게 분석&가공한 정보를<br>
+                            이메일 혹은 문자, 카카오톡으로 제공해드립니다.
+                        </p>
+                        <span>월 4,900원, 년 49,000원</span><br>
+                        <button onclick="location.href='/subscribe'">구독 하기</button>
+                        <a href="/subscribe">자세히 보기&nbsp;&nbsp;></a>
+                    </div>
+                    <div class="subsImgDiv">
+                        <img src="https://drive.google.com/uc?id=1AIrH9o8uUMj1mZcwyw9wvZL-OO2KZtB9" alt="subsImg" width="95%" height="100%">
+                    </div>
+                </div>
+            </section>
+            <section name="ADAPriceSection" id="ADASection">
+                <div style="height: 150px;"></div>
+                <div class="mainADADiv">
+                    <div class="ADAPriceSectionTitleDiv">
+                        <div></div>
+                        <h1>ADA 시세</h1>
+                        <p>에이다 시세 및 거래량을 알려드리겠습니다</p>
+                    </div>
+                    <div id="stock-graph"></div> 
+                    <div class="ADAInfoTextDiv">
+                        <br>
+                        <h3>○ 에이다 시세 / 변동폭</h3>
+                        <span class="closing_price"></span>
+                        <span class="fluctate_rate_24H"></span>
+                        <span class="unitText">&nbsp;KRW</span>
+                        <br><br><br>
+                        <h3>○ 금일 거래량</h3>
+                        <span class="units_traded"></span>
+                        <span class="unitText">&nbsp;ADA</span>
+                    </div>
+                </div>
+            </section>
+            <section name="CNFTNewsSection" id="CNFTNewsSection">
+                <div style="height: 150px;"></div>
+                <div class="CNFTNewsSectionTitleDiv">
+                    <div></div>
+                    <h1>CNFT NEWS</h1>
+                    <p>빠르게 알려드리는 CNFT 뉴스</p>
+                </div>
+                <div class="CNFTNewsContentDiv">
+                    <div name="CNFTNews1">
+                        <%if (list1[0] != null) {%>
+                            <div name="CNFTNewsSub">
+                                <%if (list1[0].img == '') {%>
+                                    <div class="cnftNewsNotImg">
+                                        <span>CNFT WITH</span>
+                                    </div>
+                                <%} else {%>
+                                    <img src="../postImg/<%=list1[0].img%>" width="274.72px" height="274.72px" alt="CNFTNewsImg">
+                                <%}%>
+                                <div>
+                                    <div></div>
+                                    <span>
+                                        <%-list1[0].title%>
+                                    </span>
+                                </div>
+                                <p><%=list1[0].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                            </div>
+                        <%}%>
+                    </div>
+                    <div name="CNFTNews2">
+                        <%if (list1[1] != null) {%>
+                            <div name="CNFTNewsSub">
+                                <%if (list1[1].img == '') {%>
+                                    <div class="cnftNewsNotImg">
+                                        <span>CNFT WITH</span>
+                                    </div>
+                                <%} else {%>
+                                    <img src="../postImg/<%=list1[1].img%>" width="274.72px" height="274.72px" alt="CNFTNewsImg">
+                                <%}%>
+                                <div>
+                                    <div></div>
+                                    <span>
+                                        <%-list1[1].title%>
+                                    </span>
+                                </div>
+                                <p><%=list1[1].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                            </div>
+                        <%}%>
+                    </div>
+                    <div name="CNFTNews3">
+                        <%if (list1[2] != null) {%>
+                            <div name="CNFTNewsSub">
+                                <%if (list1[2].img == '') {%>
+                                    <div class="cnftNewsNotImg">
+                                        <span>CNFT WITH</span>
+                                    </div>
+                                <%} else {%>
+                                    <img src="../postImg/<%=list1[2].img%>" width="274.72px" height="274.72px" alt="CNFTNewsImg">
+                                <%}%>
+                                <div>
+                                    <div></div>
+                                    <span>
+                                        <%-list1[2].title%>
+                                    </span>
+                                </div>
+                                <p><%=list1[2].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                            </div>
+                        <%}%>
+                    </div>
+                    <div name="CNFTLink">
+                        <a href="/cnftNewsPost">자세히 보기&nbsp;<span name="CNFTLinkImg">〉</span></a>
+                    </div>
+                </div>
+            </section>
+            <section name="CNFTNoticeSection" id="CNFTNoticeSection">
+                <div style="height: 150px;"></div>
+                <div class="CNFTNoticeSectionTitleDiv">
+                    <div></div><br>
+                    <h1>CNFT 게시판</h1>
+                    <p>CNFT 정보를 공유하세요</p>
+                </div>
+                <div class="CNFTNoticeContentDiv">
+                    <p>인기글</p>
+                    <%if(list2[0]==null) {%>
+                        <div name="CNFTNotice1">
+                            <div name="CNFTNoticeSub" style="float: left;">
+                                <div name="CNFTNoticeBackColor"></div>
+                                <div name="CNFTNoticeUserInfo">
+                                </div>
+                                <div name="CNFTNoticeContent">
+                                    <span name="notNoticeText">작성 된 게시글이 없습니다</span>
+                                </div>
+                            </div>
+                        </div>
+                    <%} else {%>
+                        <form method="get" id="CNFTNoticeForm1" action="/cnftPostInfo">
+                            <input type="hidden" name="postID" value="<%=list2[0].postNum%>">
+                            <div name="CNFTNotice1">
+                                <div name="CNFTNoticeSub" style="float: left;">
+                                    <div name="CNFTNoticeBackColor"></div>
+                                    <div name="CNFTNoticeUserInfo">
+                                        <img src="<%=list2[0].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <p><%=list2[0].author%></p>
+                                    </div>
+                                    <a name="formClick" onclick="document.getElementById('CNFTNoticeForm1').submit()">
+                                        <div name="CNFTNoticeContent">
+                                            <%if(list2[0].img != '') {%>
+                                                <img src="../postImg/<%=list2[0].img%>" width="219px" height="219px">
+                                            <%} else {%>
+                                                <div name="CNFTNoticeNotImg">CNFT WITH</div>
+                                            <%}%>
+                                            <div name="CNFTNoticeTitleText">
+                                                <%if(list2[0].title.length >= 17) {%>
+                                                    <h1><%=list2[0].title.substr(0,16)%>...</h1>
+                                                <%} else {%>
+                                                    <h1><%=list2[0].title%></h1>
+                                                <%}%>
+                                            </div>
+                                            <div name="CNFTNoticeContentText">
+                                                <p><%-list2[0].content%></p>
+                                            </div>
+                                            <div name="CNFTNoticeDateText">
+                                                <p><%=list2[0].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                                            </div>
+                                            <div name="CNFTNoticeCntText">
+                                                <p>조회수 : <%=list2[0].hit%></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    <%}%>
+                    <%if(list2[1]==null) {%>
+                        <div name="CNFTNotice1">
+                            <div name="CNFTNoticeSub" style="float: right;">
+                                <div name="CNFTNoticeBackColor"></div>
+                                <div name="CNFTNoticeUserInfo">
+                                </div>
+                                <div name="CNFTNoticeContent">
+                                    <span name="notNoticeText">작성 된 게시글이 없습니다</span>
+                                </div>
+                            </div>
+                        </div>
+                    <%} else {%>
+                        <form method="get" id="CNFTNoticeForm2" action="/cnftPostInfo">
+                            <input type="hidden" name="postID" value="<%=list2[1].postNum%>">
+                            <div name="CNFTNotice2">
+                                <div name="CNFTNoticeSub" style="float: right;">
+                                    <div name="CNFTNoticeBackColor"></div>
+                                    <div name="CNFTNoticeUserInfo">
+                                        <img src="<%=list2[1].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <p><%=list2[1].author%></p>
+                                    </div>
+                                    <a name="formClick" onclick="document.getElementById('CNFTNoticeForm2').submit()">
+                                        <div name="CNFTNoticeContent">
+                                            <%if(list2[1].img != '') {%>
+                                                <img src="../postImg/<%=list2[1].img%>" width="219px" height="219px">
+                                            <%} else {%>
+                                                <div name="CNFTNoticeNotImg">CNFT WITH</div>
+                                            <%}%>
+                                            <div name="CNFTNoticeTitleText">
+                                                <%if(list2[1].title.length >= 17) {%>
+                                                    <h1><%=list2[1].title.substr(0,16)%>...</h1>
+                                                <%} else {%>
+                                                    <h1><%=list2[1].title%></h1>
+                                                <%}%>
+                                            </div>
+                                            <div name="CNFTNoticeContentText">
+                                                <p><%-list2[1].content%></p>
+                                            </div>
+                                            <div name="CNFTNoticeDateText">
+                                                <p><%=list2[1].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                                            </div>
+                                            <div name="CNFTNoticeCntText">
+                                                <p>조회수 : <%=list2[1].hit%></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </form> 
+                    <%}%>
+                    <%if(list2[2]==null) {%>
+                        <div name="CNFTNotice1">
+                            <div name="CNFTNoticeSub" style="float: left;">
+                                <div name="CNFTNoticeBackColor"></div>
+                                <div name="CNFTNoticeUserInfo">
+                                </div>
+                                <div name="CNFTNoticeContent">
+                                    <span name="notNoticeText">작성 된 게시글이 없습니다</span>
+                                </div>
+                            </div>
+                        </div>
+                    <%} else {%>
+                        <form method="get" id="CNFTNoticeForm3" action="/cnftPostInfo">
+                            <input type="hidden" name="postID" value="<%=list2[2].postNum%>">
+                            <div name="CNFTNotice3">
+                                <div name="CNFTNoticeSub" style="float: left;">
+                                    <div name="CNFTNoticeBackColor"></div>
+                                    <div name="CNFTNoticeUserInfo">
+                                        <img src="<%=list2[2].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <p><%=list2[2].author%></p>
+                                    </div>
+                                    <a name="formClick" onclick="document.getElementById('CNFTNoticeForm3').submit()">
+                                        <div name="CNFTNoticeContent">
+                                            <%if(list2[2].img != '') {%>
+                                                <img src="../postImg/<%=list2[2].img%>" width="219px" height="219px">
+                                            <%} else {%>
+                                                <div name="CNFTNoticeNotImg">CNFT WITH</div>
+                                            <%}%>
+                                            <div name="CNFTNoticeTitleText">
+                                                <%if(list2[2].title.length >= 17) {%>
+                                                    <h1><%=list2[2].title.substr(0,16)%>...</h1>
+                                                <%} else {%>
+                                                    <h1><%=list2[2].title%></h1>
+                                                <%}%>
+                                            </div>
+                                            <div name="CNFTNoticeContentText">
+                                                <p><%-list2[2].content%></p>
+                                            </div>
+                                            <div name="CNFTNoticeDateText">
+                                                <p><%=list2[2].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
+                                            </div>
+                                            <div name="CNFTNoticeCntText">
+                                                <p>조회수 : <%=list2[2].hit%></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>  
+                    <%}%>
+                    <div name="CNFTLink">
+                        <a href="/cnftPost">자세히 보기&nbsp;<span name="CNFTLinkImg">〉</span></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer>
+            <div class="footerCategoryDiv">
+                <ul class="footerUl">
+                    <li><span>기업정보</span>
+                        <ul>
+                            <li><a href="/enterInfo#enterInfo1">기업이 하는 일</a></li>
+                            <li><a href="/enterInfo#enterInfo2">경영 이념</a></li>
+                            <li><a href="/investmentPost">투자정보</a></li>
+                            <li><a href="/recruitmentPost">채용정보</a></li>
+                            <li><a href="/enterInfo#enterInfo4">운영진 소개</a></li>
+                            <li><a href="/enterInfo#enterInfo3">CEO 메세지</a></li>
+                            <li><a href="/currentSituationPost">투자현황</a></li>
+                        </ul> 
+                    </li>
+                    <li><span>CFNT 정보 제공</span>
+                        <ul>
+                            <li>CNFT 용어</li>
+                            <li>CNFT 캘린더</li>
+                            <li><a href="/cnftNewsPost">CNFT 뉴스</a></li>
+                            <li><a href="/cnftPost">CNFT 소개</a></li>
+                            <li><a href="/mintingPost">CNFT 민팅</a></li>
+                            <li><a href="/exchangePost">CNFT 거래소</a></li>
+                            <li><a href="/dealPost">CNFT 거래 방법</a></li>
+                            <li><a href="/walletPost">CNFT 지갑</a></li>
+                            <li><a href="/servicePost">CNFT 서비스</a></li>
+                        </ul>
+                    </li>
+                    <li><span>에이다 뉴스</span>
+                        <ul>
+                            <li><a href="/adaInfo">에이다 생태계</a></li>
+                            <li><a href="/adaNewsPost">에이다 뉴스</li>
+                            <li><a href="/#ADASection">에이다 시세</a></li>
+                        </ul>
+                    </li>
+                    <li><span>브로커리지</span>
+                        <ul>
+                            <li><a href="/brokerage#infoID">브로커리지란?</a></li>
+                            <li><a href="/brokerage#linkID">기업 브로커리지 소개</a></li>
+                            <li><a href="/brokerage#linkID">브로커리지 거래 문의</a></li>
+                        </ul>
+                    </li>
+                    <li><span>문의사항</span>
+                        <ul>
+                            <li><a href="/questionsPage">FAQ</a></li>
+                            <li><a href="">고객문의</a></li>
+                            <li><a href="">부서문의</a></li>
+                            <li>인사팀</li>
+                            <li>개발팀</li>
+                            <li>운영진</li>
+                        </ul>
+                    </li>
+                    <li><span>프리미엄 서비스</span>
+                        <ul>
+                            <li><a href="/subscribe">CNFT WITH 구독</a></li>
+                            <li>CNFT WITH 펀드</li>
+                            <li>CNFT WITH 브로커리지 연결</li>
+                            <li>추가예정</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div name="footerImgLink">
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1INFHEFN1beKtjBDF5z1CxzxyQpd0w3QS" width="30px">
+                    </a>
+                    <a href="https://github.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1S6cm4e_AWUCwH_NR6TWdmcB2lMmcdWAh" width="30px">
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://drive.google.com/uc?id=1sEPivNFiLUFVPnTBE09A7hPLT6CGmosz" width="30px">
+                    </a>
+                </div>
+            </div>
+            <div class="footerInfoDiv">
+                <div name="footerInfoText">
+                    <strong>CNFTwith (주)</strong>
+                    <p>대표이사 :  강원석&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업자등록번호 : ------------&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;사업장소재지 : 어딘가&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;호스팅서비스 : ----------</p>
+                    <p>문의사항 : 010-2680-9361&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;이메일 : lsy000428@naver.com</p>
+                </div>
+                <div name="footerInquiryText">
+                    <strong>고객문의</strong>
+                    <p><a>전화연결 문의</a>&nbsp;&nbsp;&nbsp;<a>오픈채팅 문의</a></p>
+                </div>
+                <h4>Copyright 2020. cocodoer. All Rights Reserved</h4>
+            </div>
+        </footer>
+        <div class="loading">
+            <div class="waveform">
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+                <div class="waveform__bar"></div>
+            </div>
+        </div>
+        <div id="dimmedID" class="dimmed"></div>
+        <script src="../js/adaInfo.js" charset="utf-8"></script>
+        <script src="../js/dropdown.js" charset="utf-8"></script>
+        <script src="../js/loginPopup.js" charset="utf-8"></script>
+        <script src="../js/scrollMove.js" charset="utf-8"></script>
+        <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
+        <script src="../js/naverLogin.js" charset="utf-8"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="../js/googleLogin.js" charset="utf-8"></script>
+        <script src="../js/logout.js" charset="utf-8"></script>
+        <script src="../js/loading.js" charset="utf-8"></script>
+    </body>
+</html>

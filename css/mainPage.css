@@ -1,0 +1,637 @@
+/* 메인 이미지 */
+
+section[name='mainImgSection'] {
+    width: 100%;
+    height: 800px;
+    background-color: aliceblue;
+    font-family: 'Roboto';
+}
+
+section[name='mainImgSection'] > div{
+    margin: auto;
+    width: 100%;
+    max-width: 2000px;
+    min-width: 1200px;
+    height: 800px;
+    background-image: url(https://drive.google.com/uc?id=1zdxNzGoZfsRWEfeu8sZN6e7P2HfvM6Fg);
+    background-size: cover;
+}
+
+section[name='mainImgSection'] > div > span{
+    display: inline-block;
+    margin-top: 600px;
+    margin-left: 50px;
+    color: white;
+    font-size: 4em;
+}
+
+section[name='mainImgSection'] > div > p{
+    margin-left: 50px;
+    color: white;
+    font-size: 1.5em;
+}
+
+
+
+
+
+
+/* 구독 서비스 */
+
+section[name='subsSection'] {
+    width: 100%;
+    height: 900px;
+    min-width: 1200px;
+    background-color: white;
+    position: relative;
+    font-family: 'GmarketSans-Medium';
+}
+
+div[name='subsContentDiv'] {
+    width: 900px;
+    height: 400px;
+    position: absolute;
+    top: 275px;
+    left: 42%;
+    transform: translate(-50%, 0%);
+    z-index: 2;
+}
+
+.subsTextDiv {
+    width: 45%;
+    height: 100%;
+    float: right;
+}
+
+div[name='subsTextBorder'] {
+    width: 30%;
+    height: 1px;
+    float: left;
+    border-top: 3px solid black;
+}
+
+.subsTextDiv > h1 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.subsTextDiv > span {
+    color: gray;
+}
+
+.subsTextDiv > p {
+    margin-top: 25px;
+    margin-bottom: 135px;
+    font-family: 'GmarketSans-Light';
+    font-weight: 100;
+    color: gray;
+}
+
+.subsTextDiv > button {
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    border: 3px solid black;
+    border-radius: 40px;
+    background-color: white;
+    font-size: 1.2em;
+    font-family: 'GmarketSans-Medium';
+    cursor: pointer;
+}
+
+.subsTextDiv > a {
+    position: relative;
+    top: 10px;
+    margin-left: 70px;
+    text-decoration: none;
+    color: gray;
+    cursor: pointer;
+}
+
+.subsTextDiv > button:hover {
+    background-color: #1111;
+}
+
+.subsImgDiv {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.subsImgDiv > img {
+    float: left;
+}
+
+
+
+
+
+
+
+/* 메인 Border - 가로 선 */
+
+div[name='mainBorder'] {
+    width: 96%;
+    height: 1px;
+    border-top: 2px solid black;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+/* 에이다 시세 */
+
+section[name='ADAPriceSection'] {
+    width: 100%;
+    height: 700px;
+    min-width: 1200px;
+    font-family: 'GmarketSans-Medium';
+}
+
+.mainADADiv {
+    position: relative;
+    left: 150px;
+    width: 900px;
+    margin: auto;
+}
+
+.ADAPriceSectionTitleDiv {
+    border-left: 3px solid black;
+    width: 49%;
+    float: left;
+}
+
+.ADAPriceSectionTitleDiv > h1{
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    font-size: 2.25em;
+}
+
+.ADAPriceSectionTitleDiv > p {
+    margin: 0;
+    margin-bottom: 15px;
+    margin-left: 30px;
+    color: gray;
+}
+
+.ADAInfoTextDiv {
+    width: 59%;
+    float: left;
+}
+
+.ADAInfoTextDiv > h3 {
+    color: gray;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.unitText {
+    color: gray;
+    font-family: 'GmarketSans-Light';
+    font-weight: 600;
+}
+
+.closing_price {
+    margin-left: 50px;
+    font-size: 1.7em;
+    font-weight: 900;
+}
+
+.fluctate_rate_24H {
+    font-weight: 900;
+}
+
+.units_traded {
+    margin-left: 50px;
+    font-size: 1.7em;
+    font-weight: 900;
+}
+
+
+
+
+/* 주식 차트 */
+
+div[id='stock-graph'] {
+    width: 40%;
+    height: 320px;
+    background-color: #1111;
+    border: 2px solid gray;
+    border-radius: 5px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CNFT 뉴스 */
+
+section[name='CNFTNewsSection'] {
+    width: 100%;
+    height: 900px;
+    min-width: 1200px;
+    
+    font-family: 'GmarketSans-Medium';
+}
+
+.CNFTNewsSectionTitleDiv {
+    margin: auto;
+    width: 1000px;
+    text-align: center;
+}
+
+.CNFTNewsSectionTitleDiv > div {
+    margin: auto;
+    width: 150px;
+    height: 1px;
+    border-top: 3px solid black;
+}
+
+.CNFTNewsSectionTitleDiv > h1{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 2.25em;
+}
+
+.CNFTNewsSectionTitleDiv > p {
+    margin: 0;
+    margin-bottom: 50px;
+    color: gray;
+}
+
+.CNFTNewsContentDiv {
+    margin: auto;
+    margin-bottom: 100px;
+    width: 1000px;
+    height: 500px;
+}
+
+.CNFTNewsContentDiv > div[name='CNFTNews1']{
+    width: 300px;
+    height: 410px;
+    background-color: rgba(0, 0, 0, 0.03);
+    float: left;
+}
+
+.CNFTNewsContentDiv > div[name='CNFTNews2']{
+    width: 300px;
+    height: 410px;
+    background-color: rgba(0, 0, 0, 0.03);
+    margin-left: 50px;
+    float: left;
+}
+
+.CNFTNewsContentDiv > div[name='CNFTNews3']{
+    width: 300px;
+    height: 410px;
+    background-color: rgba(0, 0, 0, 0.03);
+    float: right;
+}
+
+div[name='CNFTNewsSub'] {
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 10px;
+    width: 300px;
+    font-family: 'GmarketSans-Light';
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+div[name='CNFTNewsSub']:hover {
+    transform: scale(1.02);
+    transition: all 0.5s;
+}
+
+div[name='CNFTNewsSub'] > img{
+    position: relative;
+    border: 1px solid gray;
+    float: left;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+div[name='CNFTNewsSub'] > div {
+    position: relative;
+    display: table;
+    width: 274.72px;
+    height: 70px;
+    border: 1px solid gray;
+    text-align: center;
+    float: left;
+    z-index: 1;
+}
+
+div[name='CNFTNewsSub'] > div > div {
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #00ff0000;
+    box-shadow: 10px 80px 7px rgba(0, 0, 0, 0.05);
+}
+
+div[name='CNFTNewsSub'] > div > span{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div[name='CNFTNewsSub'] > p{
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-right: 25px;
+    float: right;
+}
+
+div[name='CNFTLink'] {
+    width: 100%;
+    height: 50px;
+    float: right;
+}
+
+div[name='CNFTLink'] > a{
+    margin-top: 40px;
+    color: gray;
+    text-decoration: none;
+    float: right;
+    cursor: pointer;
+}
+
+div[name='CNFTLink'] > a > span[name='CNFTLinkImg'] {
+    position: relative;
+    top: 2px;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 1.3em;
+}
+
+
+
+/* ejs css */
+
+.cnftNewsNotImg {
+    display: inline-block;
+    position: relative;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.15);
+}
+
+.cnftNewsNotImg > span {
+    width: 274.72px;
+    height: 274.72px;
+    font-size: 1.5em;
+    font-family: 'GmarketSans-Medium';
+    color: white;
+    background-color: lightskyblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CNFT 게시판 */
+
+section[name='CNFTNoticeSection'] {
+    width: 100%;
+    height: 1400px;
+    min-width: 1200px;
+    
+    font-family: 'GmarketSans-Medium';
+}
+
+.CNFTNoticeSectionTitleDiv {
+    margin: auto;
+    width: 1100px;
+    margin-bottom: 100px;
+    text-align: left;
+}
+
+.CNFTNoticeSectionTitleDiv > div{
+    float: left;
+    width: 150px;
+    height: 1px;
+    border-top: 3px solid black;
+}
+
+.CNFTNoticeSectionTitleDiv > h1{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 2.25em;
+}
+
+.CNFTNoticeSectionTitleDiv > p {
+    margin: 0;
+    margin-bottom: 20px;
+    color: gray;
+}
+
+.CNFTNoticeContentDiv {
+    margin: auto;
+    width: 1100px;
+    height: 1000px;
+}
+
+.CNFTNoticeContentDiv > p {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+div[name='CNFTNotice1'] {
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 270px;
+    float: left;
+}
+
+div[name='CNFTNotice2'] {
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 270px;
+    float: left;
+}
+
+div[name='CNFTNotice3'] {
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 270px;
+    float: left;
+}
+
+div[name='CNFTNoticeSub'] {
+    width: 790px;
+    height: 100%;
+}
+
+div[name='CNFTNoticeBackColor'] {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+div[name='CNFTNoticeUserInfo'] {
+    position: relative;
+    width: 110px;
+    height: 100%;
+    text-align: center;
+    float: left;
+}
+
+div[name='CNFTNoticeUserInfo'] > img {
+    border-radius: 500px;
+    border: 3px solid black;
+}
+
+div[name='CNFTNoticeUserInfo'] > p {
+    margin-top: 0;
+}
+
+div[name='CNFTNoticeContent'] {
+    position: relative;
+    margin-left: 30px;
+    width: 630px;
+    height: 220px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.15);
+    float: left;
+    transition: all 0.5s;
+}
+
+div[name='CNFTNoticeContent']:hover {
+    transform: translateY(-7px);
+}
+
+div[name='CNFTNoticeContent'] > img{
+    border: 1px solid black;
+    border-radius: 10px;
+    float: left;
+}
+
+div[name='CNFTNoticeContent'] > div > p {
+    margin: 0;
+    color: gray;
+}
+
+div[name='CNFTNoticeTitleText'] {
+    width: 370px;
+    height: 70px;
+    float: right;
+}
+
+div[name='CNFTNoticeContentText'] {
+    word-wrap: break-word;
+    width: 370px;
+    height: 83px;
+    overflow: hidden;
+    float: right;
+}
+
+div[name='CNFTNoticeCntText'] {
+    margin-top: 40px;
+    width: 150px;
+    height: 30px;
+    float: right;
+}
+
+div[name='CNFTNoticeDateText'] {
+    margin-top: 40px;
+    width: 150px;
+    height: 30px;
+    float: right;
+}
+
+/* CNFT 게시판 - ejs */
+
+div[name='CNFTNoticeNotImg'] { /* 포스트 이미지 없을 경우 */
+    width: 219px;
+    height: 219px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightskyblue;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 219px;
+    float: left;
+}
+
+div[name='CNFTNoticeContentText'] > p > img{  /* 본문 미리보기에 이미지 없애기 */
+    display: none;
+}
+
+div[name='CNFTNoticeContentText'] > div > p > img{  /* 본문 미리보기에 이미지 없애기 */
+    display: none;
+}
+
+div[name='CNFTNoticeContentText'] > div > div > p > img{  /* 본문 미리보기에 이미지 없애기 */
+    display: none;
+}
+
+a[name='formClick'] {
+    cursor: pointer;
+}
+
+span[name='notNoticeText'] {
+    margin-left: 70px;
+    line-height: 220px;
+    font-size: 2.5em;
+    color: rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+
+
+
+
+

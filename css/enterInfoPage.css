@@ -1,0 +1,216 @@
+section[name='mainImgSection'] {
+    width: 100%;
+    height: 700px;
+    min-width: 1200px;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-bottom: 200px;
+}
+
+
+/* 상단 네비바 */
+.adaCategoryNav {
+    width: 100%;
+    height: 40px;
+}
+
+.adaCategoryNav > ul {
+    list-style-type: none;
+}
+
+.adaCategoryNav > ul >li {
+    margin-left: 100px;
+    float: left;
+}
+
+.adaCategoryNav > ul >li > a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.adaCategoryNav > ul >li > a:hover{
+    color: gainsboro;
+}
+
+
+/*대문이미지*/
+.mainImgDiv {
+    width: 100%;
+    height: 600px;
+    background-color: #1111;
+    border: 2px solid gainsboro;
+    background-image: url(https://drive.google.com/uc?id=1P86WS0m8tngHhCK_0HI5Vqg0DDkKGyn0);
+    background-size: cover;
+}
+
+.mainTitleDiv {
+    margin-left: 130px;
+    margin-top: 50px;
+    width: 80%;
+    text-align: left;
+    float: left;
+}
+.mainBox{
+    height:100%;
+    width:100%;
+    display:flex;
+    background-color:white;
+    justify-content: center;
+    align-items: center;
+    min-width: 1200px;
+}
+/*글 박스*/
+.contentsBox{
+    background-color: white;
+    width: 1100px;
+    height: 100%;
+    margin-top: 100px;
+    font-family: 'GmarketSans-Medium';
+
+}
+
+.enterInfo1{
+    background-color: white;
+    width:100%;
+    position: relative;
+}
+.container1{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    left:700px;
+    top:30px;
+}   
+.container1>img{
+    position: absolute;
+    width:100%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.enterInfo1>h1{
+    font-weight: 900;
+    font-size:40px;
+}
+.enterInfo1>ul>li{
+    font-size: 20px;
+    font-weight: 900;
+    padding-top: 20px;
+    line-height: 1.5;
+}
+.enterInfo1>ul>span{
+    font-size:17px;
+    color:gray;
+    line-height: 1.5;
+}
+
+
+.enterInfo2{
+    background-color: white;
+    width:100%;
+    min-height: 400px;
+    position: relative;
+    display:block;
+    float:right;
+    text-align: right;
+    
+}
+.container2{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    top:30px;
+}   
+.container2>img{
+    position: absolute;
+    width:100%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+.enterInfo2>h1{
+    font-weight: 900;
+    font-size:40px;
+}
+.enterInfo2>span{
+    font-size:19px;
+    color:gray;
+    line-height: 1.5;
+}
+
+
+.enterInfo3{
+    background-color: white;
+    width:100%;
+    position: relative;
+    display:block;
+    float:left;
+    text-align: left;
+    
+}
+.container3{
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    left:700px;
+    top:30px;
+}   
+.container3>img{
+    position: absolute;
+    width:100%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+.enterInfo3>h1{
+    font-weight: 900;
+    font-size:40px;
+}
+.enterInfo3>ul>li{
+    font-size: 20px;
+    font-weight: 900;
+    padding-top: 20px;
+}
+.enterInfo3>span{
+    font-size:17px;
+    color:gray;
+    line-height: 1.5;
+}
+
+
+
+.enterInfo4{
+    background-color: white;
+    width:100%;
+    min-height: 400px;
+    position: relative;
+    display:block;
+    float:right;
+    text-align: right;
+    
+}
+.container4{
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}   
+.container4>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.enterInfo4>h1{
+    font-weight: 900;
+    font-size:40px;
+}
+.enterInfo4>span{
+    font-size:19px;
+    color:gray;
+    line-height: 1.5;
+}

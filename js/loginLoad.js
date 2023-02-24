@@ -1,0 +1,1 @@
+document.querySelector('.loginBtn > img').setAttribute('src', sessionStorage.setItem('icon'));
