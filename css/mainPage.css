@@ -154,12 +154,13 @@ section[name='ADAPriceSection'] {
     height: 700px;
     min-width: 1200px;
     font-family: 'GmarketSans-Medium';
+    opacity: 0;
 }
 
 .mainADADiv {
     position: relative;
     left: 150px;
-    width: 900px;
+    width: 800px;
     margin: auto;
 }
 
@@ -293,6 +294,7 @@ section[name='CNFTNewsSection'] {
     height: 410px;
     background-color: rgba(0, 0, 0, 0.03);
     float: left;
+    opacity: 0;
 }
 
 .CNFTNewsContentDiv > div[name='CNFTNews2']{
@@ -301,6 +303,7 @@ section[name='CNFTNewsSection'] {
     background-color: rgba(0, 0, 0, 0.03);
     margin-left: 50px;
     float: left;
+    opacity: 0;
 }
 
 .CNFTNewsContentDiv > div[name='CNFTNews3']{
@@ -308,6 +311,7 @@ section[name='CNFTNewsSection'] {
     height: 410px;
     background-color: rgba(0, 0, 0, 0.03);
     float: right;
+    opacity: 0;
 }
 
 div[name='CNFTNewsSub'] {
