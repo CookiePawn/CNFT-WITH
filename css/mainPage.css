@@ -289,7 +289,7 @@ section[name='CNFTNewsSection'] {
     height: 500px;
 }
 
-.CNFTNewsContentDiv > div[name='CNFTNews1']{
+div[name='CNFTNews1']{
     width: 300px;
     height: 410px;
     background-color: rgba(0, 0, 0, 0.03);
@@ -297,7 +297,7 @@ section[name='CNFTNewsSection'] {
     opacity: 0;
 }
 
-.CNFTNewsContentDiv > div[name='CNFTNews2']{
+div[name='CNFTNews2']{
     width: 300px;
     height: 410px;
     background-color: rgba(0, 0, 0, 0.03);
@@ -306,7 +306,7 @@ section[name='CNFTNewsSection'] {
     opacity: 0;
 }
 
-.CNFTNewsContentDiv > div[name='CNFTNews3']{
+div[name='CNFTNews3']{
     width: 300px;
     height: 410px;
     background-color: rgba(0, 0, 0, 0.03);
@@ -486,6 +486,7 @@ div[name='CNFTNotice1'] {
     width: 100%;
     height: 270px;
     float: left;
+    opacity: 0;
 }
 
 div[name='CNFTNotice2'] {
@@ -494,6 +495,7 @@ div[name='CNFTNotice2'] {
     width: 100%;
     height: 270px;
     float: left;
+    opacity: 0;
 }
 
 div[name='CNFTNotice3'] {
@@ -502,6 +504,7 @@ div[name='CNFTNotice3'] {
     width: 100%;
     height: 270px;
     float: left;
+    opacity: 0;
 }
 
 div[name='CNFTNoticeSub'] {
