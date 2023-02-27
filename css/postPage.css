@@ -38,6 +38,7 @@ section[name='postListSection'] {
 }
 
 .postToolDiv > form > div {
+    width: 390px;
     margin-right: 50px;
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 40px;
@@ -46,20 +47,31 @@ section[name='postListSection'] {
 }
 
 .postToolDiv > form > div > input[type="text"] {
-    width: 350px;
+    position: relative;
+    width: 330px;
     height: 40px;
-    background-color: white;
+    background-color: #00ff0000;
     border: 0;
-    border-radius: 40px 0 0 40px;
-    float: left;
+    float: right;
     font-family: 'GmarketSans-Medium';
+    z-index: 2;
 }
 
-.postToolDiv > form > div > input[type="text"]::placeholder {
-    position: relative;
-    left: 50px;
+.postToolDiv > form > div > input[type="text"]:focus {
+    outline: none;
+}
+
+.postToolDiv > form > div > label {
+    position: absolute;
+    transform: translate(52px, 13px);
     font-weight: 600;
+    font-size: 13.5px;
     color: rgba(0, 0, 0, 0.3);
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 1;
+    transition: all 0.5s;
 }
 
 .postToolDiv > form > div > input[value="🔍︎"] {

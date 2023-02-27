@@ -122,8 +122,9 @@
                     <strong>CNFT 소개 게시판</strong>
                     <form method="get">
                         <div>
+                            <label>검색하고 싶은 게시글을 검색하세요</label>
                             <input type="submit" value="🔍︎">
-                            <input type="text" placeholder="검색하고 싶은 게시글을 검색하세요" name="postSearch">
+                            <input type="text" name="postSearch">
                         </div>
                     </form>
                     <span>총 <%=list.length%>개</span>
@@ -279,6 +280,7 @@
         <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
         <script src="../js/logout.js" charset="utf-8"></script>
         <script src="../js/loading.js" charset="utf-8"></script>
+        <script src="../js/postListSearch.js" charset="utf-8"></script>
         <script>
             if(sessionStorage.getItem('email') == null) {
                 alert('로그인을 해주세요!');
