@@ -288,7 +288,10 @@
             document.querySelector('.loginBtn > img').setAttribute('src', sessionStorage.getItem('icon'));
             document.querySelector('.loginBtn > img').setAttribute('title', sessionStorage.getItem('nickname'));
 
-            if(sessionStorage.getItem('email') == 'cookiepawn@gmail.com') {
+            if(window.location.pathname == '/cnftPost_Login') {
+                document.getElementById('postingBtn').style.display='block';
+            }
+            else if(sessionStorage.getItem('email') == 'cookiepawn@gmail.com') {
                 document.getElementById('postingBtn').style.display='block';
             }
             else if(sessionStorage.getItem('email') == 'cookiepawn@naver.com') {

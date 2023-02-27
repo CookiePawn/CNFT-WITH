@@ -263,6 +263,23 @@
             document.getElementById('nicknameID').setAttribute('value', sessionStorage.getItem('nickname'));
             document.getElementById('iconID').setAttribute('value', sessionStorage.getItem('icon'));
             document.getElementById('emailID').setAttribute('value', sessionStorage.getItem('email'));
+
+            if(window.location.pathname == '/cnftPosting') {
+
+            }
+            else if(sessionStorage.getItem('email') == 'cookiepawn@gmail.com') {
+                
+            }
+            else if(sessionStorage.getItem('email') == 'cookiepawn@naver.com') {
+                
+            }
+            else if(sessionStorage.getItem('email') == 'lsy0004282@gmail.com') {
+                
+            }
+            else {
+                alert('비정상적인 접근입니다!');
+                history.back();
+            }
         </script>
     </body>
 </html>

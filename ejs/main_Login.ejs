@@ -173,7 +173,7 @@
                 <div class="CNFTNewsContentDiv">
                     <div name="CNFTNews1">
                         <%if (list1[0] != null) {%>
-                            <form method="get" id="newsForm1" action="/cnftNewsInfo">
+                            <form method="get" id="newsForm1" action="/cnftNewsInfo_Login">
                                 <input type="hidden" name="postID" id="newsNum1" value="<%=list1[0].postNum%>">
                                 <a onclick="document.getElementById('newsForm1').submit()">
                                     <div name="CNFTNewsSub">
@@ -198,7 +198,7 @@
                     </div>
                     <div name="CNFTNews2">
                         <%if (list1[1] != null) {%>
-                            <form method="get" id="newsForm2" action="/cnftNewsInfo">
+                            <form method="get" id="newsForm2" action="/cnftNewsInfo_Login">
                                 <input type="hidden" name="postID" id="newsNum2" value="<%=list1[1].postNum%>">
                                 <a onclick="document.getElementById('newsForm2').submit()">
                                     <div name="CNFTNewsSub">
@@ -223,7 +223,7 @@
                     </div>
                     <div name="CNFTNews3">
                         <%if (list1[2] != null) {%>
-                            <form method="get" id="newsForm3" action="/cnftNewsInfo">
+                            <form method="get" id="newsForm3" action="/cnftNewsInfo_Login">
                                 <input type="hidden" name="postID" id="newsNum3" value="<%=list1[2].postNum%>">
                                 <a onclick="document.getElementById('newsForm3').submit()">
                                     <div name="CNFTNewsSub">

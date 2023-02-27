@@ -120,10 +120,11 @@ div[name='postTool'] {
     background-color: rgba(0, 0, 0, 0.035);
 }
 
-div[name='postTool'] > span {
+div[name='postTool'] > a > span {
     margin-right: 40px;
     display: inline-block;
     color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 input[id='deleteBtnID'] {
@@ -190,6 +191,10 @@ textarea[name="comContent"] {
     border: 0;
 }
 
+textarea[name="comContent"]:focus {
+    outline: none;
+}
+
 textarea[name="comContent"]::placeholder {
     font-family: 'GmarketSans-Medium';
     font-size: 1.3em;
@@ -206,6 +211,10 @@ input[name="comPostBtn"] {
     color: white;
     font-family: 'GmarketSans-Medium';
     cursor: pointer;
+}
+
+input[name="comPostBtn"]:hover {
+    background-color: lightskyblue;
 }
 
 div[name="comContent"] {

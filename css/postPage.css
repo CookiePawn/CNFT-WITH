@@ -67,7 +67,6 @@ section[name='postListSection'] {
     font-weight: 600;
     font-size: 13.5px;
     color: rgba(0, 0, 0, 0.3);
-    background-color: white;
     padding-left: 10px;
     padding-right: 10px;
     z-index: 1;
@@ -110,7 +109,7 @@ input[value='글 쓰기']{
 }
 
 input[value='글 쓰기']:hover{
-    background-color: gainsboro;
+    background-color: lightskyblue;
 }
 
 .postListTitle {
@@ -178,7 +177,7 @@ input[value='글 쓰기']:hover{
 }
 
 .postListInfoDiv:hover {
-    background-color: #1111;
+    background-color: lightskyblue;
 }
 
 .postListInfoDiv > span {

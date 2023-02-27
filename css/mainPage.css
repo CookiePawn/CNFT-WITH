@@ -110,7 +110,7 @@ div[name='subsTextBorder'] {
 }
 
 .subsTextDiv > button:hover {
-    background-color: #1111;
+    background-color: lightskyblue;
 }
 
 .subsImgDiv {
@@ -326,7 +326,6 @@ div[name='CNFTNewsSub'] {
 
 div[name='CNFTNewsSub']:hover {
     transform: scale(1.02);
-    transition: all 0.5s;
 }
 
 div[name='CNFTNewsSub'] > img{
