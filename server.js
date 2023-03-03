@@ -29,9 +29,6 @@ db.connect();
 
 
 
-
-
-
 server.use(bodyParser.urlencoded({limit: '5mb', extended: false, parameterLimit: 10000}));
 server.use(express.urlencoded({extended: true}));
 server.use(express.static(__dirname));

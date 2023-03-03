@@ -14,8 +14,7 @@ function handleCredentialResponse(response) {
     sessionStorage.setItem('email', responsePayload.email);
     sessionStorage.setItem('social', 'google');
 
-
-    location.href='/main';
+  location.href = '/main';
 }
 
 
