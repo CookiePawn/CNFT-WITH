@@ -1,4 +1,4 @@
-# CNFT-WITH 2023/02/24
+# 서버 열기 전 확인 사항
 
     1. callback URL change
     2. server.js 에서 DB 아이디 비번 바꾸기
