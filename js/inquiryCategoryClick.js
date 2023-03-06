@@ -5,12 +5,12 @@ var department = document.getElementById('c5SubSub1');
 var connect = document.getElementById('c5SubSub2');
 
 
-link1.addEventListener('click', e=> {
+link2.addEventListener('click', e=> {
     department.style.display='block';
     connect.style.display='none';
 });
 
-link2.addEventListener('click', e=> {
+link1.addEventListener('click', e=> {
     department.style.display='none';
     connect.style.display='block';
 });
