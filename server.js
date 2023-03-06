@@ -29,9 +29,6 @@ db.connect();
 
 
 
-
-
-
 server.use(bodyParser.urlencoded({limit: '5mb', extended: false, parameterLimit: 10000}));
 server.use(express.urlencoded({extended: true}));
 server.use(express.static(__dirname));
@@ -2902,7 +2899,9 @@ server.get("/cnftPost", (req, res) => {
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) =>{
       if(error) throw error;
-      res.render(__dirname + "/ejs/cnftPost", {
+      res.render(__dirname + "/ejs/postList", {
+        title : 'CNFT 소개 게시판',
+        postInfo : '/cnftPostInfo',
         list : data[0],
         clist : data[1]
       });
@@ -2914,7 +2913,9 @@ server.get("/cnftPost", (req, res) => {
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
-      res.render(__dirname + "/ejs/cnftPost", {
+      res.render(__dirname + "/ejs/postList", {
+        title : 'CNFT 소개 게시판',
+        postInfo : '/cnftPostInfo',
         list : data[0],
         clist : data[1]
       });
@@ -2932,7 +2933,10 @@ server.get("/cnftPost_Login", (req, res) => {
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) =>{
       if(error) throw error;
-      res.render(__dirname + "/ejs/cnftPost_Login", {
+      res.render(__dirname + "/ejs/postList_Login", {
+        title : 'CNFT 소개 게시판',
+        postInfo : '/cnftPostInfo',
+        posting : '/cnftPosting',
         list : data[0],
         clist : data[1]
       });
@@ -2945,7 +2949,10 @@ server.get("/cnftPost_Login", (req, res) => {
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
-      res.render(__dirname + "/ejs/cnftPost_Login", {
+      res.render(__dirname + "/ejs/postList_Login", {
+        title : 'CNFT 소개 게시판',
+        postInfo : '/cnftPostInfo',
+        posting : '/cnftPosting',
         list : data[0],
         clist : data[1]
       });

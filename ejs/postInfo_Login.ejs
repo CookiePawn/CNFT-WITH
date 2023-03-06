@@ -108,7 +108,7 @@
                 </div>
                 <div class="mainLoginDiv">
                     <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
-                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px"></button>
+                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px" height="34px"></button>
                 </div>
             </nav>
         </header>
@@ -150,7 +150,7 @@
                         <form method="post">
                             <input id="deleteBtnID" type="submit" value="삭제" name="delete" style="display: none;">
                         </form>
-                        <span>신고하기</span>
+                        <a onclick="history.back()"><span>뒤로가기</span></a>
                     </div>
                 </div>
             </section>
@@ -302,6 +302,7 @@
         <script src="../js/dropdown.js" charset="utf-8"></script>
         <script src="../js/commentsEdit.js" charset="utf-8"></script>
         <script src="../js/logout.js" charset="utf-8"></script>
+        <script src="../js/postInfoAction.js" charset="utf-8"></script>
         <script>
             let target = document.getElementById("emailID");
 

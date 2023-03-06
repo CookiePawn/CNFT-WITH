@@ -116,7 +116,7 @@
                 </div>
                 <div class="mainLoginDiv">
                     <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
-                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px"></button>
+                    <button class="loginBtn"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px" height="34px"></button>
                 </div>
             </nav>
         </header>
@@ -263,6 +263,23 @@
             document.getElementById('nicknameID').setAttribute('value', sessionStorage.getItem('nickname'));
             document.getElementById('iconID').setAttribute('value', sessionStorage.getItem('icon'));
             document.getElementById('emailID').setAttribute('value', sessionStorage.getItem('email'));
+
+            if(window.location.pathname == '/cnftPosting') {
+
+            }
+            else if(sessionStorage.getItem('email') == 'cookiepawn@gmail.com') {
+                
+            }
+            else if(sessionStorage.getItem('email') == 'cookiepawn@naver.com') {
+                
+            }
+            else if(sessionStorage.getItem('email') == 'lsy0004282@gmail.com') {
+                
+            }
+            else {
+                alert('비정상적인 접근입니다!');
+                history.back();
+            }
         </script>
     </body>
 </html>

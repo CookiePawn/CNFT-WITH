@@ -11,11 +11,13 @@ body.addEventListener('click', function(e) {
     if(target == text) {
         label.innerHTML = '제목 검색';
         label.style.transform = 'translate(20px, -7px)';
+        label.style.backgroundColor = 'white';
         div.style.border = '2px solid lightskyblue';
     }
     else if (target != text && text.value == '') {
         label.innerHTML = '검색하고 싶은 게시글을 검색하세요';
         label.style.transform = 'translate(52px, 13px)';
+        label.style.backgroundColor = '#00ff0000';
         div.style.border = '2px solid rgba(0, 0, 0, 0.3)';
     }
 });
