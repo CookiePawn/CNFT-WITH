@@ -47,6 +47,12 @@ server.listen(3000, (err) => {
 
 
 
+server.get("/GPT", (req, res) => {
+    res.sendFile(__dirname + '/html/GPT.html');
+});
+
+
+
 
 
 

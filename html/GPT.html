@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>OpenAI GPT API Example</title>
+  </head>
+  <body>
+    <h1>OpenAI GPT API Example</h1>
+    <form id="form">
+      <label for="prompt">Enter prompt:</label><br>
+      <input type="text" id="prompt" name="prompt"><br>
+      <button type="submit">Generate Text</button>
+    </form>
+    <div id="output"></div>
+    <script>
+      const form = document.getElementById('form');
+      const output = document.getElementById('output');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const prompt = document.getElementById('prompt').value;
+
+        const response = await fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer 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', // replace API_KEY with your actual API key
+          },
+          body: JSON.stringify({
+            prompt: prompt,
+            max_tokens: 128,
+            n: 1,
+            stop: '\n',
+          }),
+        });
+
+        const { choices } = await response.json();
+        const text = choices[0].text.trim();
+
+        output.innerHTML = text;
+      });
+    </script>
+  </body>
+</html>
