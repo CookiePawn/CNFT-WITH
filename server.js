@@ -10,9 +10,9 @@ const mysql = require('mysql');  // mysql 모듈 로드
 
 //DB연동
 var db = mysql.createConnection({
-  host : 'localhost',
+  host : '127.0.0.1',
   user : 'root',
-  password : 'Dks135790@',
+  password : '12345678',
   database : 'post',
   "timezone":"Asia/Seoul",
   "dateStrings":"date",
