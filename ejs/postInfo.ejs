@@ -143,7 +143,7 @@
                             <span><%= list1[0].title%></span>
                         </div>
                         <div name="postAuthor">
-                            <span><img src="<%=list1[0].authorIcon%>" width="30px">&nbsp;<%= list1[0].author%></span>
+                            <span><img src="<%=list1[0].authorIcon%>" width="30px" height="30px">&nbsp;<%= list1[0].author%></span>
                         </div>
                         <div name="postDate">
                             <span>조회수 : <%= list1[0].hit%>회&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<%= list1[0].DATE.substr(0, 10)%></span>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="postContentDiv">
                         <div name="postContent">
-                            <span><%-list1[0].content%></span>
+                            <span><%-list1[0].content.replace(/\"\"/gi, '\"').replace(/\'\'/gi, "\'")%></span>
                         </div>
                         <div name="postTool">
                             <form method="post" id="postUpdateForm">
@@ -191,7 +191,7 @@
                                 <input type="hidden" id="emailID2<%=i%>" name="comEmail2" value="<%=parseList[i].email%>">
                                 <div name="comContent">
                                     <p>
-                                        <img src="<%=parseList[i].userIcon%>" width="32px">
+                                        <img src="<%=parseList[i].userIcon%>" width="32px" height="32px">
                                         <%if(parseList[i].author == 1) {%>
                                             <span>&nbsp;&nbsp;<mark><%=parseList[i].user%></mark></span>
                                         <%} else {%>

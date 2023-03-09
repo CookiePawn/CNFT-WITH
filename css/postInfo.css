@@ -106,6 +106,7 @@ div[name='postContent'] {
 }
 
 div[name='postContent'] > span {
+    width: 100%;
     display: inline-block;
     margin-top: 20px;
     margin-bottom: 20px;

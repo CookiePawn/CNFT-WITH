@@ -143,7 +143,7 @@
                         </div>
                         <div class="div postContentDiv">
                             <textarea name="postContent" id="summernote" class="summernote">
-                                <%-list[0].content%>
+                                <%-list[0].content.replace(/\"\"/gi, '\"').replace(/\'\'/gi, "\'")%>
                             </textarea>
                         </div>
                     </div>
