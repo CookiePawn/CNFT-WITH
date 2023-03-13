@@ -50,6 +50,19 @@ server.listen(3000, (err) => {
 
 
 
+
+
+
+
+
+
+
+//메인 페이지
+//메인 페이지
+//메인 페이지
+//메인 페이지
+
+
 server.get("/", (req, res) => {
   sql = `SELECT * FROM cnftNews ORDER BY postNum DESC LIMIT 3;`
   sql2 = `SELECT * FROM postInfo ORDER BY hit DESC LIMIT 3; `;
@@ -104,9 +117,43 @@ server.post("/main", (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//네이버 로그인 콜백
+//네이버 로그인 콜백
+//네이버 로그인 콜백
+//네이버 로그인 콜백
+
 server.get("/naverLoginCheck", (req, res) => {
     res.sendFile(__dirname + '/html/naverLoginCallback.html')
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -149,6 +196,27 @@ server.get("/investmentPost", (req, res) => {
   }
 });
 
+
+server.post('/investmentPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/investmentInfo?postID=${id}`);
+});
+
+
+server.post('/investmentPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/investmentInfo_Login?postID=${id}`);
+});
 
 
 
@@ -243,15 +311,14 @@ server.get("/investmentInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : '투자 정보',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -266,15 +333,14 @@ server.get("/investmentInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : '투자 정보',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -307,7 +373,8 @@ server.post("/investmentInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM investment WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 1 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
@@ -510,6 +577,27 @@ server.get("/currentSituationPost_Login", (req, res) => {
 
 
 
+server.post('/currentSituationPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/currentSituationInfo?postID=${id}`);
+});
+
+
+server.post('/currentSituationPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/currentSituationInfo_Login?postID=${id}`);
+});
+
 
 
 
@@ -521,15 +609,14 @@ server.get("/currentSituationInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : '투자 현황',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -544,15 +631,14 @@ server.get("/currentSituationInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : '투자 현황',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -585,7 +671,8 @@ server.post("/currentSituationInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM currentSituation WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 2 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/currentSituationPost_Login");
@@ -786,6 +873,27 @@ server.get("/recruitmentPost_Login", (req, res) => {
 
 
 
+server.post('/recruitmentPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/recruitmentInfo?postID=${id}`);
+});
+
+
+server.post('/recruitmentPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/recruitmentInfo_Login?postID=${id}`);
+});
+
 
 
 
@@ -795,15 +903,14 @@ server.get("/recruitmentInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : '채용 정보',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -818,15 +925,14 @@ server.get("/recruitmentInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : '채용 정보',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -859,7 +965,8 @@ server.post("/recruitmentInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM recruitment WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 3 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/recruitmentPost_Login");
@@ -937,6 +1044,10 @@ server.post("/recruitmentUpdate", upload.array("files"), (req, res) => {
     res.redirect("/recruitmentPost_Login");
   }
 });
+
+
+
+
 
 
 //CNFT 뉴스(4)CNFT 뉴스(4)
@@ -1059,6 +1170,28 @@ server.get("/cnftNewsPost_Login", (req, res) => {
 
 
 
+server.post('/cnftNewsPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/cnftNewsInfo?postID=${id}`);
+});
+
+
+server.post('/cnftNewsPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/cnftNewsInfo_Login?postID=${id}`);
+});
+
+
 
 
 
@@ -1070,15 +1203,14 @@ server.get("/cnftNewsInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 뉴스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1093,15 +1225,14 @@ server.get("/cnftNewsInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 뉴스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1134,7 +1265,8 @@ server.post("/cnftNewsInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM cnftNews WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 4 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftNewsPost_Login");
@@ -1340,6 +1472,30 @@ server.get("/adaNewsPost_Login", (req, res) => {
 
 
 
+server.post('/adaNewsPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/adaNewsInfo?postID=${id}`);
+});
+
+
+server.post('/adaNewsPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/adaNewsInfo_Login?postID=${id}`);
+});
+
+
+
+
 
 
 
@@ -1350,15 +1506,14 @@ server.get("/adaNewsInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE adanews SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'ADA 뉴스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1373,15 +1528,14 @@ server.get("/adaNewsInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE adanews SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'ADA 뉴스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1414,7 +1568,8 @@ server.post("/adaNewsInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM adanews WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 6 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/adaNewsPost_Login");
@@ -1492,6 +1647,10 @@ server.post("/adaNewsUpdate", upload.array("files"), (req, res) => {
     res.redirect("/adaNewsPost_Login");
   }
 });
+
+
+
+
 
 
 //CNFT 민팅(7)CNFT 민팅(7)
@@ -1615,6 +1774,29 @@ server.get("/mintingPost_Login", (req, res) => {
 
 
 
+server.post('/mintingPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/mintingInfo?postID=${id}`);
+});
+
+
+server.post('/mintingPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/mintingInfo_Login?postID=${id}`);
+});
+
+
+
 
 
 
@@ -1625,15 +1807,14 @@ server.get("/mintingInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 민팅',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1648,15 +1829,14 @@ server.get("/mintingInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 민팅',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1689,7 +1869,8 @@ server.post("/mintingInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM minting WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 7 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/mintingPost_Login");
@@ -1767,6 +1948,12 @@ server.post("/mintingUpdate", upload.array("files"), (req, res) => {
     res.redirect("/mintingPost_Login");
   }
 });
+
+
+
+
+
+
 
 
 //CNFT 거래소(8)CNFT 거래소(8)
@@ -1890,6 +2077,29 @@ server.get("/exchangePost_Login", (req, res) => {
 
 
 
+server.post('/exchangePost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/exchangeInfo?postID=${id}`);
+});
+
+
+server.post('/exchangePost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/exchangeInfo_Login?postID=${id}`);
+});
+
+
+
 
 
 
@@ -1900,15 +2110,14 @@ server.get("/exchangeInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 거래소',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1923,15 +2132,14 @@ server.get("/exchangeInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 거래소',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -1964,7 +2172,8 @@ server.post("/exchangeInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM exchange WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 8 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/exchangePost_Login");
@@ -2166,6 +2375,32 @@ server.get("/dealPost_Login", (req, res) => {
 
 
 
+server.post('/dealPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/dealInfo?postID=${id}`);
+});
+
+
+server.post('/dealPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/dealInfo_Login?postID=${id}`);
+});
+
+
+
+
+
+
 
 
 
@@ -2175,15 +2410,14 @@ server.get("/dealInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 거래방법',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2198,15 +2432,14 @@ server.get("/dealInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 거래방법',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2239,7 +2472,8 @@ server.post("/dealInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM deal WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 9 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/dealPost_Login");
@@ -2442,6 +2676,33 @@ server.get("/walletPost_Login", (req, res) => {
 
 
 
+server.post('/walletPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/walletInfo?postID=${id}`);
+});
+
+
+server.post('/walletPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/walletInfo_Login?postID=${id}`);
+});
+
+
+
+
+
+
+
 
 
 
@@ -2450,15 +2711,14 @@ server.get("/walletInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 지갑',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2473,15 +2733,14 @@ server.get("/walletInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 지갑',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2514,7 +2773,8 @@ server.post("/walletInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM wallet WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 10 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/walletPost_Login");
@@ -2714,6 +2974,29 @@ server.get("/servicePost_Login", (req, res) => {
 
 
 
+server.post('/servicePost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/serviceInfo?postID=${id}`);
+});
+
+
+server.post('/servicePost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/serviceInfo_Login?postID=${id}`);
+});
+
+
+
 
 
 
@@ -2725,15 +3008,14 @@ server.get("/serviceInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 서비스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2748,15 +3030,14 @@ server.get("/serviceInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 서비스',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2789,7 +3070,8 @@ server.post("/serviceInfo_Login", (req, res) => {
       }
     });
     sql = `DELETE FROM service WHERE postNum = ${search};`;
-    db.query(sql, (error, data, fields) =>{
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 11 AND postNum =${search};`
+    db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/servicePost_Login");
@@ -2910,6 +3192,28 @@ server.get("/cnftPost", (req, res) => {
 });
 
 
+server.post('/cnftPost', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/cnftPostInfo?postID=${id}`);
+});
+
+
+server.post('/cnftPost_Login', (req, res) => {
+  const id = req.body['postID'];
+
+  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+  });
+  res.redirect(`/cnftPostInfo_Login?postID=${id}`);
+});
+
+
 
 server.get("/cnftPost_Login", (req, res) => {
   var urlPath = url.parse(req.url);
@@ -2956,15 +3260,14 @@ server.get("/cnftPostInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
       title : 'CNFT 소개 게시판',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
@@ -2973,15 +3276,14 @@ server.get("/cnftPostInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${search};`;
-  sql2 = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
-  sql3 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
-  db.query(sql + sql2 + sql3, (error, data, fields) => {
+  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
+  db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
       title : 'CNFT 소개 게시판',
-      list1 : data[1],
-      list2 : data[2]
+      list1 : data[0],
+      list2 : data[1]
     });
   });
 });
