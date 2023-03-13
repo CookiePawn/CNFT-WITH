@@ -50,20 +50,6 @@ server.listen(3000, (err) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 server.get("/", (req, res) => {
   sql = `SELECT * FROM cnftNews ORDER BY postNum DESC LIMIT 3;`
   sql2 = `SELECT * FROM postInfo ORDER BY hit DESC LIMIT 3; `;
@@ -183,14 +169,14 @@ server.post("/investmentPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -385,14 +371,14 @@ server.post("/investmentUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.investment SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else{
-    sql = `UPDATE post.investment SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -461,14 +447,14 @@ server.post("/currentSituationPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/currentSituationPost_Login");
   }
   else {
-    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -663,14 +649,14 @@ server.post("/currentSituationUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.currentSituation SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.currentSituation SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/currentSituationPost_Login");
   }
   else{
-    sql = `UPDATE post.currentSituation SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.currentSituation SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -735,14 +721,14 @@ server.post("/recruitmentPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/recruitmentPost_Login");
   }
   else {
-    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -937,14 +923,14 @@ server.post("/recruitmentUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.recruitment SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.recruitment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/recruitmentPost_Login");
   }
   else{
-    sql = `UPDATE post.recruitment SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.recruitment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1010,14 +996,14 @@ server.post("/cnftNewsPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftNewsPost_Login");
   }
   else {
-    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1212,14 +1198,14 @@ server.post("/cnftNewsUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.cnftNews SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.cnftNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftNewsPost_Login");
   }
   else{
-    sql = `UPDATE post.cnftNews SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.cnftNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1290,14 +1276,14 @@ server.post("/newsPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/adaNewsPost_Login");
   }
   else {
-    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1492,14 +1478,14 @@ server.post("/adaNewsUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.adaNews SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.adaNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/adaNewsPost_Login");
   }
   else{
-    sql = `UPDATE post.adaNews SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.adaNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1565,14 +1551,14 @@ server.post("/mintingPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/mintingPost_Login");
   }
   else {
-    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1767,14 +1753,14 @@ server.post("/mintingUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.minting SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.minting SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/mintingPost_Login");
   }
   else{
-    sql = `UPDATE post.minting SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.minting SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1840,14 +1826,14 @@ server.post("/exchangePosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/exchangePost_Login");
   }
   else {
-    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2042,14 +2028,14 @@ server.post("/exchangeUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.exchange SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.exchange SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/exchangePost_Login");
   }
   else{
-    sql = `UPDATE post.exchange SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.exchange SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2115,14 +2101,14 @@ server.post("/dealPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/dealPost_Login");
   }
   else {
-    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2317,14 +2303,14 @@ server.post("/dealUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.deal SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.deal SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/dealPost_Login");
   }
   else{
-    sql = `UPDATE post.deal SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.deal SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2390,14 +2376,14 @@ server.post("/walletPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/walletPost_Login");
   }
   else {
-    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2592,14 +2578,14 @@ server.post("/walletUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.wallet SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.wallet SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/walletPost_Login");
   }
   else{
-    sql = `UPDATE post.wallet SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.wallet SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2665,14 +2651,14 @@ server.post("/servicePosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/servicePost_Login");
   }
   else {
-    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2867,14 +2853,14 @@ server.post("/serviceUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.service SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.service SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/servicePost_Login");
   }
   else{
-    sql = `UPDATE post.service SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.service SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3029,14 +3015,14 @@ server.post("/cnftPostUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.postInfo SET title='${title}', content='${content}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.postInfo SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftPost_Login");
   }
   else{
-    sql = `UPDATE post.postInfo SET title='${title}', content='${content}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.postInfo SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3155,14 +3141,14 @@ server.post("/cnftPosting", upload.array("files"), (req, res) => {
   var btn = req.body['posting'];
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '', now(), 1)`;
+    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1);`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftPost_Login");
   }
   else {
-    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1);`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });

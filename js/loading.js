@@ -1,5 +1,3 @@
 $(window).on('load', function() {
-    setTimeout(function(){
-        $(".loading").fadeOut();
-    }, 500);
+    $(".loading").fadeOut();
 });
