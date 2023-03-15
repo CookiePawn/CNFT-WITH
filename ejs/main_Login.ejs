@@ -174,8 +174,9 @@
                 <div class="CNFTNewsContentDiv">
                     <div name="CNFTNews1">
                         <%if (list1[0] != null) {%>
-                            <form method="get" id="newsForm1" action="/cnftNewsInfo_Login">
+                            <form method="post" id="newsForm1">
                                 <input type="hidden" name="postID" id="newsNum1" value="<%=list1[0].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm1').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[0].img == '') {%>
@@ -199,8 +200,9 @@
                     </div>
                     <div name="CNFTNews2">
                         <%if (list1[1] != null) {%>
-                            <form method="get" id="newsForm2" action="/cnftNewsInfo_Login">
+                            <form method="post" id="newsForm2">
                                 <input type="hidden" name="postID" id="newsNum2" value="<%=list1[1].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm2').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[1].img == '') {%>
@@ -224,8 +226,9 @@
                     </div>
                     <div name="CNFTNews3">
                         <%if (list1[2] != null) {%>
-                            <form method="get" id="newsForm3" action="/cnftNewsInfo_Login">
+                            <form method="post" id="newsForm3">
                                 <input type="hidden" name="postID" id="newsNum3" value="<%=list1[2].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm3').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[2].img == '') {%>
@@ -273,8 +276,9 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm1" action="/cnftPostInfo_Login">
+                        <form method="post" id="CNFTNoticeForm1">
                             <input type="hidden" name="postID" value="<%=list2[0].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice1">
                                 <div name="CNFTNoticeSub" style="float: left;">
                                     <div name="CNFTNoticeBackColor"></div>
@@ -323,8 +327,9 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm2" action="/cnftPostInfo_Login">
+                        <form method="post" id="CNFTNoticeForm2">
                             <input type="hidden" name="postID" value="<%=list2[1].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice2">
                                 <div name="CNFTNoticeSub" style="float: right;">
                                     <div name="CNFTNoticeBackColor"></div>
@@ -373,8 +378,9 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm3" action="/cnftPostInfo_Login">
+                        <form method="post" id="CNFTNoticeForm3">
                             <input type="hidden" name="postID" value="<%=list2[2].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice3">
                                 <div name="CNFTNoticeSub" style="float: left;">
                                     <div name="CNFTNoticeBackColor"></div>

@@ -5,12 +5,13 @@
     font-size: 17px;
 }
 
-
 .subUl > div > div > a{
     font-size: 17px;
 }
 
-
+.subUl > div > div {
+    font-size: 17px;
+}
 
 
 

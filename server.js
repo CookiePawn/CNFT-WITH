@@ -77,12 +77,23 @@ server.get("/", (req, res) => {
 
 server.post("/", (req, res) => {
   const id = req.body['postID'];
+  const notice = req.body['noticeID'];
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
-  db.query(sql, (error, data, fields) => {
-    if(error) throw error;
-  });
-  res.redirect("/cnftPostInfo");
+  if(notice == 'news') {
+    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+    db.query(sql, (error, data, fields) => {
+      if(error) throw error;
+    });
+    res.redirect(`/cnftNewsInfo?postID=${id}`);
+  }
+  else if (notice == 'notice') {
+    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+    db.query(sql, (error, data, fields) => {
+      if(error) throw error;
+    });
+    res.redirect(`/cnftPostInfo?postID=${id}`);
+  }
+  
 });
 
 
@@ -105,16 +116,28 @@ server.get("/main", (req, res) => {
   });
 });
 
+
+
 server.post("/main", (req, res) => {
   const id = req.body['postID'];
+  const notice = req.body['noticeID'];
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
-  db.query(sql, (error, data, fields) => {
-    if(error) throw error;
-  });
-  res.redirect("/cnftPostInfo_Login");
+  if(notice == 'news') {
+    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+    db.query(sql, (error, data, fields) => {
+      if(error) throw error;
+    });
+    res.redirect(`/cnftNewsInfo_Login?postID=${id}`);
+  }
+  else if (notice == 'notice') {
+    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+    db.query(sql, (error, data, fields) => {
+      if(error) throw error;
+    });
+    res.redirect(`/cnftPostInfo_Login?postID=${id}`);
+  }
+  
 });
-
 
 
 
