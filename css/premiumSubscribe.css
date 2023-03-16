@@ -11,7 +11,7 @@ section[name='mainImgSection'] {
     height: 600px;
     background-color: #1111;
     border: 2px solid gainsboro;
-    background-image: url(https://drive.google.com/uc?id=1fvyL-05ao3TqUujFGjooM6H1Y6lTwBsu);
+    background-image: url(../img/brokerageMain.jpg);
     background-size: cover;
 }
 

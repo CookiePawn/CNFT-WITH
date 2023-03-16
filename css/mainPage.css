@@ -13,7 +13,7 @@ section[name='mainImgSection'] > div{
     max-width: 2000px;
     min-width: 1200px;
     height: 800px;
-    background-image: url(https://drive.google.com/uc?id=1zdxNzGoZfsRWEfeu8sZN6e7P2HfvM6Fg);
+    background-image: url(../img/mainImg.png);
     background-size: cover;
 }
 
