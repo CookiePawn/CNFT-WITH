@@ -48,7 +48,7 @@ function ticker(idx) {
         point = [new Date().getTime(), parseFloat(data['data']['closing_price'])];
 
         var series = chart.series[idx],
-            shift = series.data.length > 100000;
+            shift = series.data.length > 1000;
         chart.series[idx].addPoint(point, true, shift);
     }, 'json');
 }
