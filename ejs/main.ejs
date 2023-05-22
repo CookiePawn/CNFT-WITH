@@ -21,7 +21,7 @@
             <nav>
                 <div class="mainLogoDiv">
                     <a onclick="location.href='/'">
-                        <img src="https://drive.google.com/uc?id=1OjseRRmJX1efiUSZQlkEqol2Zoq5km1T" alt="MainLogo" height="22px">
+                        <img src="../img/mainLogo.svg" alt="MainLogo" height="22px">
                     </a>
                 </div>
                 <div class="mainCategoryDiv">
@@ -109,8 +109,8 @@
                     </div>
                 </div>
                 <div class="mainLoginDiv">
-                    <button class="logoutBtn" onclick="logout()"><img src="https://drive.google.com/uc?id=16YoIJBKDDBRhQML0kZtcTWvZZQmvRb8X" width="34px" title="로그아웃"></button>
-                    <button class="loginBtn" onclick="openLoginPopup()"><img src="https://drive.google.com/uc?id=1JZ25P4d9mC-ZkSZmsfQhEHmqpoxo-qnP" width="34px" title="로그인"></button>
+                    <button class="logoutBtn" onclick="logout()"><img src="../img/logout.png" width="34px" title="로그아웃"></button>
+                    <button class="loginBtn" onclick="openLoginPopup()"><img src="../img/login.png" width="34px" title="로그인"></button>
                 </div>
             </nav>
         </header>
@@ -122,7 +122,7 @@
             <h3>소셜 로그인</h3>
             <input type="button" value="x" onclick="closeLoginPopup()"></input>
             <button id="naverIdLogin_loginButton" href="javascript:void(0)">
-                <img src="https://drive.google.com/uc?id=1YAKetuHF2DliC5TpQb0OWz1XLIxTp2ru" width="37px">
+                <img src="../img/login_Naver.png" width="37px">
                 <span>NAVER 로그인</span>
             </button>
             <button id="googleLoginBtn">
@@ -151,7 +151,7 @@
                         <a href="/subscribe">자세히 보기&nbsp;&nbsp;></a>
                     </div>
                     <div class="subsImgDiv">
-                        <img src="https://drive.google.com/uc?id=1AIrH9o8uUMj1mZcwyw9wvZL-OO2KZtB9" alt="subsImg" width="95%" height="100%">
+                        <img src="../img/subsPay.jpg" alt="subsImg" width="95%" height="100%">
                     </div>
                 </div>
             </section>
@@ -187,8 +187,9 @@
                 <div class="CNFTNewsContentDiv">
                     <div name="CNFTNews1">
                         <%if (list1[0] != null) {%>
-                            <form method="get" id="newsForm1" action="/cnftNewsInfo">
+                            <form method="post" id="newsForm1">
                                 <input type="hidden" name="postID" id="newsNum1" value="<%=list1[0].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm1').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[0].img == '') {%>
@@ -212,8 +213,9 @@
                     </div>
                     <div name="CNFTNews2">
                         <%if (list1[1] != null) {%>
-                            <form method="get" id="newsForm2" action="/cnftNewsInfo">
+                            <form method="post" id="newsForm2">
                                 <input type="hidden" name="postID" id="newsNum2" value="<%=list1[1].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm2').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[1].img == '') {%>
@@ -237,8 +239,9 @@
                     </div>
                     <div name="CNFTNews3">
                         <%if (list1[2] != null) {%>
-                            <form method="get" id="newsForm3" action="/cnftNewsInfo">
+                            <form method="post" id="newsForm3">
                                 <input type="hidden" name="postID" id="newsNum3" value="<%=list1[2].postNum%>">
+                                <input type="hidden" name="noticeID" value="news">
                                 <a onclick="document.getElementById('newsForm3').submit()">
                                     <div name="CNFTNewsSub">
                                         <%if (list1[2].img == '') {%>
@@ -286,13 +289,14 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm1" action="/cnftPostInfo">
+                        <form method="post" id="CNFTNoticeForm1">
                             <input type="hidden" name="postID" value="<%=list2[0].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice1">
                                 <div name="CNFTNoticeSub" style="float: left;">
                                     <div name="CNFTNoticeBackColor"></div>
                                     <div name="CNFTNoticeUserInfo">
-                                        <img src="<%=list2[0].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <img src="<%=list2[0].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%" height="105px">
                                         <p><%=list2[0].author%></p>
                                     </div>
                                     <a name="formClick" onclick="document.getElementById('CNFTNoticeForm1').submit()">
@@ -336,13 +340,14 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm2" action="/cnftPostInfo">
+                        <form method="post" id="CNFTNoticeForm2">
                             <input type="hidden" name="postID" value="<%=list2[1].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice2">
                                 <div name="CNFTNoticeSub" style="float: right;">
                                     <div name="CNFTNoticeBackColor"></div>
                                     <div name="CNFTNoticeUserInfo">
-                                        <img src="<%=list2[1].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <img src="<%=list2[1].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%" height="105px">
                                         <p><%=list2[1].author%></p>
                                     </div>
                                     <a name="formClick" onclick="document.getElementById('CNFTNoticeForm2').submit()">
@@ -386,13 +391,14 @@
                             </div>
                         </div>
                     <%} else {%>
-                        <form method="get" id="CNFTNoticeForm3" action="/cnftPostInfo">
+                        <form method="post" id="CNFTNoticeForm3">
                             <input type="hidden" name="postID" value="<%=list2[2].postNum%>">
+                            <input type="hidden" name="noticeID" value="notice">
                             <div name="CNFTNotice3">
                                 <div name="CNFTNoticeSub" style="float: left;">
                                     <div name="CNFTNoticeBackColor"></div>
                                     <div name="CNFTNoticeUserInfo">
-                                        <img src="<%=list2[2].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%">
+                                        <img src="<%=list2[2].authorIcon%>" alt="CNFTNoticeUserIcon" width="90%" height="105px">
                                         <p><%=list2[2].author%></p>
                                     </div>
                                     <a name="formClick" onclick="document.getElementById('CNFTNoticeForm3').submit()">
@@ -492,13 +498,13 @@
                 </ul>
                 <div name="footerImgLink">
                     <a href="https://www.instagram.com/" target="_blank">
-                        <img src="https://drive.google.com/uc?id=1INFHEFN1beKtjBDF5z1CxzxyQpd0w3QS" width="30px">
+                        <img src="../img/instagramIcon.png" width="30px">
                     </a>
                     <a href="https://github.com/" target="_blank">
-                        <img src="https://drive.google.com/uc?id=1S6cm4e_AWUCwH_NR6TWdmcB2lMmcdWAh" width="30px">
+                        <img src="../img/githubIcon.png" width="30px">
                     </a>
                     <a href="https://www.youtube.com/" target="_blank">
-                        <img src="https://drive.google.com/uc?id=1sEPivNFiLUFVPnTBE09A7hPLT6CGmosz" width="30px">
+                        <img src="../img/youtubeIcon.png" width="30px">
                     </a>
                 </div>
             </div>
