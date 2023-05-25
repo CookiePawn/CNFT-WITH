@@ -13,7 +13,7 @@ section[name='mainImgSection'] > div{
     max-width: 2000px;
     min-width: 1200px;
     height: 800px;
-    background-image: url(../img/mainImg.png);
+    background-image: url(../img/MainBanner.png);
     background-size: cover;
 }
 
