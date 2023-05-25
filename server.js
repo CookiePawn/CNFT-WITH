@@ -12,7 +12,7 @@ const mysql = require('mysql');  // mysql 모듈 로드
 var db = mysql.createConnection({
   host : '127.0.0.1',
   user : 'root',
-  password : '12345678',
+  password : 'Dks135790@',
   database : 'post',
   "timezone":"Asia/Seoul",
   "dateStrings":"date",
