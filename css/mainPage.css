@@ -3,18 +3,16 @@
 section[name='mainImgSection'] {
     width: 100%;
     height: 800px;
-    background-color: aliceblue;
+    background-color: white;
     font-family: 'Roboto';
 }
 
-section[name='mainImgSection'] > div{
+section[name='mainImgSection'] > img{
+    display: block;
     margin: auto;
     width: 100%;
     max-width: 2000px;
     min-width: 1200px;
-    height: 800px;
-    background-image: url(../img/MainBanner.png);
-    background-size: cover;
 }
 
 section[name='mainImgSection'] > div > span{
