@@ -9,6 +9,9 @@ var payID = document.getElementById("payID");
 
 
 
+
+
+
 var IMP = window.IMP; 
 IMP.init('imp35844342'); 
 
