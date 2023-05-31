@@ -106,7 +106,7 @@ section[name='paymentSection'] > p {
     font-size: 20px;
 }
 
-section[name='paymentSection'] > div:active {
+section[name='paymentSection'] > a > div:active {
     border: 1px solid blue;
 }
 
@@ -130,13 +130,13 @@ section[name='paymentSection'] > div:active {
     float: left;
 }
 
-section[name='paymentSection'] > div > img {
+section[name='paymentSection'] > a > div > img {
     display: block;
     margin: auto;
     margin-top: 35px;
 }
 
-section[name='paymentSection'] > div > p {
+section[name='paymentSection'] > a > div > p {
     color: gray;
 }
 
