@@ -12,7 +12,7 @@ const mysql = require('mysql');  // mysql 모듈 로드
 var db = mysql.createConnection({
   host : '127.0.0.1',
   user : 'root',
-  password : 'Dks135790@',
+  password : '1234',
   database : 'post',
   "timezone":"Asia/Seoul",
   "dateStrings":"date",
@@ -80,18 +80,18 @@ server.post("/", (req, res) => {
   const notice = req.body['noticeID'];
 
   if(notice == 'news') {
-    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
-    res.redirect(`/cnftNewsInfo?postID=${id}`);
+    res.redirect(`/cnftNewsInfo?postID=${db.escape(id)}`);
   }
   else if (notice == 'notice') {
-    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
-    res.redirect(`/cnftPostInfo?postID=${id}`);
+    res.redirect(`/cnftPostInfo?postID=${db.escape(id)}`);
   }
   
 });
@@ -123,18 +123,18 @@ server.post("/main", (req, res) => {
   const notice = req.body['noticeID'];
 
   if(notice == 'news') {
-    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+    sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
-    res.redirect(`/cnftNewsInfo_Login?postID=${id}`);
+    res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(id)}`);
   }
   else if (notice == 'notice') {
-    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+    sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
-    res.redirect(`/cnftPostInfo_Login?postID=${id}`);
+    res.redirect(`/cnftPostInfo_Login?postID=${db.escape(id)}`);
   }
   
 });
@@ -205,7 +205,7 @@ server.get("/investmentPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM investment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM investment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 1;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -223,22 +223,22 @@ server.get("/investmentPost", (req, res) => {
 server.post('/investmentPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/investmentInfo?postID=${id}`);
+  res.redirect(`/investmentInfo?postID=${db.escape(id)}`);
 });
 
 
 server.post('/investmentPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/investmentInfo_Login?postID=${id}`);
+  res.redirect(`/investmentInfo_Login?postID=${db.escape(id)}`);
 });
 
 
@@ -260,14 +260,14 @@ server.post("/investmentPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)/*.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")*/}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)/*.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")*/}, ${image[0].filename}, now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -305,7 +305,7 @@ server.get("/investmentPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM investment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM investment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 1;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -333,9 +333,9 @@ server.get("/investmentPost_Login", (req, res) => {
 server.get("/investmentInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
-
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  console.log(db.escape(search.replace(/'/gi, '')))
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(search.replace(/'/gi, '')).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search.replace(/'/gi, '')).replace(/'/gi, '')}%' AND noticeID LIKE 1;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -356,8 +356,8 @@ server.get("/investmentInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 1;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -382,7 +382,7 @@ server.post("/investmentInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM investment WHERE postNum = ${search};`;
+    sql = `SELECT * FROM investment WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -395,8 +395,8 @@ server.post("/investmentInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM investment WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 1 AND postNum =${search};`
+    sql = `DELETE FROM investment WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 1 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -405,25 +405,25 @@ server.post("/investmentInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/investmentUpdate?postID=${id}`);
+    res.redirect(`/investmentUpdate?postID=${db.escape(id)}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(1, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(1, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/investmentInfo_Login?postID=${search}`);
+    res.redirect(`/investmentInfo_Login?postID=${db.escape(search)}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/investmentInfo_Login?postID=${search}`);
+    res.redirect(`/investmentInfo_Login?postID=${db.escape(search)}`);
   }
 });
 
@@ -438,7 +438,7 @@ server.post("/investmentInfo_Login", (req, res) => {
 server.get("/investmentUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -461,14 +461,14 @@ server.post("/investmentUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title='${db.escape(title)}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else{
-    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title='${db.escape(title)}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
