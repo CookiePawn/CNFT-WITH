@@ -205,7 +205,7 @@ server.get("/investmentPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM investment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM investment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 1;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -223,22 +223,22 @@ server.get("/investmentPost", (req, res) => {
 server.post('/investmentPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/investmentInfo?postID=${id}`);
+  res.redirect(`/investmentInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/investmentPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE investment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/investmentInfo_Login?postID=${id}`);
+  res.redirect(`/investmentInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -260,14 +260,14 @@ server.post("/investmentPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else {
-    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO investment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, ${image[0].filename}, now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -305,7 +305,7 @@ server.get("/investmentPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM investment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM investment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 1;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -333,9 +333,9 @@ server.get("/investmentPost_Login", (req, res) => {
 server.get("/investmentInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
-
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  console.log(db.escape(search.replace(/'/gi, '')))
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(search)}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search)}%' AND noticeID LIKE 1;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -356,8 +356,8 @@ server.get("/investmentInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 1;`;
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 1;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -382,7 +382,7 @@ server.post("/investmentInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM investment WHERE postNum = ${search};`;
+    sql = `SELECT * FROM investment WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -395,8 +395,8 @@ server.post("/investmentInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM investment WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 1 AND postNum =${search};`
+    sql = `DELETE FROM investment WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 1 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -405,25 +405,25 @@ server.post("/investmentInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/investmentUpdate?postID=${id}`);
+    res.redirect(`/investmentUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(1, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(1, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/investmentInfo_Login?postID=${search}`);
+    res.redirect(`/investmentInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/investmentInfo_Login?postID=${search}`);
+    res.redirect(`/investmentInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -438,7 +438,7 @@ server.post("/investmentInfo_Login", (req, res) => {
 server.get("/investmentUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM investment WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM investment WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -461,14 +461,14 @@ server.post("/investmentUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/investmentPost_Login");
   }
   else{
-    sql = `UPDATE post.investment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.investment SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -503,7 +503,7 @@ server.get("/currentSituationPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM currentSituation WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM currentSituation WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 2;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -537,14 +537,14 @@ server.post("/currentSituationPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/currentSituationPost_Login");
   }
   else {
-    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO currentSituation (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -582,7 +582,7 @@ server.get("/currentSituationPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM currentSituation WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM currentSituation WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 2;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -603,22 +603,22 @@ server.get("/currentSituationPost_Login", (req, res) => {
 server.post('/currentSituationPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/currentSituationInfo?postID=${id}`);
+  res.redirect(`/currentSituationInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/currentSituationPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE currentSituation SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/currentSituationInfo_Login?postID=${id}`);
+  res.redirect(`/currentSituationInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -632,8 +632,8 @@ server.get("/currentSituationInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
+  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 2;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -654,8 +654,8 @@ server.get("/currentSituationInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 2;`;
+  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 2;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -680,7 +680,7 @@ server.post("/currentSituationInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM currentSituation WHERE postNum = ${search};`;
+    sql = `SELECT * FROM currentSituation WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -693,8 +693,8 @@ server.post("/currentSituationInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM currentSituation WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 2 AND postNum =${search};`
+    sql = `DELETE FROM currentSituation WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 2 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -703,25 +703,25 @@ server.post("/currentSituationInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/currentSituationUpdate?postID=${id}`);
+    res.redirect(`/currentSituationUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(2, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(2, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/currentSituationInfo_Login?postID=${search}`);
+    res.redirect(`/currentSituationInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/currentSituationInfo_Login?postID=${search}`);
+    res.redirect(`/currentSituationInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -736,7 +736,7 @@ server.post("/currentSituationInfo_Login", (req, res) => {
 server.get("/currentSituationUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM currentSituation WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -759,14 +759,14 @@ server.post("/currentSituationUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.currentSituation SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.currentSituation SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/currentSituationPost_Login");
   }
   else{
-    sql = `UPDATE post.currentSituation SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.currentSituation SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -797,7 +797,7 @@ server.get("/recruitmentPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM recruitment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM recruitment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 3;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -831,14 +831,14 @@ server.post("/recruitmentPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/recruitmentPost_Login");
   }
   else {
-    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO recruitment (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -876,7 +876,7 @@ server.get("/recruitmentPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM recruitment WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM recruitment WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 3;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -899,22 +899,22 @@ server.get("/recruitmentPost_Login", (req, res) => {
 server.post('/recruitmentPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/recruitmentInfo?postID=${id}`);
+  res.redirect(`/recruitmentInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/recruitmentPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE recruitment SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/recruitmentInfo_Login?postID=${id}`);
+  res.redirect(`/recruitmentInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -926,8 +926,8 @@ server.get("/recruitmentInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
+  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 3;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -948,8 +948,8 @@ server.get("/recruitmentInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 3;`;
+  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 3;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -974,7 +974,7 @@ server.post("/recruitmentInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM recruitment WHERE postNum = ${search};`;
+    sql = `SELECT * FROM recruitment WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -987,8 +987,8 @@ server.post("/recruitmentInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM recruitment WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 3 AND postNum =${search};`
+    sql = `DELETE FROM recruitment WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 3 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -997,25 +997,25 @@ server.post("/recruitmentInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/recruitmentUpdate?postID=${id}`);
+    res.redirect(`/recruitmentUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(3, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(3, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/recruitmentInfo_Login?postID=${search}`);
+    res.redirect(`/recruitmentInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/recruitmentInfo_Login?postID=${search}`);
+    res.redirect(`/recruitmentInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);;
   }
 });
 
@@ -1030,7 +1030,7 @@ server.post("/recruitmentInfo_Login", (req, res) => {
 server.get("/recruitmentUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM recruitment WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -1053,14 +1053,14 @@ server.post("/recruitmentUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.recruitment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.recruitment SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/recruitmentPost_Login");
   }
   else{
-    sql = `UPDATE post.recruitment SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.recruitment SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1395,7 +1395,7 @@ server.get("/adaNewsPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM adaNews WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM adaNews WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 6;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1429,14 +1429,14 @@ server.post("/newsPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/adaNewsPost_Login");
   }
   else {
-    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO adaNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1474,7 +1474,7 @@ server.get("/adaNewsPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM adaNews WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM adaNews WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 6;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1496,22 +1496,22 @@ server.get("/adaNewsPost_Login", (req, res) => {
 server.post('/adaNewsPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/adaNewsInfo?postID=${id}`);
+  res.redirect(`/adaNewsInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/adaNewsPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE adaNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/adaNewsInfo_Login?postID=${id}`);
+  res.redirect(`/adaNewsInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -1527,8 +1527,8 @@ server.get("/adaNewsInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
+  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 6;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -1549,8 +1549,8 @@ server.get("/adaNewsInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 6;`;
+  sql = `SELECT * FROM adanews WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 6;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -1575,7 +1575,7 @@ server.post("/adaNewsInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM adanews WHERE postNum = ${search};`;
+    sql = `SELECT * FROM adanews WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -1588,8 +1588,8 @@ server.post("/adaNewsInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM adanews WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 6 AND postNum =${search};`
+    sql = `DELETE FROM adanews WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 6 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1598,25 +1598,25 @@ server.post("/adaNewsInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/adaNewsUpdate?postID=${id}`);
+    res.redirect(`/adaNewsUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(6, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(6, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/ADANewsInfo_Login?postID=${search}`);
+    res.redirect(`/ADANewsInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/ADANewsInfo_Login?postID=${search}`);
+    res.redirect(`/ADANewsInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -1631,7 +1631,7 @@ server.post("/adaNewsInfo_Login", (req, res) => {
 server.get("/adaNewsUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM adaNews WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM adaNews WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -1654,14 +1654,14 @@ server.post("/adaNewsUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.adaNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.adaNews SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/adaNewsPost_Login");
   }
   else{
-    sql = `UPDATE post.adaNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.adaNews SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1697,7 +1697,7 @@ server.get("/mintingPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM minting WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM minting WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 7;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1731,14 +1731,14 @@ server.post("/mintingPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/mintingPost_Login");
   }
   else {
-    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO minting (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1776,7 +1776,7 @@ server.get("/mintingPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM minting WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM minting WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 7;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1798,22 +1798,22 @@ server.get("/mintingPost_Login", (req, res) => {
 server.post('/mintingPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/mintingInfo?postID=${id}`);
+  res.redirect(`/mintingInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/mintingPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE minting SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/mintingInfo_Login?postID=${id}`);
+  res.redirect(`/mintingInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -1828,8 +1828,8 @@ server.get("/mintingInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
+  sql = `SELECT * FROM minting WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 7;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -1850,8 +1850,8 @@ server.get("/mintingInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM minting WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 7;`;
+  sql = `SELECT * FROM minting WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 7;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -1876,7 +1876,7 @@ server.post("/mintingInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM minting WHERE postNum = ${search};`;
+    sql = `SELECT * FROM minting WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -1889,8 +1889,8 @@ server.post("/mintingInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM minting WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 7 AND postNum =${search};`
+    sql = `DELETE FROM minting WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 7 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1899,25 +1899,25 @@ server.post("/mintingInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/mintingUpdate?postID=${id}`);
+    res.redirect(`/mintingUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(7, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(7, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/mintingInfo_Login?postID=${search}`);
+    res.redirect(`/mintingInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/mintingInfo_Login?postID=${search}`);
+    res.redirect(`/mintingInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -1932,7 +1932,7 @@ server.post("/mintingInfo_Login", (req, res) => {
 server.get("/mintingUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM minting WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM minting WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -1955,14 +1955,14 @@ server.post("/mintingUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.minting SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.minting SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/mintingPost_Login");
   }
   else{
-    sql = `UPDATE post.minting SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.minting SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2000,7 +2000,7 @@ server.get("/exchangePost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM exchange WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM exchange WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 8;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2034,14 +2034,14 @@ server.post("/exchangePosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/exchangePost_Login");
   }
   else {
-    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO exchange (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2079,7 +2079,7 @@ server.get("/exchangePost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM exchange WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM exchange WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 8;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2101,22 +2101,22 @@ server.get("/exchangePost_Login", (req, res) => {
 server.post('/exchangePost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/exchangeInfo?postID=${id}`);
+  res.redirect(`/exchangeInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/exchangePost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE exchange SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/exchangeInfo_Login?postID=${id}`);
+  res.redirect(`/exchangeInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -2131,8 +2131,8 @@ server.get("/exchangeInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
+  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 8;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -2153,8 +2153,8 @@ server.get("/exchangeInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 8;`;
+  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 8;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -2179,7 +2179,7 @@ server.post("/exchangeInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM exchange WHERE postNum = ${search};`;
+    sql = `SELECT * FROM exchange WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -2192,8 +2192,8 @@ server.post("/exchangeInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM exchange WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 8 AND postNum =${search};`
+    sql = `DELETE FROM exchange WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 8 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2202,25 +2202,25 @@ server.post("/exchangeInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/exchangeUpdate?postID=${id}`);
+    res.redirect(`/exchangeUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(8, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(8, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/exchangeInfo_Login?postID=${search}`);
+    res.redirect(`/exchangeInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/exchangeInfo_Login?postID=${search}`);
+    res.redirect(`/exchangeInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -2235,7 +2235,7 @@ server.post("/exchangeInfo_Login", (req, res) => {
 server.get("/exchangeUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM exchange WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -2258,14 +2258,14 @@ server.post("/exchangeUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.exchange SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.exchange SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/exchangePost_Login");
   }
   else{
-    sql = `UPDATE post.exchange SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.exchange SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2297,7 +2297,7 @@ server.get("/dealPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM deal WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM deal WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 9;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2331,14 +2331,14 @@ server.post("/dealPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/dealPost_Login");
   }
   else {
-    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO deal (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2376,7 +2376,7 @@ server.get("/dealPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM deal WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM deal WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 9;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2399,22 +2399,22 @@ server.get("/dealPost_Login", (req, res) => {
 server.post('/dealPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/dealInfo?postID=${id}`);
+  res.redirect(`/dealInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/dealPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE deal SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/dealInfo_Login?postID=${id}`);
+  res.redirect(`/dealInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -2431,8 +2431,8 @@ server.get("/dealInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
+  sql = `SELECT * FROM deal WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 9;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -2453,8 +2453,8 @@ server.get("/dealInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM deal WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 9;`;
+  sql = `SELECT * FROM deal WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 9;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -2479,7 +2479,7 @@ server.post("/dealInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM deal WHERE postNum = ${search};`;
+    sql = `SELECT * FROM deal WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -2492,8 +2492,8 @@ server.post("/dealInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM deal WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 9 AND postNum =${search};`
+    sql = `DELETE FROM deal WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 9 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2502,25 +2502,25 @@ server.post("/dealInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/dealUpdate?postID=${id}`);
+    res.redirect(`/dealUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(9, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(9, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/dealInfo_Login?postID=${search}`);
+    res.redirect(`/dealInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/dealInfo_Login?postID=${search}`);
+    res.redirect(`/dealInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -2535,7 +2535,7 @@ server.post("/dealInfo_Login", (req, res) => {
 server.get("/dealUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM deal WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM deal WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -2558,14 +2558,14 @@ server.post("/dealUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.deal SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.deal SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/dealPost_Login");
   }
   else{
-    sql = `UPDATE post.deal SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.deal SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2597,7 +2597,7 @@ server.get("/walletPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM wallet WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM wallet WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 10;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2631,14 +2631,14 @@ server.post("/walletPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/walletPost_Login");
   }
   else {
-    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO wallet (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2676,7 +2676,7 @@ server.get("/walletPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM wallet WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM wallet WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 10;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2700,22 +2700,22 @@ server.get("/walletPost_Login", (req, res) => {
 server.post('/walletPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/walletInfo?postID=${id}`);
+  res.redirect(`/walletInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/walletPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE wallet SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/walletInfo_Login?postID=${id}`);
+  res.redirect(`/walletInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -2732,8 +2732,8 @@ server.get("/walletInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
+  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 10;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -2754,8 +2754,8 @@ server.get("/walletInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 10;`;
+  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 10;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -2780,7 +2780,7 @@ server.post("/walletInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM wallet WHERE postNum = ${search};`;
+    sql = `SELECT * FROM wallet WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -2793,8 +2793,8 @@ server.post("/walletInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM wallet WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 10 AND postNum =${search};`
+    sql = `DELETE FROM wallet WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 10 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2803,25 +2803,25 @@ server.post("/walletInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/walletUpdate?postID=${id}`);
+    res.redirect(`/walletUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(10, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(10, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/walletInfo_Login?postID=${search}`);
+    res.redirect(`/walletInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/walletInfo_Login?postID=${search}`);
+    res.redirect(`/walletInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -2836,7 +2836,7 @@ server.post("/walletInfo_Login", (req, res) => {
 server.get("/walletUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM wallet WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -2859,14 +2859,14 @@ server.post("/walletUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.wallet SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.wallet SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/walletPost_Login");
   }
   else{
-    sql = `UPDATE post.wallet SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.wallet SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2898,7 +2898,7 @@ server.get("/servicePost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM service WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM service WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 11;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2932,14 +2932,14 @@ server.post("/servicePosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/servicePost_Login");
   }
   else {
-    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO service (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -2977,7 +2977,7 @@ server.get("/servicePost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM service WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM service WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 11;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -2998,22 +2998,22 @@ server.get("/servicePost_Login", (req, res) => {
 server.post('/servicePost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/serviceInfo?postID=${id}`);
+  res.redirect(`/serviceInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/servicePost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE service SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/serviceInfo_Login?postID=${id}`);
+  res.redirect(`/serviceInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -3029,8 +3029,8 @@ server.get("/serviceInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
+  sql = `SELECT * FROM service WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 11;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -3051,8 +3051,8 @@ server.get("/serviceInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM service WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 11;`;
+  sql = `SELECT * FROM service WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 11;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -3077,7 +3077,7 @@ server.post("/serviceInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM service WHERE postNum = ${search};`;
+    sql = `SELECT * FROM service WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -3090,8 +3090,8 @@ server.post("/serviceInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM service WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 11 AND postNum =${search};`
+    sql = `DELETE FROM service WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 11 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3100,25 +3100,25 @@ server.post("/serviceInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/serviceUpdate?postID=${id}`);
+    res.redirect(`/serviceUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(11, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(11, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/serviceInfo_Login?postID=${search}`);
+    res.redirect(`/serviceInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/serviceInfo_Login?postID=${search}`);
+    res.redirect(`/serviceInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -3133,7 +3133,7 @@ server.post("/serviceInfo_Login", (req, res) => {
 server.get("/serviceUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM service WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM service WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -3156,14 +3156,14 @@ server.post("/serviceUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.service SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.service SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/servicePost_Login");
   }
   else{
-    sql = `UPDATE post.service SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.service SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3198,7 +3198,7 @@ server.get("/cnftPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM postInfo WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM postInfo WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -3216,22 +3216,22 @@ server.get("/cnftPost", (req, res) => {
 server.post('/cnftPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/cnftPostInfo?postID=${id}`);
+  res.redirect(`/cnftPostInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/cnftPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/cnftPostInfo_Login?postID=${id}`);
+  res.redirect(`/cnftPostInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -3256,7 +3256,7 @@ server.get("/cnftPost_Login", (req, res) => {
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
 
-    sql = `SELECT * FROM postInfo WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM postInfo WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 5;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -3281,8 +3281,8 @@ server.get("/cnftPostInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
+  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 5;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -3297,8 +3297,8 @@ server.get("/cnftPostInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 5;`;
+  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 5;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -3316,7 +3316,7 @@ server.get("/cnftPosting", (req, res) => {
 server.get("/cnftPostUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM postInfo WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -3338,14 +3338,14 @@ server.post("/cnftPostUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.postInfo SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.postInfo SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftPost_Login");
   }
   else{
-    sql = `UPDATE post.postInfo SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.postInfo SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3364,14 +3364,14 @@ server.post("/cnftPosting", upload.array("files"), (req, res) => {
   var btn = req.body['posting'];
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1);`;
+    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1);`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftPost_Login");
   }
   else {
-    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1);`;
+    sql = `INSERT INTO postInfo (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1);`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3394,7 +3394,7 @@ server.post("/cnftPostInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM postInfo WHERE postNum = ${search};`;
+    sql = `SELECT * FROM postInfo WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -3407,8 +3407,8 @@ server.post("/cnftPostInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM postInfo WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE postNum = ${search} AND noticeID LIKE 5;`;
+    sql = `DELETE FROM postInfo WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE postNum = ${db.escape(search)} AND noticeID LIKE 5;`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3417,38 +3417,34 @@ server.post("/cnftPostInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
     if(btnName == '수정') {
-      res.redirect(`/cnftPostUpdate?postID=${id}`);
+      res.redirect(`/cnftPostUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(5, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(5, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/cnftPostInfo_Login?postID=${search}`);
+    res.redirect(`/cnftPostInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/cnftPostInfo_Login?postID=${search}`);
+    res.redirect(`/cnftPostInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
 
-
-
-
-
-
-
-
-
+//게시판 끝
+//게시판 끝
+//게시판 끝
+//게시판 끝
 
 
 server.get("/enterInfo", (req, res) => {
