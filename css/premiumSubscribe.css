@@ -45,10 +45,47 @@ section[name='mainImgSection'] {
     background-color:white;
     width:100%;
     height:1000px;
-    position: relative;
-    text-align: center;
-    
+    position: relative;  
 }
+
+.borderDiv1 {
+    width: 100px;
+    height: 1px;
+    border-bottom: 3px solid black;
+    float: left;
+}
+
+.premiumSubscribe1 > h1{
+    font-size: 40px;
+    padding-top: 40px;
+    font-family: 'GmarketSans-Medium';
+    letter-spacing: 0px;
+}
+
+.premiumSubscribe1 > h3{
+    font-size: 25px;
+    font-family: 'GmarketSans-Medium';
+    letter-spacing: -1px;
+}
+
+.premiumSubscribe1 > span{
+    letter-spacing: 0px;
+    line-height: 30px;
+    font-family: 'GmarketSans-Light';
+}
+.premiumSubscribe1 > button{
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    border: 3px solid black;
+    border-radius: 40px;
+    background-color: black;
+    font-size: 1.2em;
+    color:white;
+    cursor: pointer;
+    font-family: 'GmarketSans-Light';
+}
+
 .subscribeBox{
     position: relative;
     width:800px;
@@ -93,6 +130,8 @@ section[name='mainImgSection'] {
 .subscribeExplanation>span{
     line-height: 30px;
     color: gray;
+    font-family: 'GmarketSans-Light';
+    letter-spacing: 0px;
 }
 
 .subscribeExplanation>ul{

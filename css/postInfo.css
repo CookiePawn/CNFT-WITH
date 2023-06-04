@@ -242,6 +242,7 @@ div[name="comContent"] > p > img{
 .comContentTextDiv > p{
     text-align: left;
     color: rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
 }
 
 .comContentTextDiv > textarea{
