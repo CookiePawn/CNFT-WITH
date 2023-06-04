@@ -84,14 +84,22 @@ server.post("/", (req, res) => {
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
+<<<<<<< HEAD
     res.redirect(`/cnftNewsInfo?postID=${db.escape(id)}`);
+=======
+    res.redirect(`/cnftNewsInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
+>>>>>>> 705b7a7a823a235ef50142ba987d723fbcc30c04
   }
   else if (notice == 'notice') {
     sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
+<<<<<<< HEAD
     res.redirect(`/cnftPostInfo?postID=${db.escape(id)}`);
+=======
+    res.redirect(`/cnftPostInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
+>>>>>>> 705b7a7a823a235ef50142ba987d723fbcc30c04
   }
   
 });
@@ -127,14 +135,22 @@ server.post("/main", (req, res) => {
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
+<<<<<<< HEAD
     res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(id)}`);
+=======
+    res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
+>>>>>>> 705b7a7a823a235ef50142ba987d723fbcc30c04
   }
   else if (notice == 'notice') {
     sql = `UPDATE postInfo SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
     });
+<<<<<<< HEAD
     res.redirect(`/cnftPostInfo_Login?postID=${db.escape(id)}`);
+=======
+    res.redirect(`/cnftPostInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
+>>>>>>> 705b7a7a823a235ef50142ba987d723fbcc30c04
   }
   
 });
@@ -1096,7 +1112,7 @@ server.get("/cnftNewsPost", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-    sql = `SELECT * FROM cnftNews WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM cnftNews WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 4;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1130,14 +1146,14 @@ server.post("/cnftNewsPosting", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image == '') {
-    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '', now(), 1)`;
+    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftNewsPost_Login");
   }
   else {
-    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES('${nickname}', '${icon}', '${email}', '${title}', '${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', '${image[0].filename}', now(), 1)`;
+    sql = `INSERT INTO cnftNews (author, authorIcon, email, title, content, img, DATE, hit) VALUES(${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(title)}, ${db.escape(content)}, '${image[0].filename}', now(), 1)`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1174,8 +1190,7 @@ server.get("/cnftNewsPost_Login", (req, res) => {
   }
   else {
     var search = urlencode.decode(urlPath.query.replace(/postSearch=/, ""));
-
-    sql = `SELECT * FROM cnftNews WHERE title LIKE '%${search}%';`;
+    sql = `SELECT * FROM cnftNews WHERE title LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
     sql2 = `SELECT * FROM comments WHERE noticeID LIKE 4;`;
     db.query(sql+sql2, (error, data, fields) => {
       if(error) throw error;
@@ -1196,22 +1211,22 @@ server.get("/cnftNewsPost_Login", (req, res) => {
 server.post('/cnftNewsPost', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/cnftNewsInfo?postID=${id}`);
+  res.redirect(`/cnftNewsInfo?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
 server.post('/cnftNewsPost_Login', (req, res) => {
   const id = req.body['postID'];
 
-  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${id}`;
+  sql = `UPDATE cnftNews SET hit = hit + 1 WHERE postNum = ${db.escape(id)}`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
   });
-  res.redirect(`/cnftNewsInfo_Login?postID=${id}`);
+  res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(id).replace(/'/gi, '')}`);
 });
 
 
@@ -1226,8 +1241,8 @@ server.get("/cnftNewsInfo", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
 
-  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
+  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 4;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo", {
@@ -1247,9 +1262,8 @@ server.get("/cnftNewsInfo", (req, res) => {
 server.get("/cnftNewsInfo_Login", (req, res) => {
   var urlPath = url.parse(req.url);
   var search = urlencode.decode(urlPath.query.replace(/postID=/, ""));
-
-  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${search}%';`;
-  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${search}%' AND noticeID LIKE 4;`;
+  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  sql2 = `SELECT * FROM comments WHERE postNum LIKE '%${db.escape(search).replace(/'/gi, '')}%' AND noticeID LIKE 4;`;
   db.query(sql + sql2, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postInfo_Login", {
@@ -1274,7 +1288,7 @@ server.post("/cnftNewsInfo_Login", (req, res) => {
 
   var btnName = req.body['delete'];
   if (btnName == '삭제') {
-    sql = `SELECT * FROM cnftNews WHERE postNum = ${search};`;
+    sql = `SELECT * FROM cnftNews WHERE postNum = ${db.escape(search)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
       if(data[0].img != '') {
@@ -1287,8 +1301,8 @@ server.post("/cnftNewsInfo_Login", (req, res) => {
         }
       }
     });
-    sql = `DELETE FROM cnftNews WHERE postNum = ${search};`;
-    sql2 = `DELETE FROM comments WHERE noticeID LIKE 4 AND postNum =${search};`
+    sql = `DELETE FROM cnftNews WHERE postNum = ${db.escape(search)};`;
+    sql2 = `DELETE FROM comments WHERE noticeID LIKE 4 AND postNum =${db.escape(search)};`
     db.query(sql + sql2, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -1297,25 +1311,25 @@ server.post("/cnftNewsInfo_Login", (req, res) => {
 
   btnName = req.body['update'];
   if(btnName == '수정') {
-    res.redirect(`/cnftNewsUpdate?postID=${id}`);
+    res.redirect(`/cnftNewsUpdate?postID=${db.escape(id).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comPostBtn'];
   if(btnName == '입력') {
-    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(4, '${search}', '${nickname}', '${icon}', '${email}', '${content}', 0, now(), '${author}');`
+    sql = `INSERT INTO comments (noticeID, postNum, user, userIcon, email, content, liked, DATE, author) VALUES(4, ${db.escape(search)}, ${db.escape(nickname)}, ${db.escape(icon)}, ${db.escape(email)}, ${db.escape(content)}, 0, now(), ${db.escape(author)});`
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/cnftNewsInfo_Login?postID=${search}`);
+    res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 
   btnName = req.body['comDelete'];
   if(btnName == '삭제') {
-    sql = `DELETE FROM comments WHERE comNum = ${comNum};`;
+    sql = `DELETE FROM comments WHERE comNum = ${db.escape(comNum)};`;
     db.query(sql, (error, data, fields) => {
       if (error) throw error;
     });
-    res.redirect(`/cnftNewsInfo_Login?postID=${search}`);
+    res.redirect(`/cnftNewsInfo_Login?postID=${db.escape(search).replace(/'/gi, '')}`);
   }
 });
 
@@ -1330,7 +1344,7 @@ server.post("/cnftNewsInfo_Login", (req, res) => {
 server.get("/cnftNewsUpdate", (req, res) => {
   var urlPath = url.parse(req.url, true).query;
 
-  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${urlPath.postID}%'`;
+  sql = `SELECT * FROM cnftNews WHERE postNum LIKE '%${db.escape(urlPath.postID).replace(/'/gi, '')}%'`;
   db.query(sql, (error, data, fields) => {
     if(error) throw error;
     res.render(__dirname + "/ejs/postUpdate", {
@@ -1353,14 +1367,14 @@ server.post("/cnftNewsUpdate", upload.array("files"), (req, res) => {
 
 
   if(btn == '포스팅' && image != '') {
-    sql = `UPDATE post.cnftNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}', img='${image[0].filename}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.cnftNews SET title=${db.escape(title)}, content=${db.escape(content)}, img='${image[0].filename}' WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
     res.redirect("/cnftNewsPost_Login");
   }
   else{
-    sql = `UPDATE post.cnftNews SET title='${title}', content='${content.replace(/\"/gi, '\"\"').replace(/\'/gi, "\'\'")}' WHERE postNum=${urlPath.postID};`;
+    sql = `UPDATE post.cnftNews SET title=${db.escape(title)}, content=${db.escape(content)} WHERE postNum=${db.escape(urlPath.postID)};`;
     db.query(sql, (error, data, fields) =>{
       if(error) throw error;
     });
@@ -3356,106 +3370,6 @@ server.post("/cnftPostUpdate", upload.array("files"), (req, res) => {
 });
 
 
-server.get("/enterInfo", (req, res) => {
-  res.sendFile(__dirname + "/html/enterInfoPage.html");
-});
-
-server.get("/enterInfo_Login", (req, res) => {
-  res.sendFile(__dirname + "/html/enterInfoPage_Login.html");
-});
-
-
-
-server.get("/subscribe", (req, res) => {
-  res.sendFile(__dirname + "/html/premiumSubscribe.html");
-});
-
-server.get("/subscribe_Login", (req, res) => {
-  res.sendFile(__dirname + "/html/premiumSubscribe_Login.html");
-});
-
-
-server.get("/brokerage", (req, res) => {
-  res.sendFile(__dirname + "/html/brokerage.html");
-});
-
-server.get("/brokerage_Login", (req, res) => {
-  res.sendFile(__dirname + "/html/brokerage_Login.html");
-});
-
-
-
-
-server.get("/payPage", (req, res) => {
-  var urlPath = url.parse(req.url);
-  var search = urlencode.decode(urlPath.query.replace(/id=/, ""));
-
-  sql = `SELECT * FROM payUser WHERE email LIKE '%${search}%';`;
-  db.query(sql, (error, data, fields) => {
-    if(error) throw error;
-    if(data[0] == null) {
-      res.sendFile(__dirname + "/html/payPage.html");
-    }
-    else {
-      res.redirect("/payPageError");
-    }
-  });
-});
-
-server.get("/payPageError", (req, res) => {
-  res.sendFile(__dirname + '/html/alreadyPay.html');
-});
-
-
-server.get("/payPageResult", (req, res) => {
-  var urlPath = url.parse(req.url);
-  var search = urlencode.decode(urlPath.query.replace(/id=/, ""));
-
-  sql = `SELECT * FROM payUser WHERE payID LIKE '%${search}%';`;
-  db.query(sql, (error, data, fields) => {
-    if(error) throw error;
-    if(data[0] != null) {
-      res.sendFile(__dirname + "/html/payPageResult.html");
-    }
-    else {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.write(`<script charset="utf-8">alert('이미 구독을 하셨습니다.');</script>`);
-      res.write(`<script charset="utf-8">window.close();</script>`);
-    }
-  });
-});
-
-
-server.get("/adaInfo", (req, res) => {
-  res.sendFile(__dirname + "/html/adaInfoPage.html");
-});
-
-server.get("/adaInfo_Login", (req, res) => {
-  res.sendFile(__dirname + "/html/adaInfoPage_Login.html");
-});
-
-
-
-server.get("/questionsPage", (req, res) => {
-  res.sendFile(__dirname + "/html/questionsPage.html");
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 server.post("/cnftPosting", upload.array("files"), (req, res) => {
   const title = req.body['postTitle'];
   const content = req.body['postContent'];
@@ -3542,6 +3456,63 @@ server.post("/cnftPostInfo_Login", (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+server.get("/enterInfo", (req, res) => {
+  res.sendFile(__dirname + "/html/enterInfoPage.html");
+});
+
+server.get("/enterInfo_Login", (req, res) => {
+  res.sendFile(__dirname + "/html/enterInfoPage_Login.html");
+});
+
+
+
+server.get("/subscribe", (req, res) => {
+  res.sendFile(__dirname + "/html/premiumSubscribe.html");
+});
+
+server.get("/subscribe_Login", (req, res) => {
+  res.sendFile(__dirname + "/html/premiumSubscribe_Login.html");
+});
+
+
+server.get("/brokerage", (req, res) => {
+  res.sendFile(__dirname + "/html/brokerage.html");
+});
+
+server.get("/brokerage_Login", (req, res) => {
+  res.sendFile(__dirname + "/html/brokerage_Login.html");
+});
+
+
+
+
+server.get("/payPage", (req, res) => {
+  var urlPath = url.parse(req.url);
+  var search = urlencode.decode(urlPath.query.replace(/id=/, ""));
+  sql = `SELECT * FROM payUser WHERE email LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+    if(data[0] == null) {
+      res.sendFile(__dirname + "/html/payPage.html");
+    }
+    else {
+      res.redirect("/payPageError");
+    }
+  });
+});
+
+
 server.post("/payPage", (req, res)=> {
   var payID = req.body['payID'];
   var btnName = req.body['paySuccessBtn'];
@@ -3551,11 +3522,50 @@ server.post("/payPage", (req, res)=> {
   var age = req.body['comAge'];
 
   if(btnName == '주문 확인'){
-    sql = `INSERT INTO payUser (payID, user, email, phone, age, DATE) VALUES ('${payID}', '${nickname}', '${email}', '${phone}', '${age}', now())`;
+    sql = `INSERT INTO payUser (payID, user, email, phone, age, DATE) VALUES (${db.escape(payID)}, ${db.escape(nickname)}, ${db.escape(email)}, ${db.escape(phone)}, ${db.escape(age)}, now())`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
 
     });
-    res.redirect(`/payPageResult?id=${payID}`);
+    res.redirect(`/payPageResult?id=${db.escape(payID).replace(/'/gi, '')}`);
   }
 });
+
+server.get("/payPageError", (req, res) => {
+  res.sendFile(__dirname + '/html/alreadyPay.html');
+});
+
+
+server.get("/payPageResult", (req, res) => {
+  var urlPath = url.parse(req.url);
+  var search = urlencode.decode(urlPath.query.replace(/id=/, ""));
+
+  sql = `SELECT * FROM payUser WHERE payID LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
+  db.query(sql, (error, data, fields) => {
+    if(error) throw error;
+    if(data[0] != null) {
+      res.sendFile(__dirname + "/html/payPageResult.html");
+    }
+    else {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.write(`<script charset="utf-8">alert('이미 구독을 하셨습니다.');</script>`);
+      res.write(`<script charset="utf-8">window.close();</script>`);
+    }
+  });
+});
+
+
+server.get("/adaInfo", (req, res) => {
+  res.sendFile(__dirname + "/html/adaInfoPage.html");
+});
+
+server.get("/adaInfo_Login", (req, res) => {
+  res.sendFile(__dirname + "/html/adaInfoPage_Login.html");
+});
+
+
+
+server.get("/questionsPage", (req, res) => {
+  res.sendFile(__dirname + "/html/questionsPage.html");
+});
+
