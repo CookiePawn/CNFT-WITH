@@ -41,8 +41,11 @@
 
 
 
+# SERVER UPLOAD
+    2023/06/04 - UPDATE
 
-# SERVER UPDATE
+
+# SERVER BASE OPTIONS
     AWS로 인스턴스 생성
      - MySQL 설치
      - NODEjs 설치
@@ -73,3 +76,4 @@
 
     서버에 SQL인젝션 발생
      - DB 초기화를 통해 서버는 다시 정상작동 소스코드 수정 필요
+
