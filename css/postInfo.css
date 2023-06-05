@@ -103,6 +103,7 @@ div[name='postDate'] > span {
 div[name='postContent'] {
     width: 920px;
     margin: auto;
+    word-wrap: break-word;
 }
 
 div[name='postContent'] > span {

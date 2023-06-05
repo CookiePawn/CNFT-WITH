@@ -356,6 +356,8 @@ div[name='CNFTNewsSub'] > div > div {
 div[name='CNFTNewsSub'] > div > span{
     display: table-cell;
     vertical-align: middle;
+    max-width: 274.72px;
+    word-wrap: break-word;
 }
 
 div[name='CNFTNewsSub'] > p{
