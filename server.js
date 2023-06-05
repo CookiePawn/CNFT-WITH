@@ -3498,11 +3498,9 @@ server.post("/payPage", (req, res)=> {
   var btnName = req.body['paySuccessBtn'];
   var nickname = req.body['nickname'];
   var email = req.body['email'];
-  var phone = req.body['comPhone'];
-  var age = req.body['comAge'];
 
   if(btnName == '주문 확인'){
-    sql = `INSERT INTO payUser (payID, user, email, phone, age, DATE) VALUES (${db.escape(payID)}, ${db.escape(nickname)}, ${db.escape(email)}, ${db.escape(phone)}, ${db.escape(age)}, now())`;
+    sql = `INSERT INTO payUser (payID, user, email, DATE) VALUES (${db.escape(payID)}, ${db.escape(nickname)}, ${db.escape(email)}, now())`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
 

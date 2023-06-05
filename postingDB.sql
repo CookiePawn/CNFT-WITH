@@ -8,8 +8,6 @@ CREATE TABLE payUser(
     payID			VARCHAR(20),
 	user			VARCHAR(20),
 	email			text,
-    phone			VARCHAR(20),
-    age				VARCHAR(10),
     DATE			text
 );
 
