@@ -311,7 +311,7 @@
                                                 <%}%>
                                             </div>
                                             <div name="CNFTNoticeContentText">
-                                                <p><%-list2[0].content%></p>
+                                                <p><%-list2[0].content.replace(/(<([^>]+)>)/gi, "");%></p>
                                             </div>
                                             <div name="CNFTNoticeDateText">
                                                 <p><%=list2[0].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
@@ -362,7 +362,7 @@
                                                 <%}%>
                                             </div>
                                             <div name="CNFTNoticeContentText">
-                                                <p><%-list2[1].content%></p>
+                                                <p><%-list2[1].content.replace(/(<([^>]+)>)/gi, "");%></p>
                                             </div>
                                             <div name="CNFTNoticeDateText">
                                                 <p><%=list2[1].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>
@@ -413,7 +413,7 @@
                                                 <%}%>
                                             </div>
                                             <div name="CNFTNoticeContentText">
-                                                <p><%-list2[2].content%></p>
+                                                <p><%-list2[2].content.replace(/(<([^>]+)>)/gi, "");%></p>
                                             </div>
                                             <div name="CNFTNoticeDateText">
                                                 <p><%=list2[2].DATE.substr(0, 10).replace(/-/, '년 ').replace(/-/, '월 ')%>일</p>

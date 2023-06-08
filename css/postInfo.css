@@ -49,9 +49,7 @@ section[name='postSection'] {
 .postTitleDiv {
     margin: auto;
     width: 1000px;
-    height: 130px;
     background-color: rgba(0, 0, 0, 0.03);
-    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
 }
 
 div[name='postTitle'] {
@@ -71,6 +69,7 @@ div[name='postAuthor'] {
     height: 50px;
     float: left;
     color: rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
 }
 
 div[name='postAuthor'] > span > img {
@@ -86,6 +85,7 @@ div[name='postDate'] {
     float: right;
     text-align: right;
     color: rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.3);
 }
 
 div[name='postDate'] > span {
