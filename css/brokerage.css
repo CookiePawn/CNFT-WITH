@@ -1,31 +1,3 @@
-/* 상단 네비바 */
-.adaCategoryNav {
-    width: 100%;
-    height: 40px;
-}
-
-.adaCategoryNav > ul {
-    list-style-type: none;
-}
-
-.adaCategoryNav > ul >li {
-    margin-left: 100px;
-    float: left;
-}
-
-.adaCategoryNav > ul >li > a{
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.adaCategoryNav > ul >li > a:hover{
-    color: gainsboro;
-}
-
-
-
 
 
 

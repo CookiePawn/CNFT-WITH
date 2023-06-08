@@ -124,7 +124,7 @@
                         <div>
                             <label>검색하고 싶은 게시글을 검색하세요</label>
                             <input type="submit" value="🔍︎">
-                            <input type="text" name="postSearch" maxlength="40">
+                            <input type="text" name="postSearch" maxlength="60">
                         </div>
                     </form>
                     <span>총 <%=list.length%>개</span>
@@ -155,13 +155,13 @@
                                     <div class="postListInfoDiv">
                                         <span class="plt1">&nbsp;<%= list[i].postNum %></span>
                                         <%if(list[i].img == "" && comCnt != 0) {%>
-                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;<span>[<%=comCnt%>]</span></span>
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 60) %>&nbsp;<span>[<%=comCnt%>]</span></span>
                                         <%} else if(list[i].img == "" && comCnt == 0) {%>
-                                                <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %></span>
+                                                <span class="plt2">&nbsp;<%= list[i].title.substr(0, 60) %></span>
                                         <%} else if(list[i].img != "" && comCnt != 0) {%>
-                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;<span>[<%=comCnt%>]</span>&nbsp;&nbsp;📷</span>
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 60) %>&nbsp;<span>[<%=comCnt%>]</span>&nbsp;&nbsp;📷</span>
                                         <%} else if(list[i].img != "" && comCnt == 0) {%>
-                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 20) %>&nbsp;&nbsp;📷</span>
+                                            <span class="plt2">&nbsp;<%= list[i].title.substr(0, 60) %>&nbsp;&nbsp;📷</span>
                                         <%}%>
                                         <span class="plt3">&nbsp;
                                             <img src="<%=list[i].authorIcon%>" width="30px" height="30px">
