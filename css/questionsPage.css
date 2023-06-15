@@ -40,5 +40,29 @@ section[name="qnaListSection"] > p {
 }
 
 .qnaCategoryDiv > button{
-    float: left;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    background-color: #9f9f9f;
+    border-radius: 50px;
+    border: 0;
+}
+
+.qnaInfoListDiv {
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    border-top: 0.5px solid #9f9f9f;
+}
+
+.qnaInfo {
+    border-bottom: 0.5px solid #9f9f9f;
+}
+
+.qnaInfo > p {
+    font-size: 13px;
+    color: gray;
+    text-align: left;
 }
