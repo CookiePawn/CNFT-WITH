@@ -14,7 +14,6 @@
 section[name='qnaImgSection'] {
     width: 100%;
     min-width: 1200px;
-    border-bottom: 2px solid black;
 }
 
 section[name='qnaImgSection'] > img{
@@ -39,15 +38,16 @@ section[name="qnaListSection"] > p {
     margin: auto;
 }
 
-.qnaCategoryDiv > button{
+.qnaCategoryDiv > button {
     margin: 5px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     color: white;
+    font-weight: bold;
     background-color: #9f9f9f;
     border-radius: 50px;
-    border: 0;
+    border: 1px solid #9f9f9f;
 }
 
 .qnaInfoListDiv {

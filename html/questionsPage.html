@@ -129,30 +129,30 @@
         </div>
         <div class="contHome">
             <section name="qnaImgSection">
-                <img src="../img/kakaopay.png" width="100%">
+                <img src="../img/QnA.jpg" width="100%" height="400px">
             </section>
             <section name="qnaListSection">
                 <h1>자주 하는 질문</h1>
                 <p>자주 하는 질문을 확인해주세요</p>
                 <div class="qnaCategoryDiv">
-                    <button>기업</button>
-                    <button>CNFT 투자</button>
-                    <button>에이다</button>
-                    <button>브로커리지</button>
-                    <button>구독</button>
+                    <button onclick="btnClick(0)">기업</button>
+                    <button onclick="btnClick(1)">CNFT 투자</button>
+                    <button onclick="btnClick(2)">에이다</button>
+                    <button onclick="btnClick(3)">브로커리지</button>
+                    <button onclick="btnClick(4)">구독</button>
                 </div>
                 <div class="qnaInfoListDiv">
                     <div class="qnaInfo 1">
-                        <p>기업에 관한 질문</p>
+                        <p onclick="infoClick(0)">기업에 관한 질문</p>            
                     </div>
                     <div class="qnaInfo 2">
-                        <p>기업에 관한 질문</p>
+                        <p onclick="infoClick(1)">기업에 관한 질문</p>
                     </div>
                     <div class="qnaInfo 3">
-                        <p>기업에 관한 질문</p>
+                        <p onclick="infoClick(2)">기업에 관한 질문</p>
                     </div>
                     <div class="qnaInfo 4">
-                        <p>기업에 관한 질문</p>
+                        <p onclick="infoClick(3)">기업에 관한 질문</p>
                     </div>
                 </div>
             </section>
@@ -266,5 +266,6 @@
         <script src="../js/naverLogin.js" charset="utf-8"></script>
         <script src="../js/googleLogin.js" charset="utf-8"></script>
         <script src="../js/logout.js" charset="utf-8"></script>
+        <script src="../js/questionsPage.js" charset="utf-8"></script>
     </body>
 </html>
