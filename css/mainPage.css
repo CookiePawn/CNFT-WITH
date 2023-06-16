@@ -571,25 +571,36 @@ div[name='CNFTNoticeTitleText'] {
 
 div[name='CNFTNoticeContentText'] {
     word-wrap: break-word;
-    width: 370px;
-    height: 83px;
+    width: 350px;
+    height: 100px;
+    line-height: 25px;
+    margin-right: 20px;
     overflow: hidden;
     float: right;
 }
 
 div[name='CNFTNoticeCntText'] {
-    margin-top: 40px;
+    margin-top: 25px;
     width: 150px;
-    height: 30px;
+    height: 20px;
     float: right;
 }
 
 div[name='CNFTNoticeDateText'] {
-    margin-top: 40px;
+    margin-top: 25px;
     width: 150px;
-    height: 30px;
+    height: 20px;
     float: right;
 }
+
+
+
+
+
+
+
+
+
 
 /* CNFT 게시판 - ejs */
 
