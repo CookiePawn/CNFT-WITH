@@ -113,19 +113,10 @@ html {
 .subUl > div > div > a{
     text-decoration: none;
     color: black;
+}
+
+.subUl > div > div > a:hover{
     box-shadow : inset 0 -8px 0 lightblue;
-}
-
-div[id='c5SubSub1'] {
-    position: absolute;
-    left: 55%;
-    display: none;
-}
-
-div[id='c5SubSub2'] {
-    position: absolute;
-    left: 55%;
-    display: none;
 }
 
 .mainLoginDiv {

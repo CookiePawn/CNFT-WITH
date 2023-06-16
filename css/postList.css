@@ -187,11 +187,13 @@ input[value='글 쓰기']:hover{
 .plt1 {
     margin-right: 20px;
     width: 7%;
+    overflow: hidden;
 }
 
 .plt2 {
     margin-right: 20px;
     width: 40%;
+    overflow: hidden;
 }
 
 .plt2 > span {
@@ -201,6 +203,7 @@ input[value='글 쓰기']:hover{
 .plt3 {
     margin-right: 20px;
     width: 20%;
+    overflow: hidden;
 }
 
 .plt3 > img {
@@ -212,10 +215,12 @@ input[value='글 쓰기']:hover{
 .plt4 {
     margin-right: 20px;
     width: 9%;
+    overflow: hidden;
 }
 
 .plt5 {
     width: 16.6%;
+    overflow: hidden;
 }
 
 .list.postList{

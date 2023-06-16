@@ -3547,3 +3547,6 @@ server.get("/questionsPage", (req, res) => {
   res.sendFile(__dirname + "/html/questionsPage.html");
 });
 
+server.get("/questionsPage_Login", (req, res) => {
+  res.sendFile(__dirname + "/html/questionsPage_Login.html");
+});

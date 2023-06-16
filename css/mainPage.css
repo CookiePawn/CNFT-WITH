@@ -572,23 +572,24 @@ div[name='CNFTNoticeTitleText'] {
 div[name='CNFTNoticeContentText'] {
     word-wrap: break-word;
     width: 350px;
-    height: 88px;
+    height: 100px;
+    line-height: 25px;
     margin-right: 20px;
     overflow: hidden;
     float: right;
 }
 
 div[name='CNFTNoticeCntText'] {
-    margin-top: 40px;
+    margin-top: 25px;
     width: 150px;
-    height: 25px;
+    height: 20px;
     float: right;
 }
 
 div[name='CNFTNoticeDateText'] {
-    margin-top: 40px;
+    margin-top: 25px;
     width: 150px;
-    height: 25px;
+    height: 20px;
     float: right;
 }
 

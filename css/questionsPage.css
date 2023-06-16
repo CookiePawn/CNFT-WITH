@@ -48,9 +48,11 @@ section[name="qnaListSection"] > p {
     background-color: #9f9f9f;
     border-radius: 50px;
     border: 1px solid #9f9f9f;
+    cursor: pointer;
 }
 
 .qnaInfoListDiv {
+    display: none;
     width: 500px;
     margin: auto;
     margin-top: 20px;
@@ -62,11 +64,24 @@ section[name="qnaListSection"] > p {
     transition: all 1s;
 }
 
-.qnaInfo > p {
+.qnaInfo > h3 {
     font-size: 13px;
+    font-weight: 100;
     color: gray;
     text-align: left;
     cursor: pointer;
+}
+
+.qnaInfo > p {
+    display: none;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 13px;
+    font-weight: 100;
+    color: gray;
+    text-align: left;
+    border-top: 0.5px solid #1111;
+    background-color: aliceblue;
 }
 
 
@@ -141,4 +156,9 @@ section[name="positionQnaSection"] > div > button{
     border: 1px solid black;
     border-radius: 50px;
     background-color: white;
+    cursor: pointer;
+}
+
+section[name="positionQnaSection"] > div > button:hover{
+    background-color: lightskyblue;
 }

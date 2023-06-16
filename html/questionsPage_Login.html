@@ -7,6 +7,7 @@
         <meta name="description" content="Main Page">
         <title>CNFT WITH</title>
         <link href="../css/Tool.css" rel="stylesheet">
+        <link href="../css/questionsPage.css" rel="stylesheet">
         <script src="../js/SameSite.js" charset="utf-8"></script>
         <script src="../js/scrollPercent.js" charset="utf-8"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -47,8 +48,7 @@
                         </div>
                         <div class="c2Sub">
                             <div>
-                                - CNFT 용어<br>
-                                - CNFT 캘린더<br>
+                                
                                 <a href="/cnftNewsPost_Login">- CNFT 뉴스</a><br>
                                 <a href="/cnftPost_Login">- CNFT 소개</a>
                             </div>
@@ -80,19 +80,11 @@
                         </div>
                         <div class="c5Sub">
                             <div>
-                                <a href="/questionsPage">- FAQ</a><br>
-                                <span id="c5Sub1">- 고객문의</span><br>
-                                <span id="c5Sub2">- 부서문의</span>
+                                <a href="/questionsPage_Login">- FAQ</a><br>
+                                <a href="/questionsPage_Login">- 고객문의</a><br>
+                                <a href="/questionsPage_Login">- 부서문의</a>
                             </div>
-                            <div id="c5SubSub1">
-                                - 인사팀<br>
-                                - 개발팀<br>
-                                - 운영진
-                            </div>
-                            <div id="c5SubSub2">
-                                - 전화로 문의하기<br>
-                                - 카카오톡으로 문의하기
-                            </div>
+                            
                         </div>
                         <div class="c6Sub">
                             <div>
@@ -128,24 +120,114 @@
                     <button onclick="btnClick(3)">브로커리지</button>
                     <button onclick="btnClick(4)">구독</button>
                 </div>
-                <div class="qnaInfoListDiv">
+                <!--기업-->
+                <div class="qnaInfoListDiv enterQna">
                     <div class="qnaInfo">
-                        <p onclick="infoClick(0)">기업에 관한 질문</p>            
+                        <h3 onclick="infoClick0(0)">기업에 관한 질문</h3>         
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>   
                     </div>
                     <div class="qnaInfo">
-                        <p onclick="infoClick(1)">NFT 지갑 만드는 방법이 궁금합니다</p>
+                        <h3 onclick="infoClick0(1)">NFT 지갑 만드는 방법이 궁금합니다</h3>
+                        <p>
+                            NFT지갑은<br><br><br>
+                            이터널이라는 회사의 지갑을 통해 만들 수 있습니다!
+                        </p>  
                     </div>
                     <div class="qnaInfo">
-                        <p onclick="infoClick(2)">구독 서비스는 무엇인가요?</p>
+                        <h3 onclick="infoClick0(2)">구독 서비스는 무엇인가요?</h3>
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>  
                     </div>
                     <div class="qnaInfo">
-                        <p onclick="infoClick(3)">카카오 채널은 어디서 보나요?</p>
+                        <h3 onclick="infoClick0(3)">카카오 채널은 어디서 보나요?</h3>
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>  
                     </div>
                     <div class="qnaInfo">
-                        <p onclick="infoClick(4)">종목 추천 해주세요</p>
+                        <h3 onclick="infoClick0(4)">종목 추천 해주세요</h3>
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>  
                     </div>
                     <div class="qnaInfo">
-                        <p onclick="infoClick(5)">문의를 하고 싶습니다</p>
+                        <h3 onclick="infoClick0(5)">문의를 하고 싶습니다</h3>
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>  
+                    </div>
+                </div>
+
+                <!--CNFT 투자-->
+                <div class="qnaInfoListDiv CNFTQna">
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick1(0)">CNFT 투자에 관한 질문</h3>            
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick1(1)">NFT 지갑 만드는 방법이 궁금합니다</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick1(2)">구독 서비스는 무엇인가요?</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick1(3)">카카오 채널은 어디서 보나요?</h3>
+                    </div>
+                </div>
+
+                <!--에이다-->
+                <div class="qnaInfoListDiv adaQna">
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(0)">에이다에 관한 질문</h3>            
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(1)">NFT 지갑 만드는 방법이 궁금합니다</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(2)">구독 서비스는 무엇인가요?</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(3)">카카오 채널은 어디서 보나요?</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(4)">종목 추천 해주세요</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick2(5)">문의를 하고 싶습니다</h3>
+                    </div>
+                </div>
+
+                <!--브로커리지-->
+                <div class="qnaInfoListDiv brokerageQna">
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick3(0)">브로커리지에 관한 질문</h3>            
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick3(1)">구독 서비스는 무엇인가요?</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick3(2)">카카오 채널은 어디서 보나요?</h3>
+                    </div>
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick3(3)">종목 추천 해주세요</h3>
+                    </div>
+                </div>
+
+                <!--구독-->
+                <div class="qnaInfoListDiv subscribeQna">
+                    <div class="qnaInfo">
+                        <h3 onclick="infoClick4(0)">구독에 관한 질문</h3> 
+                        <p>
+                            CNFTWith 기업입니다<br>
+                            대표는 누구고 개발자는 누구누구누구누구입니다
+                        </p>             
                     </div>
                 </div>
             </section>
@@ -181,8 +263,7 @@
                     </li>
                     <li><span>CFNT 정보 제공</span>
                         <ul>
-                            <li>CNFT 용어</li>
-                            <li>CNFT 캘린더</li>
+                            
                             <li><a href="/cnftNewsPost_Login">CNFT 뉴스</a></li>
                             <li><a href="/cnftPost_Login">CNFT 소개</a></li>
                             <li><a href="/mintingPost_Login">CNFT 민팅</a></li>
@@ -208,12 +289,10 @@
                     </li>
                     <li><span>문의사항</span>
                         <ul>
-                            <li><a href="/questionsPage">FAQ</a></li>
-                            <li><a href="">고객문의</a></li>
-                            <li><a href="">부서문의</a></li>
-                            <li>인사팀</li>
-                            <li>개발팀</li>
-                            <li>운영진</li>
+                            <li><a href="/questionsPage_Login">FAQ</a></li>
+                            <li><a href="/questionsPage_Login">고객문의</a></li>
+                            <li><a href="/questionsPage_Login">부서문의</a></li>
+                            
                         </ul>
                     </li>
                     <li><span>프리미엄 서비스</span>
@@ -260,7 +339,7 @@
         </div>
         <div id="dimmedID" class="dimmed"></div>
         <script src="../js/dropdown.js" charset="utf-8"></script>
-        <script src="../js/inquiryCategoryClick.js" charset="utf-8"></script>
+        
         <script src="../js/logout.js" charset="utf-8"></script>
         <script src="../js/loading.js" charset="utf-8"></script>
         <script src="../js/questionsPage.js" charset="utf-8"></script>
