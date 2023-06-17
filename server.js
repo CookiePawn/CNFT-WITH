@@ -12,7 +12,7 @@ const mysql = require('mysql');  // mysql 모듈 로드
 var db = mysql.createConnection({
   host : '127.0.0.1',
   user : 'root',
-  password : '00000000',
+  password : 'Dks135790@',
   database : 'post',
   "timezone":"Asia/Seoul",
   "dateStrings":"date",
@@ -3499,13 +3499,13 @@ server.post("/payPage", (req, res)=> {
   var nickname = req.body['nickname'];
   var email = req.body['email'];
 
+
   if(btnName == '주문 확인'){
     sql = `INSERT INTO payUser (payID, user, email, DATE) VALUES (${db.escape(payID)}, ${db.escape(nickname)}, ${db.escape(email)}, now())`;
     db.query(sql, (error, data, fields) => {
       if(error) throw error;
-
     });
-    res.redirect(`/payPageResult?id=${db.escape(payID).replace(/'/gi, '')}`);
+    res.redirect(`/paySuccess`);
   }
 });
 
@@ -3513,24 +3513,10 @@ server.get("/payPageError", (req, res) => {
   res.sendFile(__dirname + '/html/alreadyPay.html');
 });
 
-
-server.get("/payPageResult", (req, res) => {
-  var urlPath = url.parse(req.url);
-  var search = urlencode.decode(urlPath.query.replace(/id=/, ""));
-
-  sql = `SELECT * FROM payUser WHERE payID LIKE '%${db.escape(search).replace(/'/gi, '')}%';`;
-  db.query(sql, (error, data, fields) => {
-    if(error) throw error;
-    if(data[0] != null) {
-      res.sendFile(__dirname + "/html/payPageResult.html");
-    }
-    else {
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.write(`<script charset="utf-8">alert('이미 구독을 하셨습니다.');</script>`);
-      res.write(`<script charset="utf-8">window.close();</script>`);
-    }
-  });
+server.get("/paySuccess", (req, res) => {
+  res.sendFile(__dirname + '/html/paySuccess.html');
 });
+
 
 
 server.get("/adaInfo", (req, res) => {

@@ -13,6 +13,16 @@
 
 
 
+
+
+/*결제 하기 */
+
+
+.paymentDiv {
+    display: block;
+    overflow: hidden;
+}
+
 /*  결제 헤더  */
 
 header {
@@ -171,16 +181,168 @@ section[name='termsSection'] > span{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*결제 결과*/
+
+.payResultDiv {
+    display: none;
+    overflow: hidden;
+}
+
+section[name='payResultSection'] {
+    width: 100%;
+    height: 450px;
+    border-bottom: 1px solid gray;
+}
+
+section[name='payResultSection'] > h2{
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+    font-weight: 100;
+}
+
+section[name='payResultSection'] > button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #00ff0000;
+    border: 0;
+    font-weight: bold;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+section[name='payResultSection'] > div{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-top: 70px;
+    border-radius: 500px;
+    background-color: blue;
+    overflow: hidden;
+}
+
+section[name='payResultSection'] > div > p{
+    text-align: center;
+    position: relative;
+    top: -40px;
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+section[name='payResultSection'] > h1{
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+    font-weight: 100;
+}
+
+section[name='payResultSection'] > p{
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 100;
+    font-size: 13px;
+    color: #9f9f9f;
+    line-height: 25px;
+}
+
+
+
+
+
+
+
+
+
+/* 결제 정보 */
+
+section[name='payResultInfoSection'] {
+    width: 100%;
+}
+
+section[name='payResultInfoSection'] > h1 {
+    margin: 0;
+    padding: 15px;
+    font-weight: 100;
+}
+
+section[name='payResultInfoSection'] > div {
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid gray;
+}
+
+section[name='payResultInfoSection'] > p {
+    margin-top: 10px;
+    margin-left: 15px;
+    color: gray;
+}
+
+section[name='payResultInfoSection'] > p > span {
+    float: right;
+    margin-right: 15px;
+}
+
+section[name='payResultInfoSection'] > h3 {
+    margin-top: 30px;
+    margin-left: 15px;
+    color: black;
+    font-weight: 100;
+}
+
+section[name='payResultInfoSection'] > h3 > span {
+    float: right;
+    margin-right: 15px;
+}
+
+
+
 /*  결제 버튼  */
 
 .payBtn {
     display: block;
-    width: 95%;
+    width: 100%;
     height: 70px;
-    margin: auto;
-    margin-top: 30px;
     background-color: gray;
+    border: 0;
     color: white;
     font-size: 28px;
-    font-weight: 900;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+/* 결제 실패 */
+
+.payErrorDiv {
+    display: none;
+    overflow: hidden;
 }
