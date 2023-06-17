@@ -1,11 +1,15 @@
 let day;
-var payChoice = document.getElementById("subscriptionPaymentsDiv");
-var paySuccess = document.querySelector(".paySuccess");
-var paySuccessText1 = document.querySelector(".paySuccessText1");
-var paySuccessText2 = document.querySelector(".paySuccessText2");
-var paySuccessText3 = document.querySelector(".paySuccessText3");
-var paySuccessText4 = document.querySelector(".paySuccessText4");
+let today;
+var paymentDiv = document.querySelector('.paymentDiv');
+var payResultDiv = document.querySelector('.payResultDiv');
+var payErrorDiv = document.querySelector('.payErrorDiv');
+var paySuccessDay = document.querySelector(".paySuccessDay");
+var paySuccessPayment = document.querySelector(".paySuccessPayment");
+var paySuccessTotal = document.querySelector(".paySuccessTotal");
+var paySuccessCard = document.querySelector(".paySuccessCard");
+var payErrorText = document.querySelector(".payErrorText");
 var payID = document.getElementById("payID");
+var termsCheckBox = document.getElementById('termsCheckBox');
 
 
 
@@ -17,6 +21,10 @@ IMP.init('imp35844342');
 
 function tossPay() {
     getTime();
+    if (termsCheckBox.checked == false) {
+        alert('약관 동의를 해주세요!')
+        return;
+    }
 
     IMP.request_pay({
         pg : 'tosspay.tosstest',
@@ -31,18 +39,21 @@ function tossPay() {
         buyer_postcode : '123-456'
     }, function (rsp) { // callback
         if (rsp.success) {
-            paySuccessText1.textContent = '결제가 완료되었습니다.';
-            paySuccessText2.textContent = `상점 거래ID : ${rsp.merchant_uid}`;
-            paySuccessText3.textContent = `결제 금액 : ${rsp.paid_amount}`;
-            paySuccessText4.textContent = `카드 승인번호 : ${rsp.apply_num}`;
+            //paySuccessText2.textContent = `상점 거래ID : ${rsp.merchant_uid}`;
+            paySuccessDay.textContent = today;
+            paySuccessPayment.textContent = '토스 페이'
+            paySuccessTotal.textContent = `${rsp.paid_amount}원`;
+            paySuccessCard.textContent = rsp.apply_num;
             payID.setAttribute('value', rsp.merchant_uid);
 
-            payChoice.style.display="none";
-            paySuccess.style.display="block";
+            paymentDiv.style.display = 'none';
+            payResultDiv.style.display = 'block';
         } else { 
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
-            alert(msg);
+            payErrorText.textContent = rsp.error_msg;
+            paymentDiv.style.display = 'none';
+            payErrorDiv.style.display = 'block';
         }
         
     });
@@ -50,6 +61,10 @@ function tossPay() {
 
 function kakaoPay() {
     getTime();
+    if (termsCheckBox.checked == false) {
+        alert('약관 동의를 해주세요!')
+        return;
+    }
 
     IMP.request_pay({
         pg : 'kakaopay.TC0ONETIME',
@@ -64,18 +79,21 @@ function kakaoPay() {
         buyer_postcode : '123-456'
     }, function (rsp) { // callback
         if (rsp.success) {
-            paySuccessText1.textContent = '결제가 완료되었습니다.';
-            paySuccessText2.textContent = `상점 거래ID : ${rsp.merchant_uid}`;
-            paySuccessText3.textContent = `결제 금액 : ${rsp.paid_amount}`;
-            paySuccessText4.textContent = `카드 승인번호 : ${rsp.apply_num}`;
+            //paySuccessText2.textContent = `상점 거래ID : ${rsp.merchant_uid}`;
+            paySuccessDay.textContent = today;
+            paySuccessPayment.textContent = '카카오 페이'
+            paySuccessTotal.textContent = `${rsp.paid_amount}원`;
+            paySuccessCard.textContent = rsp.apply_num;
             payID.setAttribute('value', rsp.merchant_uid);
 
-            payChoice.style.display="none";
-            paySuccess.style.display="block";
+            paymentDiv.style.display = 'none';
+            payResultDiv.style.display = 'block';
         } else { 
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
-            alert(msg);
+            payErrorText.textContent = rsp.error;
+            paymentDiv.style.display = 'none';
+            payErrorDiv.style.display = 'block';
         }
         
     });
@@ -93,4 +111,5 @@ function getTime() {
     const seconds = ('0' + date.getSeconds()).slice(-2); 
 
     day = `${year}${month}${days}-${hour}${minutes}${seconds}`
+    today = `${year}년 ${month}월 ${days}일`
 }
